@@ -14,13 +14,13 @@ class Main extends React.Component {
 
     render() {
         const style = {
-            
+
         }
     
         return (
                 <Provider store={store}>
                     <div style={style}>
-                        <h1>test webpage</h1>
+                        <h1>test webpage 1</h1>
                     </div>
                 </Provider>
             )
