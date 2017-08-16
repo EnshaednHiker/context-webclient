@@ -1,0 +1,17 @@
+.text-white {
+    color: white;
+}
+
+body { 
+    padding-top: 70px; 
+}
+
+.background-color-crimson {
+    background-color: crimson;
+}
+.background-color-darkblue{
+    background-color: #394264;
+}
+.background-color-lightseagreen{
+    background-color: lightseagreen;
+}
