@@ -32,7 +32,7 @@ module.exports = function (env){
             loaders: [
                 { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
                 { test: /\.css$/, loader: 'style-loader!css-loader'},
-                { test: /\.(png|jpg|gif)$/, loader: 'file-loader', options: {name: 'assets/images/[name].[ext]'}},
+                { test: /\.(png|jpg|jpeg|gif)$/, loader: 'file-loader', options: {name: 'assets/images/[name].[ext]'}},
                 { test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' , options: {name: 'assets/fonts/[name].[ext]'}},
                 { test: /\.(eot|ttf|svg)$/, loader: 'file-loader', options: {name: 'assets/fonts/[name].[ext]'} }
             ]

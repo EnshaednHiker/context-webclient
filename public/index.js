@@ -4,7 +4,10 @@ import Main from './main';
 
 //to do: create a second page that takes dynamic segment i.e. user/:ID
 const routes = {
-    '/': Main
+    '/': Main /*,
+    '/dashboard': Dashboard,
+    '/about' : About,
+    '/contact' : Contact */
 }
 
 Router.register(routes).init('#/');
