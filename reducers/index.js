@@ -1,7 +1,7 @@
 import * as actions from '~/actions';
 
 const initialState = {
-   
+    
 };
 
 export const contextReducer = (state = initialState, action) => {

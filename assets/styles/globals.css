@@ -1,3 +1,11 @@
-h1 {
-    text-align: center;
+.white-text {
+    color: white;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+.no-border {
+    border: none;
 }

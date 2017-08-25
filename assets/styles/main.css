@@ -1,2 +1,9 @@
 @import url('./globals.css');
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#navbar-id {
+    color: white;
+}

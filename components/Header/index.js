@@ -2,7 +2,9 @@ import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
 import {  } from '~/actions'
-import 'bootstrap';
+
+import '~/assets/styles/main.css'
+
 import { Picture } from 'react-responsive-picture';
 
 export class Header extends React.Component {
@@ -22,27 +24,20 @@ export class Header extends React.Component {
         }
 
         const textStyles = {
-            color: "blue",
             zIndex: 1000,
             position: "absolute",
             marginTop: "20%",
-            color: "white"    
-        }
-
-        const h1 = {
-            fontSize: "6vw"
-        }
-
-        const p = {
-            fontSize: "2vw"
+            color: "white",
+            backgroundColor: "none"
         }
 
         return (
             <header>
                 <div className="row">
                     <div className="col col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8 col-xs-offset-4 col-xs-8 text-center " style={textStyles}> 
-                        <h1 style={h1}>context</h1>
-                        <p style={p}>consult the world.</p>
+                        <div className="jumbotron transparent">
+                            <h1><strong>CONTEXT</strong> <br /><small className="white-text">consult the <mark>world.</mark></small></h1>
+                        </div>
                     </div>
                 </div>
                 <Picture style={backgroundStyles}

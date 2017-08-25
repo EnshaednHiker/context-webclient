@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import styles from '~/assets/styles/main.css';
 import {Header} from '~/components/Header'; 
-
+import {NavBar} from '~/components/NavBar'; 
 //identify layout blocks i.e. header, footer, navigation bar, maybe infomodals for about and contact rather than discrete pages
 //do the stuff I know I can do without Thinkful resources, don't spike my own wheel
 
@@ -44,6 +44,7 @@ class Main extends React.Component {
         return (
                 <Provider store={store}>
                     <div className="container-fluid" style={styles}>
+                        <NavBar />
                         <Header />
                     </div>
                 </Provider>
