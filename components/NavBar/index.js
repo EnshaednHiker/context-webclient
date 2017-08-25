@@ -25,7 +25,7 @@ export class NavBar extends React.Component {
             <Navbar fixedTop className="transparent no-border" >
                 <Navbar.Header>
                     <Navbar.Brand >
-                        <a  style={whiteText} href="#">CONTEXT</a>
+                        <a  style={whiteText} href="#"><b>CONTEXT</b></a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
@@ -34,8 +34,7 @@ export class NavBar extends React.Component {
                     <NavItem id="navbar-id" eventKey={3} href="#">Sign Up</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem bsStyle={"primary"} id="navbar-id" eventKey={5} href="#">Sign In/Demo Account</NavItem>
-                    <Button bsStyle={"primary"}>Sign In/Demo Account</Button>
+                    <button type="button" className="btn btn-default navbar-btn btn-primary">Sign In/Demo Account</button>
                 </Nav>
           </Navbar>
             )
