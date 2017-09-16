@@ -4,7 +4,8 @@ import {Provider} from 'react-redux';
 import store from './store';
 import styles from '~/assets/styles/main.css';
 import {Header} from '~/components/Header'; 
-import {NavBar} from '~/components/NavBar'; 
+import {NavBar} from '~/components/NavBar';
+import {Section} from '~/components/Section';  
 //identify layout blocks i.e. header, footer, navigation bar, maybe infomodals for about and contact rather than discrete pages
 //do the stuff I know I can do without Thinkful resources, don't spike my own wheel
 
@@ -40,12 +41,45 @@ class Main extends React.Component {
             paddingRight: "0",
             paddingLeft: "0"
         }
+
+        const sectionOptions0 = {
+            position:"center",
+            image: null,
+            copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            title: "Explanation",
+            key:0 
+        }
+        const sectionOptions1 = {
+            position:"left",
+            image: "assets/images/wikipedia_icon.svg",
+            copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            title: "Feature 1",
+            key:1  
+        }
+        const sectionOptions2 = {
+            position:"right",
+            image: "",
+            copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            title: "Feature 2",
+            key:2 
+        }
+        const sectionOptions3 = {
+            position:"left",
+            image: "",
+            copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            title: "Feature 3",
+            key:3 
+        }
     
         return (
                 <Provider store={store}>
                     <div className="container-fluid" style={styles}>
                         <NavBar />
                         <Header />
+                            <Section key={sectionOptions0.key} title={sectionOptions0.title} position={sectionOptions0.position} image={sectionOptions0.image} copy={sectionOptions0.copy} />
+                            <Section key={sectionOptions1.key} title={sectionOptions1.title} position={sectionOptions1.position} image={sectionOptions1.image} copy={sectionOptions1.copy} />
+                            <Section key={sectionOptions2.key} title={sectionOptions2.title} position={sectionOptions2.position} image={sectionOptions2.image} copy={sectionOptions2.copy} />
+                            <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} />
                     </div>
                 </Provider>
             )
@@ -55,3 +89,4 @@ class Main extends React.Component {
 export default function (next) {
     Dom.render(<Main />, document.getElementById('root'));
 } 
+

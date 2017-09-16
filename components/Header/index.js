@@ -10,9 +10,7 @@ import { Picture } from 'react-responsive-picture';
 export class Header extends React.Component {
     constructor(props){
         super(props)
-
     }
-
 
 
     render(){
@@ -36,7 +34,7 @@ export class Header extends React.Component {
                 <div className="row">
                     <div className="col col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8 col-xs-offset-4 col-xs-8 text-center " style={textStyles}> 
                         <div className="jumbotron transparent">
-                            <h1><strong>CONTEXT</strong> <br /><small className="white-text">consult the <mark>world.</mark></small></h1>
+                            <h1 id="header-text"><strong>CONTEXT</strong> <br /><small className="white-text">consult the <mark>world.</mark></small></h1>
                         </div>
                     </div>
                 </div>
@@ -56,3 +54,4 @@ const mapDispatchToProps = dispatch => {
    })
 };
 export default connect(mapDispatchToProps)(Header);
+
