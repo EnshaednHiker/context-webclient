@@ -1,5 +1,6 @@
 @import url('./globals.css');
 
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -55,16 +56,4 @@ body {
     margin-left: 14px;
 }
 
-/* @media (max-width: 844px ) {
-    #navbar-id {
-        background-color: white !important;
-        border-bottom: black;   
-    }
-    #navbar-id {
-        color: black;
-    }
-    #brand-id {
-        font-effect: outline;
-    }   
-} */
 

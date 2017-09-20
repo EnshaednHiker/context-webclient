@@ -5,8 +5,14 @@ import {  } from '~/actions'
 
 import '~/assets/styles/main.css'
 
+import Scroll from 'react-scroll';
 
 import { If, Then, Else } from 'react-if';
+
+const Element = Scroll.Element;
+const scroller = Scroll.scroller;
+const scrollSpy  = Scroll.scrollSpy;
+const Link = Scroll.Link;
 
 export class NavBar extends React.Component {
     constructor(props){
@@ -18,18 +24,39 @@ export class NavBar extends React.Component {
     }
     componentDidMount() {
         document.addEventListener('scroll', () => {
+            // if(this.state.isCollapsed===false) {
+            //     document.getElementById("hamburger-button").click();
+            // }
             this.setState({ isTop: window.scrollY < 50 })
         });
+
+        // document.addEventListener('click', () => {
+        //     if(){
+        //         document.getElementById("hamburger-button").click();
+        //     }
+        // });
+
+
 
         document.getElementById("hamburger-button").addEventListener('click', () => {
             let boolean = this.state.isCollapsed;
             this.setState({ isCollapsed: !boolean});
         });
     }
+    componentWillUnmount() {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+      }
     
-
+    onClick () {
+        if (this.state.isCollapsed===false) {
+            
+        }
+    }
 
     render(){
+
+
 
         console.log("isTop: ",this.state.isTop);
         console.log("isCollapsed: ",this.state.isCollapsed);
@@ -47,13 +74,13 @@ export class NavBar extends React.Component {
                                             <span className="icon-bar"></span>
                                             <span className="icon-bar"></span>
                                         </button>
-                                        <a className="navbar-brand white-text" href="#"><strong>CONTEXT</strong></a>
+                                        <a className="navbar-brand white-text transition" href="#"><strong>CONTEXT</strong></a>
                                     </div>
                                     <div id="navbar" className="collapse navbar-collapse transparent">
                                         <ul className="nav navbar-nav white-text">
-                                            <li><a className="white-text" href="#about">About</a></li>
-                                            <li><a className="white-text" href="#features">Features</a></li>
-                                            <li><a className="white-text" href="#sign-up">Sign Up</a></li>
+                                            <li className=""><Link className="white-text" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
+                                            <li className=""><Link className="white-text" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
+                                            <li className=""><Link className="white-text" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
                                         </ul>
                                         <button type="button" className="btn btn-default navbar-nav navbar-btn btn-primary pull-right">Sign In/Demo Account</button>
                                     </div>
@@ -76,9 +103,9 @@ export class NavBar extends React.Component {
                                     </div>
                                     <div id="navbar" className="collapse navbar-collapse cream">
                                         <ul className="nav navbar-nav grey-text">
-                                            <li><a className="grey-text" href="#about">About</a></li>
-                                            <li><a className="grey-text" href="#features">Features</a></li>
-                                            <li><a className="grey-text" href="#sign-up">Sign Up</a></li>
+                                            <li className=""><a className="transition grey-text" href="#about">About</a></li>
+                                            <li className=""><a className="transition grey-text" href="#feature1">Features</a></li>
+                                            <li className=""><a className="transition grey-text" href="#sign-up">Sign Up</a></li>
                                             <button type="button" className="btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
                                         </ul>
                                         
@@ -103,9 +130,9 @@ export class NavBar extends React.Component {
                                     </div>
                                     <div id="navbar" className="collapse navbar-collapse cream">
                                         <ul className="nav navbar-nav grey-text">
-                                            <li><a className="grey-text" href="#about">About</a></li>
-                                            <li><a className="grey-text" href="#features">Features</a></li>
-                                            <li><a className="grey-text" href="#sign-up">Sign Up</a></li>
+                                            <li className=""><a className="transition grey-text" href="#about">About</a></li>
+                                            <li className=""><a className="transition grey-text" href="#feature1">Features</a></li>
+                                            <li className=""><a className="transition grey-text" href="#sign-up">Sign Up</a></li>
                                         </ul>
                                         <button type="button" className="btn btn-default navbar-nav navbar-btn grey white-text pull-right">Sign In/Demo Account</button>
                                     </div>
@@ -129,9 +156,9 @@ export class NavBar extends React.Component {
                                     </div>
                                     <div id="navbar" className="collapse navbar-collapse cream">
                                         <ul className="nav navbar-nav grey-text">
-                                            <li><a className="grey-text" href="#about">About</a></li>
-                                            <li><a className="grey-text" href="#features">Features</a></li>
-                                            <li><a className="grey-text" href="#sign-up">Sign Up</a></li>
+                                            <li className=""><a className="transition grey-text" href="#about">About</a></li>
+                                            <li className=""><a className="transition grey-text" href="#feature1">Features</a></li>
+                                            <li className=""><a className="transition grey-text" href="#sign-up">Sign Up</a></li>
                                             <button type="button" className="btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
                                         </ul>
                                         

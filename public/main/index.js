@@ -47,6 +47,7 @@ class Main extends React.Component {
             image: null,
             copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             title: "Explanation",
+            name: "about",
             key:0 
         }
         const sectionOptions1 = {
@@ -54,6 +55,7 @@ class Main extends React.Component {
             image: "assets/images/wikipedia_icon.svg",
             copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             title: "Feature 1",
+            name: "feature1",
             key:1  
         }
         const sectionOptions2 = {
@@ -61,6 +63,7 @@ class Main extends React.Component {
             image: "",
             copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             title: "Feature 2",
+            name: "feature2",
             key:2 
         }
         const sectionOptions3 = {
@@ -68,18 +71,19 @@ class Main extends React.Component {
             image: "",
             copy: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             title: "Feature 3",
+            name: "feature3",
             key:3 
         }
     
         return (
                 <Provider store={store}>
                     <div className="container-fluid" style={styles}>
-                        <NavBar />
+                        <NavBar name0={sectionOptions0.name} name1={sectionOptions1.name} name2={sectionOptions2.name} name3={sectionOptions3.name} />
                         <Header />
-                            <Section key={sectionOptions0.key} title={sectionOptions0.title} position={sectionOptions0.position} image={sectionOptions0.image} copy={sectionOptions0.copy} />
-                            <Section key={sectionOptions1.key} title={sectionOptions1.title} position={sectionOptions1.position} image={sectionOptions1.image} copy={sectionOptions1.copy} />
-                            <Section key={sectionOptions2.key} title={sectionOptions2.title} position={sectionOptions2.position} image={sectionOptions2.image} copy={sectionOptions2.copy} />
-                            <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} />
+                            <Section key={sectionOptions0.key} title={sectionOptions0.title} position={sectionOptions0.position} image={sectionOptions0.image} copy={sectionOptions0.copy} name={sectionOptions0.name} />
+                            <Section key={sectionOptions1.key} title={sectionOptions1.title} position={sectionOptions1.position} image={sectionOptions1.image} copy={sectionOptions1.copy} name={sectionOptions1.name} />
+                            <Section key={sectionOptions2.key} title={sectionOptions2.title} position={sectionOptions2.position} image={sectionOptions2.image} copy={sectionOptions2.copy} name={sectionOptions2.name} />
+                            <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} name={sectionOptions3.name} />
                     </div>
                 </Provider>
             )
