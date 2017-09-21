@@ -6,7 +6,7 @@ body {
 }
 
 #navbar-id {
-    color: white;
+    color: #FFFF;
 }
 
 .svg-image {
@@ -26,7 +26,7 @@ body {
 }
 
 #brand-id {
-    color: white;
+    color: #FFFF;
 }  
 
 .transparent {
@@ -35,7 +35,7 @@ body {
 }
 
 .white-text {
-    color: white !important;
+    color: #FFFFFF !important;
 }
 
 .cream {
@@ -44,16 +44,27 @@ body {
 }
 
 .grey {
-    background-color: grey;
-    border: grey;
+    background-color: #B0A0AC !important;
+    border: #B0A0AC;
 }
 
 .grey-text {
-    color: grey !important;
+    color: #B0A0AC !important;
 }
 
 .margin-left-14 {
     margin-left: 14px;
 }
 
+.link {
+    cursor: pointer;
+}
 
+.link:hover {
+    text-shadow: 1px 1px 1px #000000;
+    filter: dropshadow(color=#000000, offx=2, offy=2);
+}
+
+#hamburger-button:hover {
+    background-color: #000000 !important;
+}
