@@ -1,7 +1,8 @@
 import React from 'react';
 import Dom from 'react-dom';
+
 import { connect } from 'react-redux';
-import {  } from '~/actions'
+import {scrollAtTop, hamburgerClick } from '~/actions'
 
 import '~/assets/styles/main.css'
 
@@ -14,21 +15,29 @@ const scroll = Scroll.animateScroll;
 export class NavBar extends React.Component {
     constructor(props){
         super(props)
-        this.state= {
-            isTop: true,
-            isCollapsed: true
-        };
+        
         this.scrollToTop = this.scrollToTop.bind(this);
+        this.handleHamburgerClick = this.handleHamburgerClick.bind(this);
+        //this.handleScroll = this.handleScroll.bind(this);
     }
+
+
     componentDidMount() {
         document.addEventListener('scroll', () => {
-            this.setState({ isTop: window.scrollY < 50 })
+            let boolean = window.scrollY < 1;
+            this.props.dispatch(scrollAtTop(boolean));
         });
+    }
 
-        document.getElementById("hamburger-button").addEventListener('click', () => {
-            let boolean = this.state.isCollapsed;
-            this.setState({ isCollapsed: !boolean});
-        });
+    // handleScroll () {
+    //     //onScroll={this.handleScroll}
+    //     let boolean = window.scrollY < 1;
+    //     this.props.dispatch(scrollAtTop(boolean));       
+    // }
+
+    handleHamburgerClick () {
+        let boolean = this.props.isCollapsed;
+        this.props.dispatch(hamburgerClick(!boolean));
     }
 
     scrollToTop() {
@@ -36,18 +45,19 @@ export class NavBar extends React.Component {
     }
 
     render(){
+        
+        console.log("isTop: ",this.props.isTop);
+        console.log("isCollapsed: ",this.props.isCollapsed);
 
-        console.log("isTop: ",this.state.isTop);
-        console.log("isCollapsed: ",this.state.isCollapsed);
-
+        
         return (
                  ()=> {
-                    if (this.state.isTop===true && this.state.isCollapsed===true) {
+                    if (this.props.isTop===true && this.props.isCollapsed===true) {
                         return (
                             <nav className="navbar navbar-inverse navbar-fixed-top transparent">
                                 <div className="container">
                                     <div className="navbar-header transparent">
-                                        <button type="button" id="hamburger-button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                             <span className="sr-only">Toggle navigation</span>
                                             <span className="icon-bar"></span>
                                             <span className="icon-bar"></span>
@@ -67,12 +77,12 @@ export class NavBar extends React.Component {
                             </nav>
                         )
                     }
-                    else if (this.state.isTop===true && this.state.isCollapsed===false) {
+                    else if (this.props.isTop===true && this.props.isCollapsed===false) {
                         return (
                             <nav className="navbar navbar-inverse navbar-fixed-top cream">
                                 <div className="container">
                                     <div className="navbar-header">
-                                        <button type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                             <span className="sr-only">Toggle navigation</span>
                                             <span className="icon-bar"></span>
                                             <span className="icon-bar"></span>
@@ -94,12 +104,12 @@ export class NavBar extends React.Component {
                         )
                     }
 
-                    else if (this.state.isTop===false && this.state.isCollapsed===true) {
+                    else if (this.props.isTop===false && this.props.isCollapsed===true) {
                         return (
                             <nav className="navbar navbar-inverse navbar-fixed-top cream">
                                 <div className="container">
                                     <div className="navbar-header">
-                                        <button type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                             <span className="sr-only">Toggle navigation</span>
                                             <span className="icon-bar"></span>
                                             <span className="icon-bar"></span>
@@ -125,7 +135,7 @@ export class NavBar extends React.Component {
                             <nav className="navbar navbar-inverse navbar-fixed-top cream">
                                 <div className="container">
                                     <div className="navbar-header">
-                                        <button type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                             <span className="sr-only">Toggle navigation</span>
                                             <span className="icon-bar"></span>
                                             <span className="icon-bar"></span>
@@ -150,9 +160,11 @@ export class NavBar extends React.Component {
         }
 }
 
-const mapDispatchToProps = dispatch => {
-   return ({
-
-   })
+const mapStateToProps = (state) => {
+    return ({
+         isTop: state.isTop,
+         isCollapsed: state.isCollapsed
+    })
 };
-export default connect(mapDispatchToProps)(NavBar);
+
+export default connect(mapStateToProps)(NavBar);

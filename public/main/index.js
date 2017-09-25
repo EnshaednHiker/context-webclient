@@ -3,9 +3,10 @@ import Dom from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store';
 import styles from '~/assets/styles/main.css';
-import {Header} from '~/components/Header'; 
-import {NavBar} from '~/components/NavBar';
-import {Section} from '~/components/Section';  
+import Header from '~/components/Header'; 
+import NavBar from '~/components/NavBar';
+import Section from '~/components/Section';
+import Form from '~/components/Form';  
 //identify layout blocks i.e. header, footer, navigation bar, maybe infomodals for about and contact rather than discrete pages
 //do the stuff I know I can do without Thinkful resources, don't spike my own wheel
 
@@ -37,6 +38,7 @@ class Main extends React.Component {
 
 
     render() {
+        
         const styles = {
             paddingRight: "0",
             paddingLeft: "0"
@@ -76,21 +78,26 @@ class Main extends React.Component {
         }
     
         return (
-                <Provider store={store}>
+                
                     <div className="container-fluid" style={styles}>
                         <NavBar name0={sectionOptions0.name} name1={sectionOptions1.name} name2={sectionOptions2.name} name3={sectionOptions3.name} />
                         <Header />
-                            <Section key={sectionOptions0.key} title={sectionOptions0.title} position={sectionOptions0.position} image={sectionOptions0.image} copy={sectionOptions0.copy} name={sectionOptions0.name} />
-                            <Section key={sectionOptions1.key} title={sectionOptions1.title} position={sectionOptions1.position} image={sectionOptions1.image} copy={sectionOptions1.copy} name={sectionOptions1.name} />
-                            <Section key={sectionOptions2.key} title={sectionOptions2.title} position={sectionOptions2.position} image={sectionOptions2.image} copy={sectionOptions2.copy} name={sectionOptions2.name} />
-                            <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} name={sectionOptions3.name} />
+                        <Section key={sectionOptions0.key} title={sectionOptions0.title} position={sectionOptions0.position} image={sectionOptions0.image} copy={sectionOptions0.copy} name={sectionOptions0.name} />
+                        <Section key={sectionOptions1.key} title={sectionOptions1.title} position={sectionOptions1.position} image={sectionOptions1.image} copy={sectionOptions1.copy} name={sectionOptions1.name} />
+                        <Section key={sectionOptions2.key} title={sectionOptions2.title} position={sectionOptions2.position} image={sectionOptions2.image} copy={sectionOptions2.copy} name={sectionOptions2.name} />
+                        <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} name={sectionOptions3.name} />
+                        <Form />
                     </div>
-                </Provider>
+                
             )
     } 
 }
 
 export default function (next) {
-    Dom.render(<Main />, document.getElementById('root'));
+    Dom.render(
+        <Provider store={store}>
+            <Main />
+        </Provider>    
+        , document.getElementById('root'));
 } 
 

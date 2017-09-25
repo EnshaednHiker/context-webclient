@@ -1,11 +1,11 @@
-export const ACTION1 = "ACTION1";
-export const action1 = action1 => ({
-    type: ACTION1,
-    action1
+export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
+export const hamburgerClick = boolean => ({
+    type: HAMBURGER_CLICK,
+    boolean
 });
 
-export const ACTION2 = "ACTION2";
-export const action2 = action2 => ({
-    type: ACTION2,
-    action2
+export const SCROLL_AT_TOP = "SCROLL_AT_TOP";
+export const scrollAtTop = boolean => ({
+    type: SCROLL_AT_TOP,
+    boolean
 });
