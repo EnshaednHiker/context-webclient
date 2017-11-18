@@ -1,5 +1,23 @@
 @import url('./globals.css');
 
+html {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 0 0;
+}
+
+#root {
+    padding: 0 0 0 0;
+    width: 100%;
+}
+
+.no-padding {
+    padding: 0 0 0 0;
+}
+
+.content-box {
+    box-sizing: content-box !important;
+}
 
 body {
     font-family: 'Roboto', sans-serif;

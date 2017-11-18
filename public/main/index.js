@@ -11,7 +11,7 @@ import Form from '~/components/Form';
 //do the stuff I know I can do without Thinkful resources, don't spike my own wheel
 
 //path--> 
-// 1a. context product page
+// 1a. context product page -- save user info plus a list of urls "bookmarked" for convenience for the user
 // 1b. tessellated product page
 // 2. user creating an account, look over auth0 maybe, will maybe solve some problems and look better to the end user 
 //      but not at the cost of time or complexity
@@ -41,7 +41,8 @@ class Main extends React.Component {
         
         const styles = {
             paddingRight: "0",
-            paddingLeft: "0"
+            paddingLeft: "0",
+            margin: "0"
         }
 
         const sectionOptions0 = {
@@ -78,7 +79,7 @@ class Main extends React.Component {
         }
     
         return (
-                
+                <Provider store={store}>
                     <div className="container-fluid" style={styles}>
                         <NavBar name0={sectionOptions0.name} name1={sectionOptions1.name} name2={sectionOptions2.name} name3={sectionOptions3.name} />
                         <Header />
@@ -88,16 +89,14 @@ class Main extends React.Component {
                         <Section key={sectionOptions3.key} title={sectionOptions3.title} position={sectionOptions3.position} image={sectionOptions3.image} copy={sectionOptions3.copy} name={sectionOptions3.name} />
                         <Form />
                     </div>
-                
+                </Provider>  
             )
     } 
 }
 
 export default function (next) {
     Dom.render(
-        <Provider store={store}>
-            <Main />
-        </Provider>    
+        <Main />
         , document.getElementById('root'));
 } 
 

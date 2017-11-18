@@ -9,3 +9,9 @@ export const scrollAtTop = boolean => ({
     type: SCROLL_AT_TOP,
     boolean
 });
+
+export const COLLAPSE_MENU = "COLLAPSE_MENU";
+export const collapseMenu = (click) => ({
+    type: COLLAPSE_MENU,
+    click
+});

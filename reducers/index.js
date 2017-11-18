@@ -18,5 +18,10 @@ export const contextReducer = (state = initialState, action) => {
             isTop: action.boolean
         })
     }
+    else if (action.type === actions.COLLAPSE_MENU){
+        return Object.assign({}, state, {
+            isCollapsed: true
+        })
+    }
     else return state;
 };

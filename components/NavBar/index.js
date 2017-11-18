@@ -2,11 +2,14 @@ import React from 'react';
 import Dom from 'react-dom';
 
 import { connect } from 'react-redux';
-import {scrollAtTop, hamburgerClick } from '~/actions'
+const ClickOutHandler = require('react-onclickout');
+import {scrollAtTop, hamburgerClick, collapseMenu } from '~/actions'
 
 import '~/assets/styles/main.css'
 
 import Scroll from 'react-scroll';
+
+
 
 const Element = Scroll.Element;
 const Link = Scroll.Link;
@@ -29,6 +32,11 @@ export class NavBar extends React.Component {
         });
     }
 
+    onClickOut() {
+
+        console.log("this.props._owner._instance: ",this.props.children._owner._instance.props);
+        this.props.children._owner._instance.props.dispatch(collapseMenu('click'));
+    }
     // handleScroll () {
     //     //onScroll={this.handleScroll}
     //     let boolean = window.scrollY < 1;
@@ -45,7 +53,7 @@ export class NavBar extends React.Component {
     }
 
     render(){
-        
+        const props = this.props;
         console.log("isTop: ",this.props.isTop);
         console.log("isCollapsed: ",this.props.isCollapsed);
 
@@ -54,105 +62,125 @@ export class NavBar extends React.Component {
                  ()=> {
                     if (this.props.isTop===true && this.props.isCollapsed===true) {
                         return (
-                            <nav className="navbar navbar-inverse navbar-fixed-top transparent">
-                                <div className="container">
-                                    <div className="navbar-header transparent">
-                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                            <span className="sr-only">Toggle navigation</span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                        </button>
-                                        <a onClick={this.scrollToTop} className="white-text navbar-brand link"><strong>CONTEXT</strong></a>
-                                    </div>
-                                    <div id="navbar" className="collapse navbar-collapse">
-                                        <ul className="nav navbar-nav white-text">
-                                            <li><Link className="white-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
-                                            <li><Link className="white-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
-                                            <li><Link className="white-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
-                                        </ul>
-                                        <button type="button" className="link btn btn-default navbar-nav navbar-btn btn-primary pull-right">Sign In/Demo Account</button>
+                            
+                                <div className="row">
+                                    <div className="col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <nav className="navbar navbar-inverse navbar-fixed-top transparent">
+                                            <div className="container">
+                                                <div className="navbar-header transparent">
+                                                    
+                                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                                            <span className="sr-only">Toggle navigation</span>
+                                                            <span className="icon-bar"></span>
+                                                            <span className="icon-bar"></span>
+                                                            <span className="icon-bar"></span>
+                                                        </button>
+                                                    
+                                                    <a onClick={this.scrollToTop} className="white-text navbar-brand link"><strong>CONTEXT</strong></a>
+                                                </div>
+                                                <div id="navbar" className="collapse navbar-collapse">
+                                                    <ul className="nav navbar-nav white-text">
+                                                        <li><Link className="white-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
+                                                        <li><Link className="white-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
+                                                        <li><Link className="white-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
+                                                    </ul>
+                                                    <button type="button" className="link btn btn-default navbar-nav navbar-btn btn-primary pull-right">Sign In/Demo Account</button>
+                                                </div>
+                                            </div>
+                                        </nav>
                                     </div>
                                 </div>
-                            </nav>
+                            
                         )
                     }
                     else if (this.props.isTop===true && this.props.isCollapsed===false) {
                         return (
-                            <nav className="navbar navbar-inverse navbar-fixed-top cream">
-                                <div className="container">
-                                    <div className="navbar-header">
-                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                            <span className="sr-only">Toggle navigation</span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                        </button>
-                                        <a onClick={this.scrollToTop} className="grey-text navbar-brand link"><strong>CONTEXT</strong></a>
+                            
+                                <nav className="navbar navbar-inverse navbar-fixed-top cream">
+                                    <div className="container">
+                                        <div className="navbar-header">
+                                            <ClickOutHandler onClickOut={this.onClickOut}>
+                                                <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                                    <span className="sr-only">Toggle navigation</span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                </button>
+                                            </ClickOutHandler>
+                                            <a onClick={this.scrollToTop} className="grey-text navbar-brand link"><strong>CONTEXT</strong></a>
+                                        </div>
+                                        <div id="navbar" className="collapse in navbar-collapse cream">
+                                            <ul className="nav navbar-nav grey-text">
+                                                <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
+                                                <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
+                                            </ul>
+
+                                        </div>
                                     </div>
-                                    <div id="navbar" className="collapse navbar-collapse cream">
-                                        <ul className="nav navbar-nav grey-text">
-                                            <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
-                                            <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
-                                        </ul>
-                                        
-                                    </div>
-                                </div>
-                            </nav>
+                                </nav>
+                            
                         )
                     }
 
                     else if (this.props.isTop===false && this.props.isCollapsed===true) {
                         return (
-                            <nav className="navbar navbar-inverse navbar-fixed-top cream">
-                                <div className="container">
-                                    <div className="navbar-header">
-                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                            <span className="sr-only">Toggle navigation</span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                        </button>
-                                        <a onClick={this.scrollToTop} className="grey-text navbar-brand link"><strong>CONTEXT</strong></a>
+                            
+                                <nav className="navbar navbar-inverse navbar-fixed-top cream">
+                                    <div className="container">
+                                        <div className="navbar-header">
+                                            
+                                                <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                                    <span className="sr-only">Toggle navigation</span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                </button>
+                                            
+                                            <a onClick={this.scrollToTop} className="grey-text navbar-brand link"><strong>CONTEXT</strong></a>
+                                        </div>
+                                        <div id="navbar" className="collapse navbar-collapse cream">
+                                            <ul className="nav navbar-nav grey-text">
+                                                <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
+                                            </ul>
+                                            <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text pull-right margin-left-14">Sign In/Demo Account</button>
+                                        </div>
                                     </div>
-                                    <div id="navbar" className="collapse navbar-collapse cream">
-                                        <ul className="nav navbar-nav grey-text">
-                                            <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
-                                        </ul>
-                                        <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text pull-right">Sign In/Demo Account</button>
-                                    </div>
-                                </div>
-                            </nav>
+                                </nav>
+                            
                         )
                     }
 
                     else {
                         return (
-                            <nav className="navbar navbar-inverse navbar-fixed-top cream">
-                                <div className="container">
-                                    <div className="navbar-header">
-                                        <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                            <span className="sr-only">Toggle navigation</span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                            <span className="icon-bar"></span>
-                                        </button>
-                                        <a onClick={this.scrollToTop} className="grey-text navbar-brand link" ><strong>CONTEXT</strong></a>
+                            
+                                <nav className="navbar navbar-inverse navbar-fixed-top cream">
+                                    <div className="container">
+                                        <div className="navbar-header">
+                                            <ClickOutHandler onClickOut={this.onClickOut}>
+                                                <button onClick={this.handleHamburgerClick} type="button" id="hamburger-button" className="navbar-toggle collapsed grey" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                                    <span className="sr-only">Toggle navigation</span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                    <span className="icon-bar"></span>
+                                                </button>
+                                            </ClickOutHandler>
+                                            <a onClick={this.scrollToTop} className="grey-text navbar-brand link" ><strong>CONTEXT</strong></a>
+                                        </div>
+                                        <div id="navbar" className="collapse navbar-collapse cream">
+                                            <ul className="nav navbar-nav grey-text">
+                                                <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
+                                                <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
+                                                <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div id="navbar" className="collapse navbar-collapse cream">
-                                        <ul className="nav navbar-nav grey-text">
-                                            <li><Link className="grey-text link" to={this.props.name0} spy={true} smooth={true} duration={500}>About</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name1} spy={true} smooth={true} duration={500}>Features</Link></li>
-                                            <li><Link className="grey-text link" to={this.props.name2} spy={true} smooth={true} duration={500}>Sign Up</Link></li>
-                                            <button type="button" className="link btn btn-default navbar-nav navbar-btn grey white-text margin-left-14">Sign In/Demo Account</button>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </nav>
+                                </nav>
+                            
                         )
                     }
                 }
@@ -161,6 +189,7 @@ export class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    
     return ({
          isTop: state.isTop,
          isCollapsed: state.isCollapsed
