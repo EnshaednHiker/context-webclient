@@ -1,15 +1,18 @@
-@import url('./globals.css');
 
-html {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 0 0 0;
+/* css grid layout */
+
+#main-view {
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    flex: 1 0 auto;
 }
 
-#root {
-    padding: 0 0 0 0;
-    width: 100%;
-}
+
+
+
+
+
 
 .no-padding {
     padding: 0 0 0 0;
@@ -47,28 +50,6 @@ body {
     color: #FFFF;
 }  
 
-.transparent {
-    background-color: transparent;
-    border: transparent;
-}
-
-.white-text {
-    color: #FFFFFF !important;
-}
-
-.cream {
-    background-color: #fcf8e3;
-    border: #fcf8e3;
-}
-
-.grey {
-    background-color: #B0A0AC !important;
-    border: #B0A0AC;
-}
-
-.grey-text {
-    color: #B0A0AC !important;
-}
 
 .margin-left-14 {
     margin-left: 14px;
@@ -85,4 +66,28 @@ body {
 
 #hamburger-button:hover {
     background-color: #000000 !important;
+}
+
+.highlighted-text{
+    color: black;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+/* Media queries for making sure the header text works */
+
+@media (max-width: 700px) {
+    #header-text {
+      margin-left:20vw !important;
+    }
+}
+@media (min-width: 900px) {
+    #header-text {
+      font-size: 3rem !important;
+    }
+}
+@media (max-width: 400px) {
+    #header-text {
+      font-size: 1.5rem !important;
+    }
 }

@@ -5,7 +5,7 @@ import {  } from '~/actions'
 
 import '~/assets/styles/main.css'
 
-import { Picture } from 'react-responsive-picture';
+//import { Picture } from 'react-responsive-picture';
 
 export class Header extends React.Component {
     constructor(props){
@@ -24,28 +24,19 @@ export class Header extends React.Component {
         const textStyles = {
             zIndex: 1000,
             position: "absolute",
-            marginTop: "20%",
+            marginTop: "30vw",
+            marginLeft: "60vw",
             color: "white",
             backgroundColor: "none"
         }
 
         return (
-            
-            <header>
-                <div className="row no-padding">
-                    <div className="col col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8 col-xs-offset-4 col-xs-8 text-center " style={textStyles}> 
-                        <div className="jumbotron transparent">
-                            <h1 id="header-text"><strong>CONTEXT</strong> <br /><small className="white-text">consult the <mark>world.</mark></small></h1>
-                        </div>
-                    </div>
+            <header className="header">
+                <div className="transparent" style={textStyles} id="header-text">
+                    <h1 id="header-text" className=""><strong>CONTEXT</strong> <br /><small className="white-text small">consult the <span className="cream highlighted-text">world.</span></small></h1>
                 </div>
-                <div className="row no-padding">
-                    <div className="col">
-                        <img className="img-responsive" alt="background image of books" style={backgroundStyles} src="assets/images/book_stacks_small.jpeg" srcSet="assets/images/book_stacks_small.jpeg 480w, assets/images/book_stacks_medium.jpeg 600w, assets/images/book_stacks_large.jpeg 900w"></img>
-                    </div>
-                </div>
+                <img className="" alt="background image of books" style={backgroundStyles} src="assets/images/book_stacks_small.jpeg" srcSet="assets/images/book_stacks_small.jpeg 480w, assets/images/book_stacks_medium.jpeg 600w, assets/images/book_stacks_large.jpeg 900w"></img>
             </header>
-           
             )
     }
 }

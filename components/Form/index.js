@@ -24,7 +24,7 @@ export class Form extends React.Component {
     
 
         return (
-                <form className="form-horizontal">
+                <form className="form">
                     <div className="form-group">
                         <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
                         <div className="col-sm-6">
