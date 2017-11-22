@@ -22,11 +22,11 @@ export class Feature extends React.Component {
 
         return (
             <Element name={this.props.name}>
-                <div className="features">
-                    <div>
-                        <img className="svg-image img-fluid" src={this.props.image} alt={`Image of ${this.props.title}`}></img>
+                <div className="feature">
+                    <div className="p-1">
+                        <img className="feature-image" src={this.props.image} alt={`Image of ${this.props.title}`}></img>
                     </div>
-                    <div className="">
+                    <div className="feature-content p-1">
                         <h4 className="media-heading">{this.props.title}</h4>
                         <p>{this.props.copy}</p>
                     </div>

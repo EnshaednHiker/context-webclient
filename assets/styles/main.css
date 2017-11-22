@@ -8,12 +8,6 @@
     flex: 1 0 auto;
 }
 
-
-
-
-
-
-
 .no-padding {
     padding: 0 0 0 0;
 }
@@ -30,17 +24,15 @@ body {
     color: #FFFF;
 }
 
-.svg-image {
-    max-width: 100%;
+.feature-image {
+    max-width: 40vw;
     height: inherit;
 }
 
-.section-margin {
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    margin-top: 100px;
+.feature-content {
+    max-width: 40vw;
 }
+
 
 .row-margin {
     margin-top: 50px;
@@ -89,5 +81,29 @@ body {
 @media (max-width: 400px) {
     #header-text {
       font-size: 1.5rem !important;
+    }
+}
+
+/* feature component styling */
+
+.feature {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media (max-width: 500px) {
+    .feature {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .feature-image {
+        max-width: 80vw;
+        height: inherit;
+    }
+    
+    .feature-content {
+        max-width: 80vw;
     }
 }
