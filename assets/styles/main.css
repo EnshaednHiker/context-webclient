@@ -84,7 +84,22 @@ body {
     }
 }
 
-/* feature component styling */
+/*************Content Component Stlying***********/
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 500px) {
+    .content {
+        max-width: 50vw;    
+    }
+}
+/*************Feature Component Styling***************/
 
 .feature {
     display: flex;
@@ -101,6 +116,7 @@ body {
     .feature-image {
         max-width: 80vw;
         height: inherit;
+        fill: #D2AF98 !important;
     }
     
     .feature-content {

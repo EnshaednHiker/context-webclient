@@ -19,9 +19,9 @@ export class Content extends React.Component {
     render(){
         return (
             <Element name={this.props.name}>
-                <div className="">
-                    <h4 className="">{this.props.title}</h4>
-                    <p>{this.props.copy}</p>
+                <div className="content p-5">
+                    <h4 className="tan-text-color">{this.props.title}</h4>
+                    <p className="thistle-text-color">{this.props.copy}</p>
                 </div>
             </Element>
         )
