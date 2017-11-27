@@ -84,6 +84,7 @@ class Main extends React.Component {
         return (
                 <Provider store={store}>
                     <div className="dark-slate-gray-background-color" style={styles} id="main-view">
+                        <NavBar link1={contentOptions.name} link2={featureOptions1.name} link3="form"/>
                         <Header />
                         <Content key={contentOptions.key} title={contentOptions.title} position={contentOptions.position} copy={contentOptions.copy} name={contentOptions.name} />
                         <Feature key={featureOptions1.key} title={featureOptions1.title} position={featureOptions1.position} image={featureOptions1.image} copy={featureOptions1.copy} name={featureOptions1.name} />
