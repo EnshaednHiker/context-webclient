@@ -9,9 +9,6 @@
 }
 
 
-
-
-
 .margin-left-14 {
     margin-left: 14px !important;
 }
@@ -38,19 +35,33 @@ nav {
 }
 
 nav ul {
+    display: flex !important;
+    flex-direction: row;
     list-style: none;
-    padding-left: 0;
-    display: flex !important;
-    flex-direction: row;
-}
-
-nav .links {
-    display: flex !important;
-    flex-direction: row;
-    
     width: 100%;
     align-items: baseline;
+    padding-left: 0;
 }
+
+@media (max-width: 650px) {
+    nav {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: space-around;
+        background-color: rgba(227,218,206, 0.5);
+    }
+    nav ul {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: space-around;
+        height: 100px;
+    }
+    nav ul li {
+        flex-direction: column;  
+    }
+
+}
+
 nav .button {
    align-content: center;
    margin-right: 14px !important; 
@@ -82,17 +93,15 @@ nav .button {
     filter: dropshadow(color=#000000, offx=2, offy=2);
 }
 
-#hamburger-button:hover {
-    background-color: #000000 !important;
-}
+
+
+/************Header Component Styling*************/
 
 .highlighted-text{
     color: black;
     padding-right: 3px;
     padding-left: 3px;
 }
-
-/* Media queries for making sure the header text works */
 
 @media (max-width: 700px) {
     #header-text {
@@ -143,18 +152,18 @@ nav .button {
     align-items: center;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
     .feature {
         flex-direction: column;
         justify-content: center;
     }
     .feature-image {
-        max-width: 80vw;
+        max-width: 60vw;
         height: inherit;
         fill: #D2AF98 !important;
     }
     
     .feature-content {
-        max-width: 80vw;
+        max-width: 60vw;
     }
 }

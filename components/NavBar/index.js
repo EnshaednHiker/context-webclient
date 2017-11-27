@@ -58,6 +58,7 @@ export class NavBar extends React.Component {
         console.log('this.props: ', this.props);
         console.log("isTop: ",this.props.isTop);
         console.log("isCollapsed: ",this.props.isCollapsed);
+        
 
         return (
                  ()=> {
@@ -65,72 +66,32 @@ export class NavBar extends React.Component {
                         return (
                             <nav className="transparent">
                                 <div className="brand margin-top-14">
-                                    <a onClick={this.scrollToTop} className="margin-left-14 white-text navbar-brand link"><strong>CONTEXT</strong></a>
+                                    <a onClick={this.scrollToTop} className="m-2 white-text navbar-brand link"><strong>CONTEXT</strong></a>
                                 </div>
-                                <div className="links">
-                                    <ul className="margin-left-14 white-text">
-                                        <li><Link className="thistle-text-color link ml-2 mr-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                        <li><Link className="thistle-text-color link ml-2 mr-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                        <li><Link className="thistle-text-color link ml-2 mr-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="link button button-primary margin-bottom-14 margin-right-14">Sign In/Demo Account</button>
-                            </nav>
-                        )
-                    }
-                    else if (this.props.isTop===true && this.props.isCollapsed===false) {
-                        return (
-                                <nav className="tan-background-color">
-                                    <div className="brand margin-top-14">
-                                        <a onClick={this.scrollToTop} className="margin-left-14 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
-                                    </div>
-                                    <div className="links">
-                                        <ul className="margin-left-14 dark-slate-gray-text-color">
-                                            <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                            <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                            <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
-                                        </ul>
-                                    </div>
-                                    <button type="button" className="link button dark-slate-gray-background-color margin-bottom-14 margin-right-14">Sign In/Demo Account</button>
-                                </nav>
-                        )
-                    }
-
-                    else if (this.props.isTop===false && this.props.isCollapsed===true) {
-                        return (
-                            <nav className="thistle-background-color">
-                                <div className="brand margin-top-14">
-                                    <a onClick={this.scrollToTop} className="margin-left-14 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
-                                </div>
-                                <div className="links">
-                                    <ul className="margin-left-14 dark-slate-gray-text-color">
-                                        <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                        <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                        <li><Link className="dark-slate-gray-text-color link ml-2 mr-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="link button thistle-text-color light-sea-green-background-color margin-bottom-14 margin-right-14">Sign In/Demo Account</button>
+                                <ul className="white-text links">
+                                    <li><Link className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
+                                    <li><Link className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
+                                    <li><Link className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
+                                </ul>
+                                <button type="button" className="link button button-primary m-2">Sign In/Demo Account</button>
                             </nav>
                         )
                     }
 
                     else {
                         return (
-                            
-                            <nav className="cream">
-                            <div className="brand margin-top-14">
-                                <a onClick={this.scrollToTop} className="margin-left-14 white-text navbar-brand link"><strong>CONTEXT</strong></a>
-                            </div>
-                            <div className="links">
-                                <ul className="margin-left-14 white-text">
-                                    <li><Link className="grey-text link ml-2 mr-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                    <li><Link className="grey-text link ml-2 mr-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                    <li><Link className="grey-text link ml-2 mr-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
+                            <nav className="thistle-background-color">
+                                <div className="brand margin-top-14">
+                                    <a onClick={this.scrollToTop} className="m-2 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
+                                </div>
+                                <ul className="links dark-slate-gray-text-color">
+                                    <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
+                                    <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
+                                    <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
                                 </ul>
-                            </div>
-                            <button type="button" className="link button grey margin-bottom-14 margin-right-14">Sign In/Demo Account</button>
-                        </nav>
-                            
+                                
+                                <button type="button" className="link button thistle-text-color light-sea-green-background-color m-2">Sign In/Demo Account</button>
+                            </nav>
                         )
                     }
                 }

@@ -33,7 +33,7 @@ export class Header extends React.Component {
         return (
             <header className="header">
                 <div className="transparent" style={textStyles} id="header-text">
-                    <h1 id="header-text" className=""><strong>CONTEXT</strong> <br /><small className="white-text small">consult the <span className="cream highlighted-text">world.</span></small></h1>
+                    <h1 id="header-text" className=""><strong>CONTEXT</strong> <br /><span className="white-text small">consult the <span className="thistle-background-color highlighted-text">world.</span></span></h1>
                 </div>
                 <img className="" alt="background image of books" style={backgroundStyles} src="assets/images/book_stacks_small.jpeg" srcSet="assets/images/book_stacks_small.jpeg 480w, assets/images/book_stacks_medium.jpeg 600w, assets/images/book_stacks_large.jpeg 900w"></img>
             </header>
