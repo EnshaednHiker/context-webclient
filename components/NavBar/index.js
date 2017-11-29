@@ -8,7 +8,7 @@ import {scrollAtTop, hamburgerClick, collapseMenu } from '~/actions'
 import '~/assets/styles/main.css'
 
 import Scroll from 'react-scroll';
-
+import MediaQuery from 'react-responsive';
 
 
 const Element = Scroll.Element;
@@ -59,6 +59,7 @@ export class NavBar extends React.Component {
         console.log("isTop: ",this.props.isTop);
         console.log("isCollapsed: ",this.props.isCollapsed);
         
+        
 
         return (
                  ()=> {
@@ -68,12 +69,15 @@ export class NavBar extends React.Component {
                                 <div className="brand margin-top-14">
                                     <a onClick={this.scrollToTop} className="m-2 white-text navbar-brand link"><strong>CONTEXT</strong></a>
                                 </div>
-                                <ul className="white-text links">
-                                    <li><Link className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                    <li><Link className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                    <li><Link className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
-                                </ul>
-                                <button type="button" className="link button button-primary m-2">Sign In/Demo Account</button>
+                                    <ul className="white-text links">
+                                        <li><Link className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
+                                        <li><Link className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
+                                        <li><Link className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>Sign Up</Link></li>
+                                    </ul>
+                                    <button type="button" className="link button button-primary m-2">Sign In/Demo Account</button>
+                                    <button type="button" className="button hamburger-link m-2">
+                                        <i className="fa fa-bars white-text" aria-hidden="true"></i>
+                                    </button>
                             </nav>
                         )
                     }
