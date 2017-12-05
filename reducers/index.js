@@ -2,7 +2,9 @@ import * as actions from '~/actions';
 
 const initialState = {
     isTop: true,
-    isCollapsed: true
+    isCollapsed: true,
+    recentSearches: [],
+    currentSearch:null
 };
 
 export const contextReducer = (state = initialState, action) => {
@@ -21,6 +23,11 @@ export const contextReducer = (state = initialState, action) => {
     else if (action.type === actions.COLLAPSE_MENU){
         return Object.assign({}, state, {
             isCollapsed: true
+        })
+    }
+    else if (action.type === actions.SEARCH){
+        return Object.assign({}, state, {
+            currentSearch: action.url
         })
     }
     else return state;

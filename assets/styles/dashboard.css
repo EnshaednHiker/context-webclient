@@ -1,0 +1,22 @@
+#dashboard-view {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas: "dash dash"
+                          "frame sidebar";
+    height: 100vh;
+
+}
+
+.frame {
+    grid-area: frame;
+    width: 100%;
+    height: 100%;
+}
+
+.dash {
+    grid-area: dash;
+}
+.sidebar {
+    grid-area: sidebar
+}

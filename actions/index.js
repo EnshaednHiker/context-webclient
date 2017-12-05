@@ -17,7 +17,13 @@ export const collapseMenu = (click) => ({
 });
 
 export const TOGGLE__HAMBURGER_MENU = "TOGGLE__HAMBURGER_MENU";
-export const ToggleMenu = (click) => ({
+export const toggleHamburgerMenu = (click) => ({
     type: TOGGLE__HAMBURGER_MENU,
     click
+});
+
+export const SEARCH = "SEARCH";
+export const search = (url) => ({
+    type: SEARCH,
+    url
 });
