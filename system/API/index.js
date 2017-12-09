@@ -84,5 +84,7 @@ function Request (action, url) {
 
 function outsideRequest (action, url) {
     return request[action](url)
-        .set('Content-Type','application/json')
+        .set('Accept','application/json')
+        //.set('Allow-Control-Allow-Origin','*')
+
 }
