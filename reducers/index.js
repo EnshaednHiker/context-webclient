@@ -40,7 +40,7 @@ export const contextReducer = (state = initialState, action) => {
         return handle (state, action, {
             start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
             finish: prevState => ({ ...prevState, isAnnoLoading: false }),
-            failure: prevState => ({ ...prevState, dbPediaError: action.payload }),
+            failure: prevState => ({ ...prevState, dbPediaError: action.payload.body }),
             success: prevState => ({ ...prevState, annotation: action.payload.body })
         });
     }
