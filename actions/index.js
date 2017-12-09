@@ -1,3 +1,6 @@
+
+import system from '~/system';
+
 export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
 export const hamburgerClick = boolean => ({
     type: HAMBURGER_CLICK,
@@ -27,3 +30,18 @@ export const search = (url) => ({
     type: SEARCH,
     url
 });
+
+export const SET_ANNOTATION_STRING = "SET_ANNOTATION_STRING";
+export const setAnnotationString = (annoString) => ({
+    type: SET_ANNOTATION_STRING,
+    annoString
+});
+
+export const ANNOTATE = 'ANNOTATE';
+
+export function annotate(annoString) {
+    return {
+        type: ANNOTATE,
+        promise: system.API.GET_OUTSIDE_RESOURCE(process.env.DBPEDIA_API, {text:annoString})
+    }
+}

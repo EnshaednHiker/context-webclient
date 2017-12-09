@@ -68,6 +68,11 @@ body {
     font-size: 80%;
 }
 
+.full-size {
+    height: 100%;
+    width:100%;
+}
+
 .button {
     display: inline-block;
     padding: 6px 12px;

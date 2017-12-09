@@ -21,8 +21,8 @@ class Dashboard extends React.Component {
         return (
                 <Provider store={store}>
                     <div className="" id="dashboard-view">
-                        <Dash />
-                        <Frame />
+                        <Dash formId="annotate-form"/>
+                        <Frame formId="annotate-form" />
                         <Sidebar />
                     </div>
                 </Provider>  

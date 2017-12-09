@@ -1,10 +1,15 @@
 import * as actions from '~/actions';
+import { handle } from 'redux-pack';  
 
 const initialState = {
     isTop: true,
     isCollapsed: true,
     recentSearches: [],
-    currentSearch:null
+    annoString: "",
+    dbPediaError: null,
+    isAnnoLoading: false,
+    annotation: null
+
 };
 
 export const contextReducer = (state = initialState, action) => {
@@ -25,10 +30,19 @@ export const contextReducer = (state = initialState, action) => {
             isCollapsed: true
         })
     }
-    else if (action.type === actions.SEARCH){
+    else if (action.type === actions.SET_ANNOTATION_STRING){
+        console.log(action);
         return Object.assign({}, state, {
-            currentSearch: action.url
+            annoString: action.annoString
         })
+    }
+    else if (action.type === actions.ANNOTATE){
+        return handle (state, action, {
+            start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
+            finish: prevState => ({ ...prevState, isAnnoLoading: false }),
+            failure: prevState => ({ ...prevState, dbPediaError: action.payload }),
+            success: prevState => ({ ...prevState, annotation: action.payload })
+        });
     }
     else return state;
 };

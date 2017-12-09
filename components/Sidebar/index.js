@@ -3,6 +3,8 @@ import Dom from 'react-dom';
 import { connect } from 'react-redux';
 import {  } from '~/actions'
 
+
+
 export class Sidebar extends React.Component {
     constructor(props){
         super(props)
@@ -10,7 +12,10 @@ export class Sidebar extends React.Component {
     }
 
     render(){
-
+        console.log("this.props.annotation", this.props.annotation);
+        console.log("this.props.isAnnoLoading", this.props.isAnnoLoading);
+        console.log("this.props.dbPediaError",this.props.dbPediaError);
+        console.log("process.env.DBPEDIA_API: ",process.env.DBPEDIA_API);
 
         return (
                 <aside className="sidebar thistle-background-color">
@@ -19,9 +24,11 @@ export class Sidebar extends React.Component {
             )
     }
 }
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return ({
- 
+        annotation: state.annotation,
+        isAnnoLoading: state.isAnnoLoading,
+        dbPediaError: state.dbPediaError
     })
  };
- export default connect(mapDispatchToProps)(Sidebar);
+ export default connect(mapStateToProps)(Sidebar);

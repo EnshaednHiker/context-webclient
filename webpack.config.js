@@ -3,7 +3,8 @@ const dotenv = require('dotenv-webpack');
 const html = require('html-webpack-plugin');
 const path = require('path');
 
-module.exports = function (env){
+module.exports = function (environment){
+    environment = environment || 'local';
     return {
         entry: {
             main: path.join(__dirname,"index.js")
@@ -40,7 +41,7 @@ module.exports = function (env){
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new html({template:path.join(__dirname,"index.html")}),
-            new dotenv({path:path.join(__dirname,".env")}),
+            new dotenv({path:path.join(__dirname,'configs',`${environment}.env`)}),
         ]
     }
 }

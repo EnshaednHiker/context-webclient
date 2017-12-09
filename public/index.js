@@ -1,4 +1,4 @@
-import Router from '~/system/router.js';
+import system from '~/system';
 import Main from './main';
 import Dashboard from './dashboard';
 import GlobalsCSS from '~/assets/styles/globals.css'
@@ -14,4 +14,4 @@ const routes = {
     '/contact' : Contact */
 }
 
-Router.register(routes).init('#/');
+system.router.register(routes).init('#/');
