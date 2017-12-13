@@ -15,6 +15,7 @@ export class Frame extends React.Component {
     render(){
 
         return (
+            
                 <textarea 
                     name="userInput"
                     form={this.props.formId} 
@@ -28,7 +29,7 @@ export class Frame extends React.Component {
 }
 const mapStateToProps = state => {
     return ({
-        annoString: state.annoString
+        annotation: state.annotations.annotation
         
     })
  };

@@ -26,9 +26,9 @@ export class Sidebar extends React.Component {
 }
 const mapStateToProps = state => {
     return ({
-        annotation: state.annotation,
-        isAnnoLoading: state.isAnnoLoading,
-        dbPediaError: state.dbPediaError
+        annotation: state.annotations.annotation,
+        isAnnoLoading: state.annotations.isAnnoLoading,
+        dbPediaError: state.annotations.dbPediaError
     })
  };
  export default connect(mapStateToProps)(Sidebar);

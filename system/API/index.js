@@ -83,7 +83,7 @@ function Request (action, url) {
 }
 
 function outsideRequest (action, url) {
-    return request[action](url)
+    return request[action](process.env.DBPEDIA_API+url)
         .set('Accept','application/json')
         //.set('Allow-Control-Allow-Origin','*')
 

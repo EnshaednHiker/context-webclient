@@ -1,5 +1,6 @@
-
 import system from '~/system';
+
+/***************UI ACTIONS******************/
 
 export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
 export const hamburgerClick = boolean => ({
@@ -37,11 +38,64 @@ export const setAnnotationString = (annoString) => ({
     annoString
 });
 
-export const ANNOTATE = 'ANNOTATE';
+/********************API CALL ACTIONS************************/
 
+export const ANNOTATE = 'ANNOTATE';
 export function annotate(annoString) {
     return {
         type: ANNOTATE,
-        promise: system.API.GET_OUTSIDE_RESOURCE(process.env.DBPEDIA_API, {text:annoString})
+        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}),
+        meta: {
+            // onSuccess: (result, getState) => {
+            //     const annotation = result;
+            //     postAnnotation(annotation);
+            // }
+        }
     }
+}
+
+export const POST_ANNOTATION = 'POST_ANNOTATION';
+export function postAnnotation(annotation) {
+    return {
+        type: POST_ANNOTATION,
+        promise: system.API.POST()
+    }
+}
+
+export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
+export function getAnnotations() {
+
+}
+
+export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
+export function deleteAnnotations () {
+
+}
+
+export const REGISTER = 'REGISTER';
+export function register(payload){
+    return {
+        type: REGISTER,
+        promise: system.API.POST('/users',{"payload":payload})
+    }
+}
+
+export const LOGIN = 'LOGIN';
+export function login () {
+
+}
+
+export const GET_USER = 'GET_USER';
+export function getUser () {
+
+}
+
+export const LOGOUT = 'LOGOUT';
+export function logout () {
+
+}
+
+export const DELETE_USER = 'DELETE_USER';
+export function deleteUser () {
+
 }

@@ -106,8 +106,8 @@ export class NavBar extends React.Component {
 const mapStateToProps = (state) => {
     
     return ({
-         isTop: state.isTop,
-         isCollapsed: state.isCollapsed
+         isTop: state.mainUi.isTop,
+         isCollapsed: state.mainUi.isCollapsed
     })
 };
 
