@@ -11,7 +11,7 @@ export class Dash extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.log("event.target.search-box.value: ",e.target.userInput.value)
+        //console.log("event.target.search-box.value: ",e.target.userInput.value)
         let annoString = "" + `${e.target.userInput.value}`;
         this.props.dispatch(setAnnotationString(annoString));
         this.props.dispatch(annotate(annoString));

@@ -46,12 +46,24 @@ export function annotate(annoString) {
         type: ANNOTATE,
         promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}),
         meta: {
+            onSuccess: (result, getState) => {
+                let resources = result.body.Resources;
+                let text = getState().annotations.annoString
+                markUpText(text, resources);
+            }
             // onSuccess: (result, getState) => {
             //     const annotation = result;
             //     postAnnotation(annotation);
             // }
         }
     }
+}
+
+export const MARK_UP_TEXT = "MARK_UP_TEXT";
+export const markUpText = (text, resources) => {
+    type: MARK_UP_TEXT,
+    text,
+    resources
 }
 
 export const POST_ANNOTATION = 'POST_ANNOTATION';

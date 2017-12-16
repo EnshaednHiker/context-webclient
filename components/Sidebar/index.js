@@ -12,10 +12,10 @@ export class Sidebar extends React.Component {
     }
 
     render(){
-        console.log("this.props.annotation", this.props.annotation);
-        console.log("this.props.isAnnoLoading", this.props.isAnnoLoading);
-        console.log("this.props.dbPediaError",this.props.dbPediaError);
-        console.log("process.env.DBPEDIA_API: ",process.env.DBPEDIA_API);
+        // console.log("this.props.annotation", this.props.annotation);
+        // console.log("this.props.isAnnoLoading", this.props.isAnnoLoading);
+        // console.log("this.props.dbPediaError",this.props.dbPediaError);
+        // console.log("process.env.DBPEDIA_API: ",process.env.DBPEDIA_API);
 
         return (
                 <aside className="sidebar thistle-background-color">

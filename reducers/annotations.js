@@ -6,27 +6,39 @@ const initialState = {
     annoString: "",
     dbPediaError: null,
     isAnnoLoading: false,
-    annotation: null
+    annotation: null,
+    stringArray: []
 };
+
+function splitString (text) {
+    return text.split(" ");
+}
 
 export default function annotations (state = initialState, action) {
     if (action.type === actions.SET_ANNOTATION_STRING){
-        console.log(action);
         return Object.assign({}, state, {
             annoString: action.annoString
         })
     }
     else if (action.type === actions.ANNOTATE){
+
         return handle (state, action, {
             start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
             finish: prevState => ({ ...prevState, isAnnoLoading: false }),
             failure: prevState => ({ ...prevState, dbPediaError: action.payload.body }),
             success: prevState => ({ 
                 ...prevState, 
-                annotation: action.payload.body,
-                recentAnnotations: state.recentAnnotations.pop(action.payload.body)
+                annotation: action.payload.body
+                //recentAnnotations: state.recentAnnotations.pop(action.payload.body)
             })
         });
+    }
+    else if (action.type === actions.MARK_UP_TEXT){
+        let stringArray = splitString(action.text);
+        
+        return Object.assign({}, state, {
+            stringArray: stringArray
+        })
     }
     else return state;
 }
