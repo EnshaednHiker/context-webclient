@@ -44,12 +44,13 @@ export class Frame extends React.Component {
             //replace the first named entity for each with a JSON string of relevant data to be decoded and used in the Words component
             arrayResources.forEach(function(resource, index){
                 let word = resource['@surfaceForm']
-                let regex = new RegExp(`${word}`,"i");
+                let regex = new RegExp(`(?<!_|\/|")${word}(?!_|\/|\")`,"i");
                 
                 let uri = resource['@URI'];
                 let replacementString = JSON.stringify({uri:uri,word:word});
                 console.log("replacementString: ", replacementString);
                 let dupString = newString.replace(regex,separator+replacementString+separator);
+                console.log('dupString: ', dupString)
                 newString = dupString;
             });
             console.log("newString: ",newString)
