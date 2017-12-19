@@ -52,9 +52,9 @@ export class Form extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = dispatch => {
    return ({
 
    })
 };
-export default connect(mapDispatchToProps)(Form);
+export default connect(mapStateToProps)(Form);
