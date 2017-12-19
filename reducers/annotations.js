@@ -33,6 +33,11 @@ export default function annotations (state = initialState, action) {
             })
         });
     }
+    else if (action.type === actions.CLEAR_ANNOTATION){
+        return Object.assign({}, state,{
+            annotation: null
+        })
+    }
     else if (action.type === actions.MARK_UP_TEXT){
         let stringArray = splitString(action.text);
         

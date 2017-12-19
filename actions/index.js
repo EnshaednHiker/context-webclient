@@ -1,6 +1,6 @@
 import system from '~/system';
 
-/***************UI ACTIONS******************/
+/***************Main UI ACTIONS******************/
 
 export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
 export const hamburgerClick = boolean => ({
@@ -26,16 +26,23 @@ export const toggleHamburgerMenu = (click) => ({
     click
 });
 
-export const SEARCH = "SEARCH";
-export const search = (url) => ({
-    type: SEARCH,
-    url
-});
+// export const SEARCH = "SEARCH";
+// export const search = (url) => ({
+//     type: SEARCH,
+//     url
+// });
+
+/********************Dashboard UI ACTIONS*********************/
 
 export const SET_ANNOTATION_STRING = "SET_ANNOTATION_STRING";
 export const setAnnotationString = (annoString) => ({
     type: SET_ANNOTATION_STRING,
     annoString
+});
+
+export const CLEAR_ANNOTATION = "CLEAR_ANNOTATION";
+export const clearAnnotation = () => ({
+    type: CLEAR_ANNOTATION
 });
 
 /********************API CALL ACTIONS************************/
