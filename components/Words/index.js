@@ -18,10 +18,14 @@ export class Words extends React.Component {
     }
     render(){
     
-        if(this.props.words.startsWith('{"uri":')){
-            
-            let wordObject = JSON.parse(this.props.words);
-            
+        if(this.props.words.startsWith('{"uri":') && this.props.words.endsWith('}')){
+            console.log("this.props.words", this.props.words);
+            let wordObject;
+            try {
+                wordObject = JSON.parse(this.props.words);
+            } catch (error) {
+                console.error(error)
+            }
             return (
                 <button type="button" onClick={this.handleClick} className="button-link" data-url={wordObject.uri} >{wordObject.word}</button>
             )
