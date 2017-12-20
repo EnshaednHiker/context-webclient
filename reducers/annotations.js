@@ -10,9 +10,6 @@ const initialState = {
     stringArray: []
 };
 
-function splitString (text) {
-    return text.split(" ");
-}
 
 export default function annotations (state = initialState, action) {
     if (action.type === actions.SET_ANNOTATION_STRING){
@@ -25,7 +22,7 @@ export default function annotations (state = initialState, action) {
         return handle (state, action, {
             start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
             finish: prevState => ({ ...prevState, isAnnoLoading: false }),
-            failure: prevState => ({ ...prevState, dbPediaError: action.payload.body }),
+            failure: prevState => ({ ...prevState, dbPediaError: action.payload.body}),
             success: prevState => ({ 
                 ...prevState, 
                 annotation: action.payload.body
@@ -35,7 +32,9 @@ export default function annotations (state = initialState, action) {
     }
     else if (action.type === actions.CLEAR_ANNOTATION){
         return Object.assign({}, state,{
-            annotation: null
+            annotation: null,
+            dbPediaError: null,
+            annoString: ""
         })
     }
     else if (action.type === actions.MARK_UP_TEXT){
