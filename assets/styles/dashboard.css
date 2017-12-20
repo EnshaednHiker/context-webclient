@@ -21,6 +21,11 @@
     grid-area: sidebar
 }
 
+.iframe {
+    height: 100%;
+    width: 100%;
+}
+
 .button-link {
     background:none!important;
     border:none; 

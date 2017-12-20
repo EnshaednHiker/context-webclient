@@ -45,6 +45,17 @@ export const clearAnnotation = () => ({
     type: CLEAR_ANNOTATION
 });
 
+export const LOAD_ARTICLE = "LOAD_ARTICLE";
+export const loadArticle = (url) => ({
+    type: LOAD_ARTICLE,
+    url
+});
+
+export const DUMP_ARTICLE = "DUMP_ARTICLE";
+export const dumpArticle = () => ({
+    type: DUMP_ARTICLE
+});
+
 /********************API CALL ACTIONS************************/
 
 export const ANNOTATE = 'ANNOTATE';

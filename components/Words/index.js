@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {  } from '~/actions'
+import { loadArticle } from '~/actions'
 
 
 import '~/assets/styles/dashboard.css'
@@ -15,6 +15,7 @@ export class Words extends React.Component {
     handleClick(event){
         console.log("event.target.dataset.url: ", event.target.dataset.url)
         //then dispatch action to show the text
+        this.props.dispatch(loadArticle(event.target.dataset.url));
     }
     render(){
     

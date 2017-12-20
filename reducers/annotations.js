@@ -7,7 +7,8 @@ const initialState = {
     dbPediaError: null,
     isAnnoLoading: false,
     annotation: null,
-    stringArray: []
+    articleUrl: null
+    
 };
 
 
@@ -34,14 +35,18 @@ export default function annotations (state = initialState, action) {
         return Object.assign({}, state,{
             annotation: null,
             dbPediaError: null,
-            annoString: ""
+            annoString: "",
+            articleUrl: null
         })
     }
-    else if (action.type === actions.MARK_UP_TEXT){
-        let stringArray = splitString(action.text);
-        
+    else if (action.type === actions.LOAD_ARTICLE){
         return Object.assign({}, state, {
-            stringArray: stringArray
+            articleUrl: action.url
+        })
+    }
+    else if (action.type === actions.DUMP_ARTICLE){
+        return Object.assign({}, state, {
+            articleUrl: null
         })
     }
     else return state;

@@ -16,19 +16,26 @@ export class Sidebar extends React.Component {
         // console.log("this.props.isAnnoLoading", this.props.isAnnoLoading);
         // console.log("this.props.dbPediaError",this.props.dbPediaError);
         // console.log("process.env.DBPEDIA_API: ",process.env.DBPEDIA_API);
-
-        return (
+        if(this.props.articleUrl!==null){
+            return (
                 <aside className="sidebar thistle-background-color">
-                    <p>Sidebar content</p>
+                    <iframe className="iframe" src={this.props.articleUrl}></iframe>
                 </aside>
             )
+        }
+        else{
+            return (
+                <aside className="sidebar thistle-background-color"></aside>
+            )
+        }
     }
 }
 const mapStateToProps = state => {
     return ({
         annotation: state.annotations.annotation,
         isAnnoLoading: state.annotations.isAnnoLoading,
-        dbPediaError: state.annotations.dbPediaError
+        dbPediaError: state.annotations.dbPediaError,
+        articleUrl: state.annotations.articleUrl
     })
  };
  export default connect(mapStateToProps)(Sidebar);
