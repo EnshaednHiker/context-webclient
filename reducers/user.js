@@ -4,7 +4,16 @@ import { handle } from 'redux-pack';
 const initialState = {
     userToken: null,
     isUserLoading: false,
-    userError: null    
+    userError: null,
+    register: {
+        username: null,
+        email: null,
+        password: null
+    },
+    login: {
+        username: null,
+        password: null
+    }    
 };
 
 

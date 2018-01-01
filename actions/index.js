@@ -26,11 +26,11 @@ export const toggleHamburgerMenu = (click) => ({
     click
 });
 
-// export const SEARCH = "SEARCH";
-// export const search = (url) => ({
-//     type: SEARCH,
-//     url
-// });
+export const TOGGLE_FORM = "TOGGLE_FORM";
+export const toggleForm = (boolean) => ({
+    type: TOGGLE_FORM,
+    boolean
+});
 
 /********************Dashboard UI ACTIONS*********************/
 
