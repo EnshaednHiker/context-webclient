@@ -94,6 +94,13 @@ export function annotate(annoString) {
     }
 }
 
+export const LOAD_ARTICLE = "LOAD_ARTICLE";
+export const loadArticle = (url) => ({
+        type: LOAD_ARTICLE,
+        url
+});
+
+
 export const MARK_UP_TEXT = "MARK_UP_TEXT";
 export const markUpText = (text, resources) => {
     type: MARK_UP_TEXT,
@@ -121,42 +128,50 @@ export function deleteAnnotations () {
 
 export const REGISTER = 'REGISTER';
 export function register(payload){
-    return {
-        type: REGISTER,
-        promise: system.API.POST('/users',{"payload":payload}),
-        meta: {
-            onSuccess: (result, getState) => {
-                if (result.status===201){
-                    return system.API.POST("/users/login",{payload:payload})
-                        .then((res)=>{
-                            //save the token to local storage
-                            window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
-                            //redirect to meaningful page
-                            window.location.hash='#/dashboard';
-                        })
-                        .catch((err)=>{
-                            console.warn(err);
-                        });
+    
+        return {
+            type: REGISTER,
+            promise: system.API.POST('/users',{"payload":payload}),
+            meta: {
+                onSuccess: (result, getState) => {
+                    if (result.status===201){
+                        //return dispatch => dispatch(login(payload));
+                        
+                            
+                        return system.API.POST("/users/login",{payload:payload})
+                            .then((res)=>{
+                                //save the token to local storage
+                                window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
+                                //redirect to meaningful page
+                                window.location.hash='#/dashboard';
+                            })
+                            .catch((err)=>{
+                                console.warn(err);
+                            });
+                    }
+                },
+                onFailure: (err, getState) => {
+                    console.warn(err);
                 }
-            },
-            onFailure: (err, getState) => {
-                console.warn(err);
             }
         }
-    }
+    
+
 }
 
 export const LOGIN = 'LOGIN';
 export function login (payload) {
+    console.log("did login fire?", payload);
     return {
         type: LOGIN,
         promise: system.API.POST('/users/login',{payload:payload}),
         meta: {
             onSuccess: (result, getState) => {
-                //save the token to local storage
-                window.localStorage.setItem(process.env.TOKEN, result.body.user.token);
-                //redirect to meaningful page
-                window.location.hash='#/dashboard';
+
+                // //save the token to local storage
+                // window.localStorage.setItem(process.env.TOKEN, result.body.user.token);
+                // //redirect to meaningful page
+                // window.location.hash='#/dashboard';
             }
         }
     }

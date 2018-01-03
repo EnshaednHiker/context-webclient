@@ -132,7 +132,7 @@ export class Form extends React.Component {
         else {
             return (
                 <div className="form-container">
-                    <form className="form" name="userForm" onSubmit={(e) => {this.handleSubmitRegister(e); this.handleClearForm("userForm");}}>
+                    <form className="form" id="userForm" name="userForm" onSubmit={(e) => {this.handleSubmitRegister(e); this.handleClearForm("userForm");}}>
                         <Element name="form">
                             <h2 className="tan-text-color m-3">Register</h2>
                         </Element>

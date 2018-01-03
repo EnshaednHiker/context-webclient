@@ -6,7 +6,8 @@ const initialState = {
     annoString: "",
     dbPediaError: null,
     isAnnoLoading: false,
-    annotation: null
+    annotation: null,
+    articleUrl: null
 };
 
 export default function annotations (state = initialState, action) {
@@ -26,6 +27,16 @@ export default function annotations (state = initialState, action) {
                 //recentAnnotations: state.recentAnnotations.pop(action.payload.body)
             })
         });
+    }
+    else if (action.type === actions.LOAD_ARTICLE){
+        return Object.assign({}, state, {  
+            articleUrl: action.url
+        })
+    }
+    else if (action.type === actions.DUMP_ARTICLE){
+        return Object.assign({}, state, {
+            articleUrl: null
+        })
     }
     else if (action.type === actions.CLEAR_ANNOTATION){
         return Object.assign({}, state,{

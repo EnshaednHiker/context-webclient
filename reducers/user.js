@@ -1,8 +1,10 @@
 import * as actions from '~/actions';
 import { handle } from 'redux-pack'; 
+import system from '~/system';
 
 const initialState = {
     userToken: null,
+    user: system.identity(),
     isUserLoading: false,
     loginError: false,
     username: null,
@@ -41,14 +43,21 @@ function loginError (error) {
     return true
 }
 
+function setToken (res){
+    //save the token to local storage
+    window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
+    //redirect to meaningful page
+    window.location.hash='#/dashboard';
+    return system.identity()
+}
+
 export default function user (state = initialState, action) {
     if (action.type === actions.REGISTER){
         return handle (state, action, {
-             
             start: prevState => ({ ...prevState, isUserLoading: true, userError: null}),
             finish: prevState => ({ ...prevState, isUserLoading: false }),
             failure: prevState => ({ ...prevState, usernameValidationError: validationError(action.payload ,'username') ,emailValidationError:validationError(action.payload,'email')}),
-            success: prevState => ({ ...prevState, userToken: action.payload.body, })
+            success: prevState => ({ ...prevState, usernameValidationError: false, emailValidationError: false })
         });
     }
     else if (action.type ===actions.LOGIN){
@@ -56,8 +65,11 @@ export default function user (state = initialState, action) {
             start: prevState => ({ ...prevState, isUserLoading: true, loginError: false}),
             finish: prevState => ({ ...prevState, isUserLoading: false }),
             failure: prevState => ({ ...prevState, loginError: loginError(action.payload)}),
-            success: prevState => ({ ...prevState, userToken: action.payload.body, loginError: false,isUserLoading: false})
+            success: prevState => ({ ...prevState, user: setToken(action.payload), loginError: false})
         });
+    }
+    else if (action.type === actions.LOGOUT){
+
     }
     else if (action.type === actions.SET_EMAIL) {
         console.log("set email: ",action.email)

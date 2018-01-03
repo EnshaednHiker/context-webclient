@@ -58,7 +58,7 @@ export class NavBar extends React.Component {
         console.log('this.props: ', this.props);
         console.log("isTop: ",this.props.isTop);
         console.log("isCollapsed: ",this.props.isCollapsed);
-        
+        console.log("user: ", this.props.user);
 
         return (
                  ()=> {
@@ -71,7 +71,7 @@ export class NavBar extends React.Component {
                                     <ul className="white-text links">
                                         <li><Link className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
                                         <li><Link className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                        <li><Link className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{this.props.isLogin ? "Sign in" : "Sign up"}</Link></li>
+                                        <li><Link className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{this.props.isLoginForm ? "Sign in" : "Sign up"}</Link></li>
                                     </ul>
                                     <button type="button" className="link button button-primary m-2">Sign In/Demo Account</button>
                                     <button type="button" className="button hamburger-link m-2">
@@ -90,7 +90,7 @@ export class NavBar extends React.Component {
                                 <ul className="links dark-slate-gray-text-color">
                                     <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
                                     <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                    <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{this.props.isLogin ? "Sign in" : "Sign up"}</Link></li>
+                                    <li><Link className="dark-slate-gray-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{this.props.isLoginForm ? "Sign in" : "Sign up"}</Link></li>
                                 </ul>
                                 
                                 <button type="button" className="link button thistle-text-color light-sea-green-background-color m-2">Sign In/Demo Account</button>
@@ -107,7 +107,8 @@ const mapStateToProps = (state) => {
     return ({
          isTop: state.mainUi.isTop,
          isCollapsed: state.mainUi.isCollapsed,
-         isLogin: state.mainUi.isLogin
+         isLoginForm: state.mainUi.isLoginForm,
+         user: state.user.user
     })
 };
 
