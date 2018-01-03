@@ -1,5 +1,5 @@
 import system from '~/system';
-
+    import store from '~/public/store.js';
 /***************Main UI ACTIONS******************/
 
 export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
@@ -128,7 +128,6 @@ export function deleteAnnotations () {
 
 export const REGISTER = 'REGISTER';
 export function register(payload){
-    
         return {
             type: REGISTER,
             promise: system.API.POST('/users',{"payload":payload}),
@@ -136,18 +135,18 @@ export function register(payload){
                 onSuccess: (result, getState) => {
                     if (result.status===201){
                         //return dispatch => dispatch(login(payload));
-                        
+                        store.dispatch(login(payload));
                             
-                        return system.API.POST("/users/login",{payload:payload})
-                            .then((res)=>{
-                                //save the token to local storage
-                                window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
-                                //redirect to meaningful page
-                                window.location.hash='#/dashboard';
-                            })
-                            .catch((err)=>{
-                                console.warn(err);
-                            });
+                        // return system.API.POST("/users/login",{payload:payload})
+                        //     .then((res)=>{
+                        //         //save the token to local storage
+                        //         window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
+                        //         //redirect to meaningful page
+                        //         window.location.hash='#/dashboard';
+                        //     })
+                        //     .catch((err)=>{
+                        //         console.warn(err);
+                        //     });
                     }
                 },
                 onFailure: (err, getState) => {
@@ -155,9 +154,8 @@ export function register(payload){
                 }
             }
         }
+    }
     
-
-}
 
 export const LOGIN = 'LOGIN';
 export function login (payload) {
@@ -167,7 +165,7 @@ export function login (payload) {
         promise: system.API.POST('/users/login',{payload:payload}),
         meta: {
             onSuccess: (result, getState) => {
-
+                console.log("login dispatched!",result);
                 // //save the token to local storage
                 // window.localStorage.setItem(process.env.TOKEN, result.body.user.token);
                 // //redirect to meaningful page

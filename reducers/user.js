@@ -54,7 +54,7 @@ function setToken (res){
 export default function user (state = initialState, action) {
     if (action.type === actions.REGISTER){
         return handle (state, action, {
-            start: prevState => ({ ...prevState, isUserLoading: true, userError: null}),
+            start: prevState => ({ ...prevState, isUserLoading: true, userError: null, loginError: false}),
             finish: prevState => ({ ...prevState, isUserLoading: false }),
             failure: prevState => ({ ...prevState, usernameValidationError: validationError(action.payload ,'username') ,emailValidationError:validationError(action.payload,'email')}),
             success: prevState => ({ ...prevState, usernameValidationError: false, emailValidationError: false })
