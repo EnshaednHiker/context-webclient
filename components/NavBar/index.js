@@ -58,7 +58,6 @@ export class NavBar extends React.Component {
         console.log('this.props: ', this.props);
         console.log("isTop: ",this.props.isTop);
         console.log("isCollapsed: ",this.props.isCollapsed);
-        console.log("isLogin: ",this.props.isLogin);
         
 
         return (

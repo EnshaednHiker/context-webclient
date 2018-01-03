@@ -7,7 +7,6 @@
     "postinstall": "node nightwatch.conf.js",
     "test": "./node_modules/.bin/nightwatch --env local",
     "start": "webpack-dev-server",
-    "start-local": "npm start -- --env=local",
     "build": "webpack -p",
     "production-build": "npm run build -- --env=production",
     "local-build": "npm run build -- --env=local",

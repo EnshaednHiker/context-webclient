@@ -4,7 +4,7 @@ import { handle } from 'redux-pack';
 const initialState = {
     isTop: true,
     isCollapsed: true,
-    isLogin: true
+    isLoginForm: true
 };
 
 export default function mainUi (state = initialState, action) {
@@ -26,7 +26,7 @@ export default function mainUi (state = initialState, action) {
     }
     else if (action.type === actions.TOGGLE_FORM) {
         return Object.assign({}, state, {
-            isLogin: action.boolean
+            isLoginForm: action.boolean
         })
     }
     else return state;

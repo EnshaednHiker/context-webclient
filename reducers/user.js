@@ -4,24 +4,84 @@ import { handle } from 'redux-pack';
 const initialState = {
     userToken: null,
     isUserLoading: false,
-    userError: null,
-    register: {
-        username: null,
-        email: null,
-        password: null
-    },
-    login: {
-        username: null,
-        password: null
-    }    
+    loginError: false,
+    username: null,
+    email: null,
+    confirmEmail: null,
+    password: null,
+    confirmPassword: null,
+    usernameValidationError: false,
+    emailValidationError: false    
 };
 
+//block handles validation errors to make sure user doesn't mis-enter email or password and that the username hasn't already been taken
+function validationError (error, errorType) {
+    console.warn(error.response.text);
+    if (error.response.status===500){
+        let valError = JSON.parse(error.response.text);
+        let errorKeys = Object.keys(valError.errors);
+        function hasError (element, errorType){
+            //errorType can be either "email" or "username"
+            return element === errorType;
+        }
+        if (errorKeys.find(hasError)){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+function loginError (error) {
+    console.warn(error)
+    return true
+}
 
 export default function user (state = initialState, action) {
     if (action.type === actions.REGISTER){
         return handle (state, action, {
+             
             start: prevState => ({ ...prevState, isUserLoading: true, userError: null}),
+            finish: prevState => ({ ...prevState, isUserLoading: false }),
+            failure: prevState => ({ ...prevState, usernameValidationError: validationError(action.payload ,'username') ,emailValidationError:validationError(action.payload,'email')}),
+            success: prevState => ({ ...prevState, userToken: action.payload.body, })
         });
+    }
+    else if (action.type ===actions.LOGIN){
+        return handle (state, action, {
+            start: prevState => ({ ...prevState, isUserLoading: true, loginError: false}),
+            finish: prevState => ({ ...prevState, isUserLoading: false }),
+            failure: prevState => ({ ...prevState, loginError: loginError(action.payload)}),
+            success: prevState => ({ ...prevState, userToken: action.payload.body, loginError: false,isUserLoading: false})
+        });
+    }
+    else if (action.type === actions.SET_EMAIL) {
+        console.log("set email: ",action.email)
+        return Object.assign({}, state, {
+            email: action.email
+        })
+    }
+    else if (action.type === actions.SET_CONFIRM_EMAIL) {
+        console.log("set confirmEmail: ",action.confirmEmail)
+        return Object.assign({}, state, {
+            confirmEmail: action.confirmEmail
+        })
+    }
+    else if (action.type === actions.SET_PASSWORD) {
+        console.log("set password: ",action.password)
+        return Object.assign({}, state, {
+            password: action.password
+        })
+    }
+    else if (action.type === actions.SET_CONFIRM_PASSWORD) {
+        console.log("set confirm password: ",action.confirmPassword)
+        return Object.assign({}, state, {
+            confirmPassword: action.confirmPassword
+        })
     }
     else return state;
 }
