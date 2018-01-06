@@ -8,6 +8,7 @@ import globalStyles from '~/assets/styles/globals.css';
 import Sidebar from '~/components/Sidebar';
 import Frame from '~/components/Frame';
 import Dash from '~/components/Dash';
+import NavBar from '~/components/NavBar'
 
 class Dashboard extends React.Component {
     constructor(){
@@ -21,7 +22,7 @@ class Dashboard extends React.Component {
         return (
                 <Provider store={store}>
                     <div className="" id="dashboard-view">
-                        <Dash formId="annotate-form"/>
+                        <NavBar formId="annotate-form"/>
                         <Frame formId="annotate-form" />
                         <Sidebar />
                     </div>

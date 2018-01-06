@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import { toggleForm, register, setEmail, setConfirmEmail, setPassword, setConfirmPassword, login } from '~/actions'
+import { toggleForm, register, setEmail, setConfirmEmail, setPassword, setConfirmPassword, login, logout } from '~/actions'
 import Scroll from 'react-scroll';
 const Element = Scroll.Element;
 import system from '~/system';
@@ -20,6 +20,7 @@ export class Form extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
         this.handleClearForm = this.handleClearForm.bind(this);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
     }
 
     handleToggleForm() {
@@ -47,9 +48,6 @@ export class Form extends React.Component {
 
     handleSubmitLogin(e) {
         e.preventDefault();
-        console.log("e.target.password.value: ",e.target.password.value);
-        console.log("e.target.username.value: ",e.target.username.value);
-
         let payload = system.security.encrypt(
             {
               "user": {
@@ -63,12 +61,6 @@ export class Form extends React.Component {
 
     handleSubmitRegister(e){
         e.preventDefault();
-        console.log("e.target.username.value: ",e.target.username.value);
-        console.log("e.target.email.value: ",e.target.email.value);
-        console.log("e.target.confirmEmail.value: ",e.target.confirmEmail.value);
-        console.log("e.target.password.value: ",e.target.password.value);
-        console.log("e.target.confirmPassword.value: ",e.target.confirmPassword.value);
-
         let payload = system.security.encrypt(
             {
               "user": {
@@ -78,12 +70,15 @@ export class Form extends React.Component {
               }
             }
         );
-        
         this.props.dispatch(register(payload));
+    }
 
+    handleLogoutClick () {
+        this.props.dispatch(logout());
     }
 
     render(){
+        console.log("system.authorization(system.identity())",system.authorization(system.identity()));
         const badColor = {
             backgroundColor: "#ff6666",
             color: "white"
@@ -101,7 +96,7 @@ export class Form extends React.Component {
 
         const disabledCheck = this.props.email !== this.props.confirmEmail || this.props.password !== this.props.confirmPassword
     
-        if (this.props.isLoginForm){
+        if (this.props.isLoginForm && !this.props.userAuth){
             return (
                 <div className="form-container">
                     <form className="form" id="userForm" name="userForm" onSubmit={(e) => {this.handleSubmitLogin(e); this.handleClearForm("userForm");}}>
@@ -129,7 +124,7 @@ export class Form extends React.Component {
                 </div>
             )
         }
-        else {
+        else if (!this.props.isLoginForm && !this.props.userAuth) {
             return (
                 <div className="form-container">
                     <form className="form" id="userForm" name="userForm" onSubmit={(e) => {this.handleSubmitRegister(e); this.handleClearForm("userForm");}}>
@@ -183,6 +178,21 @@ export class Form extends React.Component {
                 </div>
             )
         }
+        else {
+            let user = system.identity()
+            console.log("user: ",user);
+            return (
+                <div className="form-container">
+                    <div className="form">
+                        <Element name="form">
+                            <h2 className="tan-text-color m-2">Logged In</h2>
+                        </Element>
+                        <p className="thistle-text-color m-1">Welcome back, {user.username}. You are currently logged in.</p>
+                        <button type="button" onClick={this.handleLogoutClick} className="m-2 button thistle-text-color light-sea-green-background-color" name="sign-in-button">Logout</button>
+                    </div>
+                </div>
+            )    
+        }
     }
 }
 
@@ -195,7 +205,8 @@ const mapStateToProps = state => {
         confirmPassword: state.user.confirmPassword,
         loginError: state.user.loginError,
         usernameValidationError: state.user.usernameValidationError,
-        emailValidationError: state.user.emailValidationError
+        emailValidationError: state.user.emailValidationError,
+        userAuth: state.user.userAuth
     })
 };
 export default connect(mapStateToProps)(Form);

@@ -3,8 +3,8 @@ import { handle } from 'redux-pack';
 import system from '~/system';
 
 const initialState = {
-    userToken: null,
     user: system.identity(),
+    userAuth: system.authorization(system.identity()),
     isUserLoading: false,
     loginError: false,
     username: null,
@@ -13,7 +13,8 @@ const initialState = {
     password: null,
     confirmPassword: null,
     usernameValidationError: false,
-    emailValidationError: false    
+    emailValidationError: false,
+    location: window.location.hash    
 };
 
 //block handles validation errors to make sure user doesn't mis-enter email or password and that the username hasn't already been taken
@@ -40,6 +41,12 @@ function loginError (error) {
     return true
 }
 
+function setUserAuth (res){
+    window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
+    let user = system.identity()
+    return system.authorization(user)
+}
+
 function setToken (res){
     //save the token to local storage
     window.localStorage.setItem(process.env.TOKEN, res.body.user.token);
@@ -62,11 +69,8 @@ export default function user (state = initialState, action) {
             start: prevState => ({ ...prevState, isUserLoading: true, loginError: false}),
             finish: prevState => ({ ...prevState, isUserLoading: false }),
             failure: prevState => ({ ...prevState, loginError: loginError(action.payload)}),
-            success: prevState => ({ ...prevState, user: setToken(action.payload), loginError: false})
+            success: prevState => ({ ...prevState, user: setToken(action.payload),userAuth: setUserAuth(action.payload), loginError: false})
         });
-    }
-    else if (action.type === actions.LOGOUT){
-
     }
     else if (action.type === actions.SET_EMAIL) {
         console.log("set email: ",action.email)
@@ -90,6 +94,25 @@ export default function user (state = initialState, action) {
         console.log("set confirm password: ",action.confirmPassword)
         return Object.assign({}, state, {
             confirmPassword: action.confirmPassword
+        })
+    }
+    else if (action.type === actions.GET_USER){
+        
+    }
+    else if (action.type === actions.LOGOUT){
+        window.localStorage.removeItem(process.env.TOKEN);
+        window.location.hash='#';
+        return Object.assign({},state,{
+            user: system.identity(),
+            userAuth: system.authorization(system.identity()),
+            loginError: false,
+            usernameValidationError: false,
+            emailValidationError: false 
+        });
+    }
+    else if(action.type === actions.SET_LOCATION){
+        return Object.assign({},state,{
+            location: action.location
         })
     }
     else return state;
