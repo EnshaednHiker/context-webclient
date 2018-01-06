@@ -19,19 +19,16 @@ const initialState = {
 //block handles validation errors to make sure user doesn't mis-enter email or password and that the username hasn't already been taken
 function validationError (error, errorType) {
     console.warn(error.response.text);
+    let valError = JSON.parse(error.response.text);
     if (error.response.status===500){
-        let valError = JSON.parse(error.response.text);
         let errorKeys = Object.keys(valError.errors);
-        function hasError (element, errorType){
-            //errorType can be either "email" or "username"
+        console.log("errorKeys: ", errorKeys);
+        function hasError (element){
+            //errorType currently set to be either a string of "email" or "username"
             return element === errorType;
         }
-        if (errorKeys.find(hasError)){
-            return true
-        }
-        else {
-            return false
-        }
+    
+        return errorKeys.find(hasError)
     }
     else {
         return false;
@@ -54,7 +51,7 @@ function setToken (res){
 export default function user (state = initialState, action) {
     if (action.type === actions.REGISTER){
         return handle (state, action, {
-            start: prevState => ({ ...prevState, isUserLoading: true, userError: null, loginError: false}),
+            start: prevState => ({ ...prevState, isUserLoading: true, usernameValidationError: false, emailValidationError: false}),
             finish: prevState => ({ ...prevState, isUserLoading: false }),
             failure: prevState => ({ ...prevState, usernameValidationError: validationError(action.payload ,'username') ,emailValidationError:validationError(action.payload,'email')}),
             success: prevState => ({ ...prevState, usernameValidationError: false, emailValidationError: false })
