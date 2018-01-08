@@ -155,6 +155,11 @@ body {
     border-color:#E3DACE;
 }
 
+/*************Flex Directions*******************/
+.flex-direction-row-reverse {
+    justify-content: flex-end;
+    
+}
 
 /*******************Padding Globals***************/
 /*******************Padding-All Sides*********************/

@@ -43,9 +43,17 @@ nav ul {
     padding-left: 0;
 }
 
+.float-flex-item-right {
+    margin-left: auto !important;
+    margin-right: 14px !important;
+}
+
 .hamburger-link {
     background-color: transparent;
     display: none !important;
+}
+.hamburger-link:hover {
+    background-color: black;
 }
 
 @media (max-width: 650px) {
@@ -64,6 +72,12 @@ nav ul {
         flex-direction: column;
         width: 100%;  
     }
+    nav ul form button {
+        margin-top: 1rem;
+    }
+    .float-flex-item-right {
+        margin: 0.5rem !important;
+    }
     .hamburger-link{
         display: inherit !important;
         flex-direction: row;
@@ -71,14 +85,10 @@ nav ul {
 }
 
 
-.hamburger-link:hover {
-    background-color: black;
-}
 
-nav .button {
-   align-content: center;
-   margin-right: 14px !important; 
-}
+
+
+
 
 #navbar-id {
     color: #FFFF;
