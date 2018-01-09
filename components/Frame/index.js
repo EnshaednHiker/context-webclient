@@ -18,15 +18,15 @@ export class Frame extends React.Component {
 
         if(this.props.annotation === null && this.props.dbPediaError === null) {
             return (
-                
+                <div className="frame">
                     <textarea 
                         name="userInput"
-                        form={this.props.formId} 
-                        className="frame" 
+                        form={this.props.formId}  
                         required
                         placeholder="paste in text to annotate here"
                     > 
                     </textarea> 
+                </div>
                 )
         }
         else if (this.props.annotation.Resources === undefined || this.props.dbPediaError !== null){

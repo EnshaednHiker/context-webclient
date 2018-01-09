@@ -42,7 +42,8 @@ export default function annotations (state = initialState, action) {
         return Object.assign({}, state,{
             annotation: null,
             dbPediaError: null,
-            annoString: ""
+            annoString: "",
+            articleUrl: null
         })
     }
     else return state;

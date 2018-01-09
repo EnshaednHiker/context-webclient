@@ -7,7 +7,7 @@ import globalStyles from '~/assets/styles/globals.css';
 
 import Sidebar from '~/components/Sidebar';
 import Frame from '~/components/Frame';
-import Dash from '~/components/Dash';
+import Footer from '~/components/Footer';
 import NavBar from '~/components/NavBar'
 
 class Dashboard extends React.Component {
@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
                         <NavBar formId="annotate-form"/>
                         <Frame formId="annotate-form" />
                         <Sidebar />
+                        
                     </div>
                 </Provider>  
             )
