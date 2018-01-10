@@ -1,17 +1,18 @@
 #dashboard-view {
     display: grid;
-    grid-template-columns: 1fr 400px;
+    grid-template-columns: 1fr;
     grid-template-rows: 100px 1fr;
-    grid-template-areas: "dash dash"
-                          "frame frame";
+    grid-template-areas: "dash"
+                          "frame";
     height: 100vh;
 
 }
+
 @media (max-width: 650px) {
     #dashboard-view {
         grid-template-rows: 175px 1fr; 
-        grid-template-areas: "dash dash"
-                            "frame frame";   
+        grid-template-areas: "dash"
+                            "frame";   
     }
 }
 
@@ -32,6 +33,12 @@ textarea {
     border: none;
     outline: none; 
 }
+@media (max-width: 800px) {
+    .frame {
+        width: 70%;
+    }
+}
+
 
 @media (max-width: 650px) {
     .frame {
@@ -39,14 +46,22 @@ textarea {
     }
 }
 
-/**************Sidebar Component Styling***************/
-.sidebar {
-    grid-area: sidebar;
+.modalCloseButton {
+    background: none !important;
+    color: inherit;
+    border: none;
+    padding: 0! important;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit !important;
 }
 
-.iframe {
-    height: 100%;
-    width: 100%;
+.modalCloseButton i:hover {
+    color: gray;
+}
+
+.modalOverlayZIndex {
+    z-index: 100;
 }
 
 .button-link {

@@ -7,8 +7,13 @@ const initialState = {
     dbPediaError: null,
     isAnnoLoading: false,
     annotation: null,
-    articleUrl: null
+    articleJson: null,
+    isArticleJsonLoading: false,
+    articleJsonError: null,
+    articleUrl: null,
+    articleWord: null
 };
+
 
 export default function annotations (state = initialState, action) {
     if (action.type === actions.SET_ANNOTATION_STRING){
@@ -21,21 +26,37 @@ export default function annotations (state = initialState, action) {
             start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
             finish: prevState => ({ ...prevState, isAnnoLoading: false }),
             failure: prevState => ({ ...prevState, dbPediaError: action.payload.body}),
-            success: prevState => ({ 
-                ...prevState, 
-                annotation: action.payload.body
+            success: prevState => ({...prevState, annotation: action.payload.body
                 //recentAnnotations: state.recentAnnotations.pop(action.payload.body)
             })
         });
     }
-    else if (action.type === actions.LOAD_ARTICLE){
-        return Object.assign({}, state, {  
+    else if (action.type===actions.GET_ARTICLE_JSON){
+        return handle (state,action,{
+            start: prevState => ({ ...prevState, isArticleJsonLoading: true, articleJsonError: null}),
+            finish: prevState => ({ ...prevState, isArticleJsonLoading: false }),
+            failure: prevState => ({ ...prevState, articleJsonError: action.payload.body}),
+            success: prevState => ({...prevState, articleJson: action.payload.body})
+        })
+    }
+    else if (action.type === actions.SET_ARTICLE_URL){
+        return Object.assign({}, state, {
             articleUrl: action.url
         })
     }
-    else if (action.type === actions.DUMP_ARTICLE){
+    // else if (action.type === actions.LOAD_JSON){
+    //     return Object.assign({}, state, {  
+    //         articleJson: action.json
+    //     })
+    // }
+    else if (action.type === actions.SET_ARTICLE_WORD){
         return Object.assign({}, state, {
-            articleUrl: null
+            articleWord: action.word
+        })
+    }
+    else if (action.type === actions.DUMP_JSON){
+        return Object.assign({}, state, {
+            articleJson: null
         })
     }
     else if (action.type === actions.CLEAR_ANNOTATION){
@@ -43,7 +64,11 @@ export default function annotations (state = initialState, action) {
             annotation: null,
             dbPediaError: null,
             annoString: "",
-            articleUrl: null
+            articleUrl: null,
+            articleJson: null,
+            isArticleJsonLoading: false,
+            articleJsonError: null,
+            articleWord: null
         })
     }
     else return state;

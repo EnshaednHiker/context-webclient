@@ -72,6 +72,20 @@ export function GET_OUTSIDE_RESOURCE (url,query) {
     });
 }
 
+export function GET_OUTSIDE_ARTICLE (url,query) {
+    return new Promise (function(resolve,reject){
+        outsideArticleRequest('get',url)
+            .query(query || {})
+            .end(function(err,res){
+                if (err){reject(err)}
+
+                else {
+                    resolve(res)
+                }
+            })    
+    });
+}
+
 function Request (action, url) {
     let token = window.localStorage.getItem(process.env.TOKEN);
     
@@ -87,4 +101,9 @@ function outsideRequest (action, url) {
         .set('Accept','application/json')
         //.set('Allow-Control-Allow-Origin','*')
 
+}
+
+function outsideArticleRequest (action, url) {
+    return request[action](process.env.DBPEDIA_ARTICLE_JSON+url)
+        .set('Accept','application/json')
 }

@@ -1,18 +1,35 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {markUpText} from '~/actions';
+import {markUpText,hideModal} from '~/actions';
 import Words from '~/components/Words';
 import splitAt from 'split-at';
-
+import Modal from 'react-modal';
 
 
 export class Frame extends React.Component {
     constructor(props){
         super(props)
-        
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.getAbstract = this.getAbstract.bind(this);
+        this.getLinks = this.getLinks.bind(this);  
     }
 
+    handleCloseModal () {
+        this.props.dispatch(hideModal());
+    }
+
+    getLinks(json,url){
+        let dummyLinks =  <ul><li key="1">1. <a target="_blank"></a></li></ul>
+        let realLinks = undefined;
+        return realLinks || dummyLinks;
+    }
+
+    getAbstract(json,url){
+        let dummyAbstract = "Dummy Abstract"
+        let realAbstract = undefined;
+        return realAbstract || dummyAbstract;
+    }
 
     render(){
 
@@ -89,10 +106,33 @@ export class Frame extends React.Component {
                 return <Words words={word} key={index} />
             });
             
+            let abstract = this.getAbstract(this.props.articleJson, this.props.articleUrl)
+            let links = this.getLinks(this.props.articleJson, this.props.articleUrl)
+            let modalStyle = {
+                overlay:{
+                    zIndex:"100"
+                }
+            }
+
             return (
                 <div className="frame">
                     {wordComponents}
+                    <Modal
+                        base="frame"
+                        
+                        style={modalStyle}
+                        isOpen={this.props.showModal}
+                        contentLabel={this.props.articleWord}
+                    >
+                        <button className="modalCloseButton" onClick={this.handleCloseModal}><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></button>
+                        <h2>{this.props.articleWord}</h2>
+                        <h3>Abstract:</h3>
+                        <p>{abstract}</p>
+                        <h3>External Links</h3>
+                        {links}
+                    </Modal>
                 </div>
+
             )
         }
 
@@ -102,7 +142,13 @@ const mapStateToProps = state => {
     return ({
         annotation: state.annotations.annotation,
         annoString: state.annotations.annoString,
-        dbPediaError: state.annotations.dbPediaError
+        dbPediaError: state.annotations.dbPediaError,
+        showModal: state.dashboardUi.showModal,
+        articleUrl: state.annotations.articleUrl,
+        articleJson: state.annotations.articleJson,
+        isArticleJsonLoading: state.annotations.isArticleJsonLoading,
+        articleJsonError: state.annotations.articleJsonError,
+        articleWord: state.annotations.articleWord
     })
  };
  export default connect(mapStateToProps)(Frame);

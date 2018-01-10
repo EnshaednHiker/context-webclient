@@ -31,7 +31,7 @@ nav {
     flex-direction: row;
     align-items: baseline;
     width: 100%;
-    z-index: 100000;
+    z-index: 10;
 }
 
 nav ul {

@@ -62,71 +62,20 @@ export const setConfirmPassword = (confirmPassword) => ({
 
 /********************Dashboard UI ACTIONS*********************/
 
-export const SET_ANNOTATION_STRING = "SET_ANNOTATION_STRING";
-export const setAnnotationString = (annoString) => ({
-    type: SET_ANNOTATION_STRING,
-    annoString
-});
 
-export const CLEAR_ANNOTATION = "CLEAR_ANNOTATION";
-export const clearAnnotation = () => ({
-    type: CLEAR_ANNOTATION
-});
-
-
-
-/********************API CALL ACTIONS************************/
-
-export const ANNOTATE = 'ANNOTATE';
-export function annotate(annoString) {
-    return {
-        type: ANNOTATE,
-        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:0.9}),
-        meta: {
-            onSuccess: (result, getState) => {
-                let resources = result.body.Resources;
-                let text = getState().annotations.annoString
-                markUpText(text, resources);
-            }
-            // onSuccess: (result, getState) => {
-            //     const annotation = result;
-            //     postAnnotation(annotation);
-            // }
-        }
-    }
+export const SHOW_MODAL = "SHOW_MODAL";
+export const showModal = () =>{
+    console.log("showModal action fired") 
+    return {type: SHOW_MODAL};
 }
 
-export const LOAD_ARTICLE = "LOAD_ARTICLE";
-export const loadArticle = (url) => ({
-        type: LOAD_ARTICLE,
-        url
+export const HIDE_MODAL = "HIDE_MODAL";
+export const hideModal = () => ({
+    type: HIDE_MODAL
 });
 
 
-export const MARK_UP_TEXT = "MARK_UP_TEXT";
-export const markUpText = (text, resources) => {
-    type: MARK_UP_TEXT,
-    text,
-    resources
-}
-
-export const POST_ANNOTATION = 'POST_ANNOTATION';
-export function postAnnotation(annotation) {
-    return {
-        type: POST_ANNOTATION,
-        promise: system.API.POST()
-    }
-}
-
-export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
-export function getAnnotations() {
-    
-}
-
-export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
-export function deleteAnnotations () {
-
-}
+/*********************USER ACTIONS****************************/
 
 export const REGISTER = 'REGISTER';
 export function register(payload){
@@ -174,13 +123,110 @@ export const logout = () => ({
     type: LOGOUT
 });
 
+export const DELETE_USER = 'DELETE_USER';
+export function deleteUser () {
+
+}
+
+/********************ANNOTATION ACTIONS************************/
+
+export const SET_ANNOTATION_STRING = "SET_ANNOTATION_STRING";
+export const setAnnotationString = (annoString) => ({
+    type: SET_ANNOTATION_STRING,
+    annoString
+});
+
+export const CLEAR_ANNOTATION = "CLEAR_ANNOTATION";
+export const clearAnnotation = () => ({
+    type: CLEAR_ANNOTATION
+});
+
+export const ANNOTATE = 'ANNOTATE';
+export function annotate(annoString) {
+    return {
+        type: ANNOTATE,
+        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:0.9}),
+        meta: {
+            onSuccess: (result, getState) => {
+                let resources = result.body.Resources;
+                let text = getState().annotations.annoString
+                markUpText(text, resources);
+            }
+            // onSuccess: (result, getState) => {
+            //     const annotation = result;
+            //     postAnnotation(annotation);
+            // }
+        }
+    }
+}
+
+export const GET_ARTICLE_JSON = 'GET_ARTICLE_JSON';
+export function getArticleJson(url) {
+    return {
+        type: GET_ARTICLE_JSON,
+        promise: system.API.GET_OUTSIDE_ARTICLE(url),
+        meta: {
+            onSuccess: (result, getState) => {
+                console.log("result.body from getting article JSON: ", result.body);
+            }
+            // onSuccess: (result, getState) => {
+            //     const annotation = result;
+            //     postAnnotation(annotation);
+            // }
+        }
+    }
+}
+
+
+export const SET_ARTICLE_URL = "SET_ARTICLE_URL";
+export const setArticleUrl = (url) => ({
+        type: SET_ARTICLE_URL,
+        url
+});
+
+export const SET_ARTICLE_WORD = "SET_ARTICLE_WORD";
+export const setArticleWord = (word) => ({
+        type: SET_ARTICLE_WORD,
+        word
+});
+
+export const DUMP_JSON = "DUMP_JSON";
+export const dumpJson = () => ({
+        type: DUMP_JSON
+});
+
+
+export const MARK_UP_TEXT = "MARK_UP_TEXT";
+export const markUpText = (text, resources) => {
+    type: MARK_UP_TEXT,
+    text,
+    resources
+}
+
+export const POST_ANNOTATION = 'POST_ANNOTATION';
+export function postAnnotation(annotation) {
+    return {
+        type: POST_ANNOTATION,
+        promise: system.API.POST()
+    }
+}
+
+export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
+export function getAnnotations() {
+    
+}
+
+export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
+export function deleteAnnotations () {
+
+}
+
+/**************ROUTER ACTIONS****************/
+
 export const SET_LOCATION = "SET_LOCATION";
 export const setLocation = (location) => ({
     type: SET_LOCATION,
     location
 });
 
-export const DELETE_USER = 'DELETE_USER';
-export function deleteUser () {
 
-}
