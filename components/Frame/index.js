@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {markUpText,hideModal} from '~/actions';
+import {markUpText, hideModal} from '~/actions';
 import Words from '~/components/Words';
 import splitAt from 'split-at';
 import Modal from 'react-modal';
@@ -41,54 +41,10 @@ export class Frame extends React.Component {
                 </p>
             )
         }
-        else {
-            let separator = "45098quarksdfglijhg34bitcoin5987xvckjhg3madness562867"            
-            let newString = this.props.annotation['@text'];
-            console.log("this.props.annotation:", this.props.annotation);
-            //remove duplicate named entities flagged by dbPedia
-            let arrayResources;
-            if(this.props.annotation !== undefined){
-                arrayResources = this.props.annotation.Resources.filter((resource, index, self)=>{
-                    return index === self.findIndex((r) => {
-                        return r['@surfaceForm'] === resource['@surfaceForm']
-                    })
-                });
-            }
-            
-            //build indices for splitAt function
-            let indicesSplitsEndArray = arrayResources.map((resource)=>{
-                return resource['@surfaceForm'].length+parseInt(resource['@offset']) - 1
-            });
-            let indicesSplitsStartArray = arrayResources.map((resource)=>{
-                return parseInt(resource['@offset']) - 1
-            });
-            let indicesArray = indicesSplitsStartArray.concat(indicesSplitsEndArray);
-            indicesArray.sort((a, b) => {
-                return a - b;
-              });
-            
-            //cut up string with the multiple splits
-            let splitArray = splitAt(newString,indicesArray);
-            
-            //use a .map to return an array where elements that exactly match to '@surfaceForm' get changed into the proper object
-            
-            let surfaceForm = '@surfaceForm';
-            let uri = '@URI';
-        
-            let convertedSplitArray = splitArray.map((splitString)=>{
-                let matchedResource = arrayResources.find((element)=>{
-                    return element[surfaceForm]===splitString 
-                })
-                if (matchedResource){
-                    return JSON.stringify({uri:matchedResource[uri],word:matchedResource[surfaceForm]})
-                }
-                else {
-                    return splitString
-                }
-            });
+        else if (this.props.showConvertedText){
             
             //put each array chunk into the Words component where that components decides whether to return a named entity button or span of text
-            let wordComponents = convertedSplitArray.map((word, index)=>{
+            let wordComponents = this.props.annotatedText.map((word, index)=>{
                 return <Words words={word} key={index} />
             });
             
@@ -99,10 +55,10 @@ export class Frame extends React.Component {
                     zIndex:"100"
                 }
             }
+            let urlRegex;
+            
             let externalLinks = this.props.externalLinks.map((link, index)=>{
-                
-
-                let urlRegex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
+                urlRegex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
                 console.log(`${link}: `, urlRegex.test(link));
                 if (urlRegex.test(link)){
                     return <li key={index}><a target="_blank" href={link}>{link}</a></li>
@@ -136,6 +92,15 @@ export class Frame extends React.Component {
 
             )
         }
+        else {
+            console.log("this.props.showConvertedText",this.props.showConvertedText);
+            return (
+                <div className="frame">
+                    <h2>Whoops! Some kind of error.</h2>
+                    <p>Try reloading the page.</p>
+                </div>
+            )
+        }
 
     }
 }
@@ -151,7 +116,9 @@ const mapStateToProps = state => {
         articleJsonError: state.annotations.articleJsonError,
         articleWord: state.annotations.articleWord,
         abstract: state.annotations.abstract,
-        externalLinks: state.annotations.externalLinks
+        externalLinks: state.annotations.externalLinks,
+        annotatedText: state.annotations.annotatedText,
+        showConvertedText: state.dashboardUi.showConvertedText
     })
  };
  export default connect(mapStateToProps)(Frame);

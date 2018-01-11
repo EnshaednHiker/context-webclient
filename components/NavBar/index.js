@@ -1,11 +1,12 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {scrollAtTop, hamburgerClick, logout, setAnnotationString, annotate, clearAnnotation} from '~/actions'
+import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation} from '~/actions'
 
 import '~/assets/styles/main.css'
 
 import Scroll from 'react-scroll';
+
 
 const Element = Scroll.Element;
 const Link = Scroll.Link;
@@ -19,7 +20,6 @@ export class NavBar extends React.Component {
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleGoToOtherPage = this.handleGoToOtherPage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
     }
 
     componentDidMount() {
@@ -38,7 +38,9 @@ export class NavBar extends React.Component {
         }
         else {
             e.preventDefault()
+            this.props.dispatch(hideConvertedText());
             this.props.dispatch(clearAnnotation());
+            
         }
     }
 

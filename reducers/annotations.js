@@ -1,7 +1,7 @@
 import * as actions from '~/actions';
-import { handle } from 'redux-pack'; 
-//the below should log out to "http://live.dbpedia.org/ontology/abstract"
-let abstract = process.env.DBPEDIA_ABSTRACT
+import { handle } from 'redux-pack';
+import splitAt from 'split-at';
+
 
 const initialState = {
     recentAnnotations: [],
@@ -14,7 +14,10 @@ const initialState = {
     articleUrl: "nullUrl",
     articleWord: null,
     abstract: "Sorry, no abstract found for this entry.",
-    externalLinks: ["Sorry, no external links found for this entry."]
+    externalLinks: ["Sorry, no external links found for this entry."],
+    annotatedText: null,
+    serverError: null,
+    postingAnnotation: false
 };
 
 function getLinks (json,url) {
@@ -52,6 +55,53 @@ function getAbstract(json,url){
     }
 }
 
+function convertText(annotation){
+    let separator = "45098quarksdfglijhg34bitcoin5987xvckjhg3madness562867"            
+    let newString = annotation['@text'];
+    console.log("annotation: ", annotation);
+    //remove duplicate named entities flagged by dbPedia
+   
+    let arrayResources = annotation.Resources.filter((resource, index, self)=>{
+        return index === self.findIndex((r) => {
+            return r['@surfaceForm'] === resource['@surfaceForm']
+        })
+    });
+    
+    
+    //build indices for splitAt function
+    let indicesSplitsEndArray = arrayResources.map((resource)=>{
+        return resource['@surfaceForm'].length+parseInt(resource['@offset']) - 1
+    });
+    let indicesSplitsStartArray = arrayResources.map((resource)=>{
+        return parseInt(resource['@offset']) - 1
+    });
+    let indicesArray = indicesSplitsStartArray.concat(indicesSplitsEndArray);
+    indicesArray.sort((a, b) => {
+        return a - b;
+      });
+    
+    //cut up string with the multiple splits
+    let splitArray = splitAt(newString,indicesArray);
+    
+    //use a .map to return an array where elements that exactly match to '@surfaceForm' get changed into the proper object
+    
+    let surfaceForm = '@surfaceForm';
+    let uri = '@URI';
+
+    let convertedSplitArray = splitArray.map((splitString)=>{
+        let matchedResource = arrayResources.find((element)=>{
+            return element[surfaceForm]===splitString 
+        })
+        if (matchedResource){
+            return JSON.stringify({uri:matchedResource[uri],word:matchedResource[surfaceForm]})
+        }
+        else {
+            return splitString
+        }
+    });
+    console.log("convertedSplitArray in reducer: ",convertedSplitArray);
+    return convertedSplitArray
+}
 
 
 export default function annotations (state = initialState, action) {
@@ -65,9 +115,15 @@ export default function annotations (state = initialState, action) {
             start: prevState => ({ ...prevState, isAnnoLoading: true, dbPediaError: null}),
             finish: prevState => ({ ...prevState, isAnnoLoading: false }),
             failure: prevState => ({ ...prevState, dbPediaError: action.payload.body}),
-            success: prevState => ({...prevState, annotation: action.payload.body
-                //recentAnnotations: state.recentAnnotations.pop(action.payload.body)
-            })
+            success: prevState => ({...prevState, annotation: action.payload.body, annotatedText: convertText(action.payload.body)})
+        });
+    }
+    else if (action.type === actions.POST_ANNOTATION){
+        return handle (state, action, {
+            start: prevState => ({ ...prevState, postingAnnotation: true, serverError: null}),
+            finish: prevState => ({ ...prevState, postingAnnotation: false }),
+            failure: prevState => ({ ...prevState, serverError: action.payload.body}),
+            success: prevState => ({...prevState, recentAnnotations: action.payload.body})
         });
     }
     else if (action.type===actions.GET_ARTICLE_JSON){
@@ -109,7 +165,8 @@ export default function annotations (state = initialState, action) {
             articleUrl: "nullUrl",
             articleWord: null,
             abstract: "Sorry, no abstract found for this entry.",
-            externalLinks: ["Sorry, no external links found for this entry."]
+            externalLinks: ["Sorry, no external links found for this entry."],
+            annotatedText: null
         })
     }
     else return state;

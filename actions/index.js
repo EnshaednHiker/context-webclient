@@ -73,6 +73,15 @@ export const hideModal = () => ({
     type: HIDE_MODAL
 });
 
+export const SHOW_CONVERTED_TEXT = "SHOW_CONVERTED_TEXT";
+export const showConvertedText = () => ({
+    type: SHOW_CONVERTED_TEXT
+});
+
+export const HIDE_CONVERTED_TEXT = "HIDE_CONVERTED_TEXT";
+export const hideConvertedText = () => ({
+    type: HIDE_CONVERTED_TEXT
+});
 
 /*********************USER ACTIONS****************************/
 
@@ -147,9 +156,12 @@ export function annotate(annoString) {
         promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:0.9}),
         meta: {
             onSuccess: (result, getState) => {
-                let resources = result.body.Resources;
-                let text = getState().annotations.annoString
-                markUpText(text, resources);
+                let currentStore=getState();
+                let user = system.identity();
+                let payload = {annotation: currentStore.annotations.annotatedText}
+                store.dispatch(showConvertedText());
+                
+                store.dispatch(postAnnotation(payload,user.id))
             }
             // onSuccess: (result, getState) => {
             //     const annotation = result;
@@ -201,10 +213,15 @@ export const markUpText = (text, resources) => {
 }
 
 export const POST_ANNOTATION = 'POST_ANNOTATION';
-export function postAnnotation(annotation) {
+export function postAnnotation(payload,userId) {
     return {
         type: POST_ANNOTATION,
-        promise: system.API.POST()
+        promise: system.API.POST(`/user/${userId}/annotations`, payload),
+        meta: {
+            onSuccess: (result, getState) => {
+                console.log("result.body from posting annotation to server: ", result.body);
+            }
+        }
     }
 }
 
