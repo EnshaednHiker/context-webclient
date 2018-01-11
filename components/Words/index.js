@@ -29,19 +29,22 @@ export class Words extends React.Component {
         let array = [lastIndex];
         
         let urlArray = splitAt(event.target.dataset.url,array); 
-        
+        console.log("urlArray: ", urlArray);
+        console.log("process.env.DBPEDIA_ARTICLE_URL+urlArray[1]: ", process.env.DBPEDIA_ARTICLE_URL+urlArray[1]);
+        console.log("event.target.dataset.word: ", event.target.dataset.word);
         //then dispatch actions to show the text to set 
+        
+
+        this.props.dispatch(setArticleUrl(process.env.DBPEDIA_ARTICLE_URL+urlArray[1]));
+        this.props.dispatch(setArticleWord(event.target.dataset.word));
         this.props.dispatch(getArticleJson(urlArray[1]+".json"));
-        this.props.dispatch(setArticleUrl(event.target.dataset.url));
-        this.props.dispatch(showModal());
-        this.props.dispatch(setArticleWord(event.target.dataset.word))
     }
 
 
     render(){
     
         if(this.props.words.startsWith('{"uri":') && this.props.words.endsWith('}')){
-            console.log("this.props.words", this.props.words);
+            
             let wordObject;
             try {
                 wordObject = JSON.parse(this.props.words);

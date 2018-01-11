@@ -64,10 +64,9 @@ export const setConfirmPassword = (confirmPassword) => ({
 
 
 export const SHOW_MODAL = "SHOW_MODAL";
-export const showModal = () =>{
-    console.log("showModal action fired") 
-    return {type: SHOW_MODAL};
-}
+export const showModal = () => ({ 
+     type: SHOW_MODAL
+});
 
 export const HIDE_MODAL = "HIDE_MODAL";
 export const hideModal = () => ({
@@ -168,11 +167,9 @@ export function getArticleJson(url) {
         meta: {
             onSuccess: (result, getState) => {
                 console.log("result.body from getting article JSON: ", result.body);
+                store.dispatch(showModal())
             }
-            // onSuccess: (result, getState) => {
-            //     const annotation = result;
-            //     postAnnotation(annotation);
-            // }
+
         }
     }
 }
