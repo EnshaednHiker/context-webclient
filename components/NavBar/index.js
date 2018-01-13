@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation} from '~/actions'
+import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation, getAnnotations} from '~/actions'
 
 import '~/assets/styles/main.css'
 
@@ -20,14 +20,22 @@ export class NavBar extends React.Component {
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleGoToOtherPage = this.handleGoToOtherPage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRecentAnnotationsClick = this.handleRecentAnnotationsClick.bind(this)
     }
 
     componentDidMount() {
         document.addEventListener('scroll', () => {
             let boolean = window.scrollY < 1;
             this.props.dispatch(scrollAtTop(boolean));
-        });
+        },{ passive: true });
     }
+    componentWillUnmount() {
+        document.removeEventListener('scroll', () => {
+            let boolean = window.scrollY < 1;
+            this.props.dispatch(scrollAtTop(boolean));
+        },{ passive: true });
+    }
+
     handleSubmit(e, annotation){
         if(annotation === null){
             e.preventDefault();
@@ -61,7 +69,9 @@ export class NavBar extends React.Component {
         }
             
     }
-
+    handleRecentAnnotationsClick () {
+        this.props.dispatch(getAnnotations())
+    }
     render(){
         const props = this.props;
         let session = "";
@@ -132,8 +142,10 @@ export class NavBar extends React.Component {
                                 </div>
                                 <ul className="links dark-slate-gray-text-color">
                                     <li className="dark-slate-gray-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
-                                        <button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button>  
+                                        <button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button>
+                                        <button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button>  
                                     <form className="float-flex-item-right" id={this.props.formId} onSubmit={(e) => this.handleSubmit(e,this.props.annotation)}>
+                                        
                                         <button type="submit" className="button button-primary" name="search-button">{this.props.annotation===null ? "Annotate" : "Clear"}</button>
                                     </form>
                                 </ul>

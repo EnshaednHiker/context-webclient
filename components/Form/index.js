@@ -107,11 +107,11 @@ export class Form extends React.Component {
                         <div className="form-fields">
                             <div className="form-field">
                                 <label htmlFor='username' className="thistle-text-color m-1">Username: </label>
-                                <input name='username' required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
+                                <input name='username' autoComplete="true" required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
                             </div>
                             <div className="form-field">
                                 <label htmlFor="password" className="thistle-text-color m-1">Password: </label>
-                                <input type="password"  required name="password" className="m-1" id="loginPassword" placeholder="Password"></input>
+                                <input type="password"  autoComplete="true" required name="password" className="m-1" id="loginPassword" placeholder="Password"></input>
                             </div>
                             <div className="form-field">
                                 <span className="m-1 thistle-text-color" id="errorSpan">{this.props.loginError === true ? "Incorrect login, please enter the correct credentials" : ""}</span>
@@ -135,7 +135,7 @@ export class Form extends React.Component {
                         <div className="form-fields">
                             <div className="form-field">
                                 <label htmlFor='username' className="thistle-text-color m-1">Username: </label>
-                                <input name='username' required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
+                                <input name='username' autoComplete="true" required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">
@@ -143,7 +143,7 @@ export class Form extends React.Component {
                             </div>
                             <div className="form-field">
                                 <label htmlFor="email" className="thistle-text-color m-1">Email: </label>
-                                <input required onChange={this.handleEmailChange} name='email' type='email' className='m-1' id='registerEmail' placeholder='Email'></input>
+                                <input required onChange={this.handleEmailChange} autoComplete="true" name='email' type='email' className='m-1' id='registerEmail' placeholder='Email'></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">
@@ -151,7 +151,7 @@ export class Form extends React.Component {
                             </div>
                             <div className="form-field">
                                 <label htmlFor='confirmEmail' className="thistle-text-color m-1">Confirm Email: </label>
-                                <input onChange={this.handleConfirmEmailChange} style={this.props.email !== this.props.confirmEmail ? badColor : goodColor} title="The Confirm Email field must be the same as the 'Email' field." required name='confirmEmail' type='email' className='m-1' id='registerConfirmEmail' placeholder='Confirm Email'></input>
+                                <input onChange={this.handleConfirmEmailChange} autoComplete="true" style={this.props.email !== this.props.confirmEmail ? badColor : goodColor} title="The Confirm Email field must be the same as the 'Email' field." required name='confirmEmail' type='email' className='m-1' id='registerConfirmEmail' placeholder='Confirm Email'></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">
@@ -159,12 +159,12 @@ export class Form extends React.Component {
                             </div>
                             <div className="form-field">
                                 <label htmlFor="password" className="thistle-text-color m-1">Password: </label>
-                                <input onChange={this.handlePasswordChange} name="password" type="password" className="m-1" id="registrationPassword" placeholder="Password"></input>
+                                <input onChange={this.handlePasswordChange} autoComplete="true" name="password" type="password" className="m-1" id="registrationPassword" placeholder="Password"></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">
                                 <label htmlFor='confirmPassword' className="thistle-text-color m-1">Confirm Password: </label>
-                                <input onChange={this.handleConfirmPasswordChange} style={this.props.password !== this.props.confirmPassword ? badColor : goodColor} required title="The 'Confirm Password' field must be the same as the 'Password' field." type='password' name='confirmPassword' className='m-1' id='registerConfirmPassword' placeholder='Confirm Password'></input>
+                                <input onChange={this.handleConfirmPasswordChange} autoComplete="true" style={this.props.password !== this.props.confirmPassword ? badColor : goodColor} required title="The 'Confirm Password' field must be the same as the 'Password' field." type='password' name='confirmPassword' className='m-1' id='registerConfirmPassword' placeholder='Confirm Password'></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">

@@ -70,12 +70,14 @@ export class Frame extends React.Component {
             });
 
             return (
-                <div className="frame">
+                <div className="frame" id="frame-id">
                     {wordComponents}
                     <Modal
                         base="frame"
-                        
+                        appElement={document.getElementById('frame-id')}
                         style={modalStyle}
+                        closeTimeOutMS={10}
+                        onRequestClose={this.handleCloseModal}
                         isOpen={this.props.showModal}
                         contentLabel={this.props.articleWord}
                     >
@@ -91,6 +93,7 @@ export class Frame extends React.Component {
                 </div>
 
             )
+            
         }
         else {
             console.log("this.props.showConvertedText",this.props.showConvertedText);

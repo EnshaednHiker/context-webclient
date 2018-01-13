@@ -226,8 +226,16 @@ export function postAnnotation(payload,userId) {
 }
 
 export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
-export function getAnnotations() {
-    
+export function getAnnotations(userId) {
+    return {
+        type: POST_ANNOTATION,
+        promise: system.API.GET(`/user/${userId}/annotations`),
+        meta: {
+            onSuccess: (result, getState) => {
+                console.log("result.body from getting annotations from server: ", result.body);
+            }
+        }
+    }
 }
 
 export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';

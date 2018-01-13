@@ -134,6 +134,14 @@ export default function annotations (state = initialState, action) {
             success: prevState => ({...prevState, abstract:getAbstract(action.payload.body,state.articleUrl), externalLinks: getLinks(action.payload.body,state.articleUrl) })
         })
     }
+    else if (action.type===actions.GET_ANNOTATIONS){
+        return handle (state,action,{
+            start: prevState => ({ ...prevState, areAnnoationsLoading: true, annotationsError: null}),
+            finish: prevState => ({ ...prevState, areAnnoationsLoading: false }),
+            failure: prevState => ({ ...prevState, annotationsError: action.payload.body}),
+            success: prevState => ({...prevState,  recentAnnotations: action.payload.body})
+        })
+    }
     else if (action.type === actions.SET_ARTICLE_URL){
         return Object.assign({}, state, {
             articleUrl: action.url
