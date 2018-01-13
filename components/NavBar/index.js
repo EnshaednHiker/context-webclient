@@ -1,12 +1,14 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation, getAnnotations} from '~/actions'
-
+import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation, 
+        getAnnotations,showRecentAnnotationsModal,hideRecentAnnotationsModal,setAnnotatedText, 
+        showConvertedText} from '~/actions';
+import Modal from 'react-modal';
 import '~/assets/styles/main.css'
-
+import Words from '~/components/Words'
 import Scroll from 'react-scroll';
-
+import system from '~/system'
 
 const Element = Scroll.Element;
 const Link = Scroll.Link;
@@ -20,7 +22,17 @@ export class NavBar extends React.Component {
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleGoToOtherPage = this.handleGoToOtherPage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleRecentAnnotationsClick = this.handleRecentAnnotationsClick.bind(this)
+        this.handleRecentAnnotationsClick = this.handleRecentAnnotationsClick.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.afterModalOpen = this.afterModalOpen.bind(this);
+        this.handleRecentAnnotationClick = this.handleRecentAnnotationClick.bind(this)
+    }
+
+    handleCloseModal () {
+        this.props.dispatch(hideRecentAnnotationsModal());
+    }
+    handleOpenModal () {
+        this.props.dispatch(showRecentAnnotationsModal());
     }
 
     componentDidMount() {
@@ -70,8 +82,26 @@ export class NavBar extends React.Component {
             
     }
     handleRecentAnnotationsClick () {
-        this.props.dispatch(getAnnotations())
+        console.log("handleRecentAnnotationsClick function fired")
+        this.props.dispatch(showRecentAnnotationsModal());
+        
     }
+    afterModalOpen() {
+        console.log("afterModalOpen function fired")
+        let user = system.identity()
+        this.props.dispatch(getAnnotations(user.id))
+    }
+
+    handleRecentAnnotationClick(event){
+        console.log("this.props.recentAnnotations",this.props.recentAnnotations);
+        let element = parseInt(event.currentTarget.dataset.element);
+        console.log("this.props.recentAnnotations[element]", this.props.recentAnnotations[element]);
+        this.props.dispatch(setAnnotatedText(this.props.recentAnnotations[element].annotation));
+        this.handleCloseModal();
+        this.props.dispatch(showConvertedText());
+        
+    }
+
     render(){
         const props = this.props;
         let session = "";
@@ -106,14 +136,13 @@ export class NavBar extends React.Component {
                                 <div className="brand margin-top-14">
                                     <a onClick={this.scrollToTop} className="m-2 white-text navbar-brand link"><strong>CONTEXT</strong></a>
                                 </div>
-                                    <ul className="white-text links">
-                                        <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                        <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                        <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
-                                        <li className="thistle-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
-                                        <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 white-text float-flex-item-right" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
-                                    </ul>
-
+                                <ul className="white-text links">
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
+                                    <li className="thistle-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
+                                    <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 white-text float-flex-item-right" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
+                                </ul>
                             </nav>
                         )
                     }
@@ -135,8 +164,17 @@ export class NavBar extends React.Component {
                         )
                     }
                     else if (this.props.location.includes("dashboard")) {
+                        let modalStyle = {
+                            overlay:{
+                                zIndex:"100"
+                            }
+                        }
+                        
+                        let recentAnnotations = this.props.recentAnnotations.map((annotation,index)=>{
+                            return <li key={index}><button className="button-link" onClick={this.handleRecentAnnotationClick} data-element={index}><Words words={annotation.annotation[0]} key={index} noButton={true} /><Words words={annotation.annotation[1]} key={index+1} noButton={true} />...</button></li>
+                        });
                         return (
-                            <nav className="thistle-background-color">
+                            <nav className="thistle-background-color" id="nav-id">
                                 <div className="brand margin-top-14">
                                     <a onClick={this.scrollToTop} className="m-2 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
                                 </div>
@@ -149,7 +187,22 @@ export class NavBar extends React.Component {
                                         <button type="submit" className="button button-primary" name="search-button">{this.props.annotation===null ? "Annotate" : "Clear"}</button>
                                     </form>
                                 </ul>
-
+                                <Modal
+                                    base=""
+                                    appElement={document.getElementById('nav-id')}
+                                    style={modalStyle}
+                                    closeTimeOutMS={10}
+                                    onRequestClose={this.handleCloseModal}
+                                    isOpen={this.props.showRecentAnnotationsModal}
+                                    contentLabel='Recent Annotations Modal'
+                                    onAfterOpen={this.afterModalOpen}
+                                >
+                                    <button className="modalCloseButton" onClick={this.handleCloseModal}><i className="fa fa-times-circle fa-2x" aria-hidden="true"></i></button>
+                                    <h2>Recent Annotations</h2>
+                                    <ol>
+                                        {recentAnnotations}
+                                    </ol>
+                                </Modal>
                             </nav>
                         )
                     }
@@ -167,7 +220,9 @@ const mapStateToProps = (state) => {
          user: state.user.user,
          userAuth: state.user.userAuth,
          location: state.user.location,
-         annotation:state.annotations.annotation
+         annotation:state.annotations.annotation,
+         showRecentAnnotationsModal: state.dashboardUi.showRecentAnnotationsModal,
+         recentAnnotations: state.annotations.recentAnnotations
     })
 };
 

@@ -17,9 +17,14 @@ export class Frame extends React.Component {
         this.props.dispatch(hideModal());
     }
 
-    render(){
 
-        if(this.props.annotation === null && this.props.dbPediaError === null) {
+    render(){
+        console.log("this.props.annotatedText",this.props.annotatedText);
+        console.log("this.props.dbPediaError",this.props.dbPediaError);
+        console.log("this.props.annotation",this.props.annotation);
+        console.log("this.props.showConvertedText",this.props.showConvertedText)
+
+        if(this.props.annotatedText === null && this.props.dbPediaError === null) {
             return (
                 <div className="frame">
                     <textarea 
@@ -45,7 +50,7 @@ export class Frame extends React.Component {
             
             //put each array chunk into the Words component where that components decides whether to return a named entity button or span of text
             let wordComponents = this.props.annotatedText.map((word, index)=>{
-                return <Words words={word} key={index} />
+                return <Words words={word} key={index} noButton={false} />
             });
             
             //let abstract = this.getAbstract(this.props.articleJson, this.props.articleUrl)

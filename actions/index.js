@@ -73,6 +73,16 @@ export const hideModal = () => ({
     type: HIDE_MODAL
 });
 
+export const SHOW_RECENT_ANNOTATIONS_MODAL = "SHOW_RECENT_ANNOTATIONS_MODAL";
+export const showRecentAnnotationsModal = () => ({
+    type: SHOW_RECENT_ANNOTATIONS_MODAL
+})
+
+export const HIDE_RECENT_ANNOTATIONS_MODAL = "HIDE_RECENT_ANNOTATIONS_MODAL";
+export const hideRecentAnnotationsModal = () => ({
+    type: HIDE_RECENT_ANNOTATIONS_MODAL
+})
+
 export const SHOW_CONVERTED_TEXT = "SHOW_CONVERTED_TEXT";
 export const showConvertedText = () => ({
     type: SHOW_CONVERTED_TEXT
@@ -226,9 +236,9 @@ export function postAnnotation(payload,userId) {
 }
 
 export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
-export function getAnnotations(userId) {
+export function getAnnotations(userId, modalType) {
     return {
-        type: POST_ANNOTATION,
+        type: GET_ANNOTATIONS,
         promise: system.API.GET(`/user/${userId}/annotations`),
         meta: {
             onSuccess: (result, getState) => {
@@ -237,6 +247,12 @@ export function getAnnotations(userId) {
         }
     }
 }
+
+export const SET_ANNOTATED_TEXT = "SET_ANNOTATED_TEXT";
+export const setAnnotatedText = (annotatedText) => {
+    console.log("what does annotatedText look like?", annotatedText);
+    return {type: SET_ANNOTATED_TEXT, annotatedText}
+};
 
 export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
 export function deleteAnnotations () {

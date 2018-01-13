@@ -5,7 +5,6 @@ import system from '~/system';
 const initialState = {
     user: system.identity(),
     userAuth: system.authorization(system.identity()),
-    isUserLoading: false,
     loginError: false,
     username: null,
     email: null,
@@ -14,7 +13,9 @@ const initialState = {
     confirmPassword: null,
     usernameValidationError: false,
     emailValidationError: false,
-    location: window.location.hash    
+    location: window.location.hash,
+    //state for loading screens
+    isUserLoading: false    
 };
 
 //block handles validation errors to make sure user doesn't mis-enter email or password and that the username hasn't already been taken

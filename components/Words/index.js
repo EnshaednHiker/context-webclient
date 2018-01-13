@@ -51,9 +51,15 @@ export class Words extends React.Component {
             } catch (error) {
                 console.error(error)
             }
-            return (
-                <button type="button" onClick={this.handleClick} className="button-link" data-word={wordObject.word} data-url={wordObject.uri} >{wordObject.word}</button>
-            )
+            if(this.props.noButton === false)
+                return (
+                    <button type="button" onClick={this.handleClick} className="button-link" data-word={wordObject.word} data-url={wordObject.uri} >{wordObject.word}</button>
+                )
+            else {
+                return (
+                    <span>{wordObject.word}</span>
+                )
+            }
         }
         else {
             return (

@@ -4,12 +4,12 @@ import splitAt from 'split-at';
 
 
 const initialState = {
-    recentAnnotations: [],
+    recentAnnotations:[{annotation:["foo","bar"]}],
     annoString: "",
     dbPediaError: null,
-    isAnnoLoading: false,
+    
     annotation: null,
-    isArticleJsonLoading: false,
+    
     articleJsonError: null,
     articleUrl: "nullUrl",
     articleWord: null,
@@ -17,7 +17,11 @@ const initialState = {
     externalLinks: ["Sorry, no external links found for this entry."],
     annotatedText: null,
     serverError: null,
-    postingAnnotation: false
+    //state for loading screens
+    postingAnnotation: false,
+    areAnnotationsLoading:false,
+    isAnnoLoading: false,
+    isArticleJsonLoading: false,
 };
 
 function getLinks (json,url) {
@@ -123,7 +127,7 @@ export default function annotations (state = initialState, action) {
             start: prevState => ({ ...prevState, postingAnnotation: true, serverError: null}),
             finish: prevState => ({ ...prevState, postingAnnotation: false }),
             failure: prevState => ({ ...prevState, serverError: action.payload.body}),
-            success: prevState => ({...prevState, recentAnnotations: action.payload.body})
+            success: prevState => ({...prevState})
         });
     }
     else if (action.type===actions.GET_ARTICLE_JSON){
@@ -136,10 +140,10 @@ export default function annotations (state = initialState, action) {
     }
     else if (action.type===actions.GET_ANNOTATIONS){
         return handle (state,action,{
-            start: prevState => ({ ...prevState, areAnnoationsLoading: true, annotationsError: null}),
-            finish: prevState => ({ ...prevState, areAnnoationsLoading: false }),
+            start: prevState => ({ ...prevState, areAnnotationsLoading: true, annotationsError: null}),
+            finish: prevState => ({ ...prevState, areAnnotationsLoading: false }),
             failure: prevState => ({ ...prevState, annotationsError: action.payload.body}),
-            success: prevState => ({...prevState,  recentAnnotations: action.payload.body})
+            success: prevState => ({...prevState,  recentAnnotations: action.payload.body.annotations})
         })
     }
     else if (action.type === actions.SET_ARTICLE_URL){
@@ -162,6 +166,12 @@ export default function annotations (state = initialState, action) {
             articleJson: null
         })
     }
+    else if (action.type === actions.SET_ANNOTATED_TEXT){
+        return Object.assign({}, state, {
+            annotatedText: action.annotatedText,
+            annotation: {Resources:"foo"}
+        })
+    }
     else if (action.type === actions.CLEAR_ANNOTATION){
         return Object.assign({}, state,{
             annoString: "",
@@ -174,7 +184,8 @@ export default function annotations (state = initialState, action) {
             articleWord: null,
             abstract: "Sorry, no abstract found for this entry.",
             externalLinks: ["Sorry, no external links found for this entry."],
-            annotatedText: null
+            annotatedText: null,
+            areAnnotationsLoading:false
         })
     }
     else return state;

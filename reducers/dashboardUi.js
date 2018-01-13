@@ -2,7 +2,8 @@ import * as actions from '~/actions';
 
 const initialState = {
     showModal: false,
-    showConvertedText: false
+    showConvertedText: false,
+    showRecentAnnotationsModal: false
 };
 
 
@@ -15,6 +16,16 @@ export default function dashboardUi (state = initialState, action) {
     else if (action.type === actions.HIDE_MODAL){
         return Object.assign({}, state,{
             showModal: false
+        })
+    }
+    else if (action.type === actions.SHOW_RECENT_ANNOTATIONS_MODAL){
+        return Object.assign({}, state,{
+            showRecentAnnotationsModal: true
+        })
+    }
+    else if (action.type === actions.HIDE_RECENT_ANNOTATIONS_MODAL){
+        return Object.assign({}, state,{
+            showRecentAnnotationsModal: false
         })
     }
     else if (action.type === actions.SHOW_CONVERTED_TEXT){
