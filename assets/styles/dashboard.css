@@ -9,10 +9,15 @@
 }
 
 @media (max-width: 650px) {
+
+    nav {
+        height: 210px;
+    }
     #dashboard-view {
-        grid-template-rows: 175px 1fr; 
+        grid-template-rows: 210px 1fr; 
         grid-template-areas: "dash"
-                            "frame";   
+                            "frame";
+          
     }
 }
 
@@ -20,10 +25,10 @@
 .frame {
     grid-area: frame;
     width: 40%;
-    height: 99.9%;
+    height: 90%;
     margin-left: auto;
     margin-right: auto;
-
+    padding: 20px;
 }
 
 textarea {
@@ -46,6 +51,23 @@ textarea {
     }
 }
 
+
+
+.button-link {
+    background:none!important;
+    border:none; 
+    padding:0!important;
+    font: inherit;
+    cursor: pointer;
+    color: #337AB7; 
+}
+.button-link:hover {
+    /* color: blue; */
+    text-decoration:underline;
+} 
+
+/******************Info Modal Styling******************/
+
 .modalCloseButton {
     background: none !important;
     color: inherit;
@@ -64,18 +86,22 @@ textarea {
     z-index: 100;
 }
 
-.button-link {
-    background:none!important;
-    border:none; 
-    padding:0!important;
-    font: inherit;
-    cursor: pointer;
-    color: #337AB7; 
+.info-modal-div{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
-.button-link:hover {
-    /* color: blue; */
-    text-decoration:underline;
-} 
+@media (max-width: 800px) {
+    .info-modal-div {
+        width: 80%;
+    }
+}
+
+@media (max-width: 650px) {
+    .info-modal-div {
+        width: 100%;
+    }
+}
 
 /**********Loading Screen Component Styling***********/
 .loading-screen-div{

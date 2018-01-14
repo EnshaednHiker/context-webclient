@@ -66,7 +66,7 @@ export class Frame extends React.Component {
                 urlRegex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
                 console.log(`${link}: `, urlRegex.test(link));
                 if (urlRegex.test(link)){
-                    return <li key={index}><a target="_blank" href={link}>{link}</a></li>
+                    return <li key={index}><a className="text-wrap" target="_blank" href={link}>{link}</a></li>
                 }
                 else {
                     return <li key={index}>{link}</li>
@@ -87,13 +87,15 @@ export class Frame extends React.Component {
                         contentLabel={this.props.articleWord}
                     >
                         <button className="modalCloseButton" onClick={this.handleCloseModal}><i className="fa fa-times-circle fa-2x" aria-hidden="true"></i></button>
-                        <h2>{this.props.articleWord}</h2>
-                        <h3>Abstract:</h3>
-                        <p>{this.props.abstract}</p>
-                        <h3>External Links</h3>
-                        <ul>
-                            {externalLinks}
-                        </ul>
+                        <div className="info-modal-div">
+                            <h2>{this.props.articleWord}</h2>
+                            <h3>Abstract:</h3>
+                            <p>{this.props.abstract}</p>
+                            <h3>External Links</h3>
+                            <ul>
+                                {externalLinks}
+                            </ul>
+                        </div>
                     </Modal>
                 </div>
 

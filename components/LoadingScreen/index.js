@@ -1,11 +1,9 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-
 import Modal from 'react-modal';
 import '~/assets/styles/dashboard.css'
-import store from '~/public/store.js'; 
-
+ 
 export class LoadingScreen extends React.Component {
     constructor(props){
         super(props)
@@ -40,14 +38,6 @@ export class LoadingScreen extends React.Component {
             }
           }
         let boolean = this.props.postingAnnotation === true || this.props.areAnnotationsLoading === true || this.props.isAnnoLoading === true || this.props.isArticleJsonLoading === true || this.props.isUserLoading === true;
-        // if(this.props.postingAnnotation === true || this.props.areAnnotationsLoading === true || this.props.isAnnoLoading === true || this.props.isArticleJsonLoading === true || this.props.isUserLoading === true){
-        //     //store.dispatch(showLoadingScreen())
-        //     this.handleOpenLoadingScreen()
-        // }
-        // else {
-        //     //store.dispatch(hideLoadingScreen())
-        //     this.handleCloseLoadingScreen()
-        // }
 
         return (
             <div id="loading-screen-id">
@@ -55,7 +45,6 @@ export class LoadingScreen extends React.Component {
                     appElement={document.getElementById('loading-screen-id')}
                     style={modalStyle}
                     closeTimeOutMS={10}
-                    
                     isOpen={boolean}
                     contentLabel={"Loading Screen"}
                 >
@@ -66,7 +55,6 @@ export class LoadingScreen extends React.Component {
                 </Modal>
             </div>
         )
-
     }
 }
 

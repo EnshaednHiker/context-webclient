@@ -171,17 +171,18 @@ export class NavBar extends React.Component {
                         }
                         
                         let recentAnnotations = this.props.recentAnnotations.map((annotation,index)=>{
-                            return <li key={index}><button className="button-link" onClick={this.handleRecentAnnotationClick} data-element={index}><Words words={annotation.annotation[0]} key={index} noButton={true} /><Words words={annotation.annotation[1]} key={index+1} noButton={true} />...</button></li>
+                            return <li key={index}><p><button className="button-link text-left" onClick={this.handleRecentAnnotationClick} data-element={index}><Words words={annotation.annotation[0]} key={index} noButton={true} /><Words words={annotation.annotation[1]} key={index+1} noButton={true} />...</button></p></li>
                         });
                         return (
                             <nav className="thistle-background-color" id="nav-id">
-                                <div className="brand margin-top-14">
-                                    <a onClick={this.scrollToTop} className="m-2 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
-                                </div>
+
                                 <ul className="links dark-slate-gray-text-color">
+                                    <div className="brand links margin-top-14">
+                                        <a onClick={this.scrollToTop} className="m-2 gray-text-color navbar-brand link"><strong>CONTEXT</strong></a>
+                                    </div>
                                     <li className="dark-slate-gray-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
-                                        <button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button>
-                                        <button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button>  
+                                    <li><button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button></li>
+                                    <li><button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button></li>  
                                     <form className="float-flex-item-right" id={this.props.formId} onSubmit={(e) => this.handleSubmit(e,this.props.annotation)}>
                                         
                                         <button type="submit" className="button button-primary" name="search-button">{this.props.annotation===null ? "Annotate" : "Clear"}</button>
@@ -198,10 +199,12 @@ export class NavBar extends React.Component {
                                     onAfterOpen={this.afterModalOpen}
                                 >
                                     <button className="modalCloseButton" onClick={this.handleCloseModal}><i className="fa fa-times-circle fa-2x" aria-hidden="true"></i></button>
-                                    <h2>Recent Annotations</h2>
-                                    <ol>
-                                        {recentAnnotations}
-                                    </ol>
+                                    <div className="info-modal-div">
+                                        <h2>Recent Annotations</h2>
+                                        <ol>
+                                            {recentAnnotations}
+                                        </ol>
+                                    </div>
                                 </Modal>
                             </nav>
                         )
