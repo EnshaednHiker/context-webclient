@@ -73,6 +73,10 @@ body {
     width:100%;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .button {
     display: inline-block;
     padding: 6px 12px;
@@ -153,6 +157,10 @@ body {
 .thistle-background-color {
     background-color: #E3DACE;
     border-color:#E3DACE;
+}
+
+.margin-10{
+    margin: 10px;
 }
 
 /*************Flex Directions*******************/

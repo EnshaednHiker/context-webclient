@@ -25,8 +25,11 @@ export class Footer extends React.Component {
 
 
         return (
-                <footer className="grey">
-                    <p>Footer content</p>
+                <footer className="">
+                    <p className="thistle-text-color text-center">Crafted by Nick Bingham 
+                        <a className="button tan-background-color margin-10" href="https://github.com/EnshaednHiker/context-webclient" target="_blank"><span class="fa fa-github fa-lg"></span></a> 
+                        <a className="button tan-background-color" href="https://www.linkedin.com/in/nicholas-bingham-a0696326/" target="_blank"><span class="fa fa-linkedin fa-lg"></span></a>
+                    </p>
                 </footer>
             )
     }
