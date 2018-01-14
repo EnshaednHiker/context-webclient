@@ -93,6 +93,16 @@ export const hideConvertedText = () => ({
     type: HIDE_CONVERTED_TEXT
 });
 
+export const SHOW_LOADING_SCREEN = "SHOW_LOADING_SCREEN";
+export const showLoadingScreen = () => ({
+    type: SHOW_LOADING_SCREEN
+});
+
+export const HIDE_LOADING_SCREEN = "HIDE_LOADING_SCREEN";
+export const hideLoadingScreen = () => ({
+    type: HIDE_LOADING_SCREEN
+});
+
 /*********************USER ACTIONS****************************/
 
 export const REGISTER = 'REGISTER';

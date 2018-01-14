@@ -9,7 +9,8 @@ import NavBar from '~/components/NavBar';
 import Content from '~/components/Content';
 import Feature from '~/components/Feature';
 import Form from '~/components/Form';
-import Footer from '~/components/Footer';   
+import Footer from '~/components/Footer';
+import LoadingScreen from '~/components/LoadingScreen';   
 //identify layout blocks i.e. header, footer, navigation bar, maybe infomodals for about and contact rather than discrete pages
 //do the stuff I know I can do without Thinkful resources, don't spike my own wheel
 
@@ -92,6 +93,7 @@ class Main extends React.Component {
                         <Feature key={featureOptions3.key} title={featureOptions3.title} position={featureOptions3.position} image={featureOptions3.image} copy={featureOptions3.copy} name={featureOptions3.name} />
                         <Form />
                         <Footer />
+                        <LoadingScreen />
                     </div>
                 </Provider>  
             )

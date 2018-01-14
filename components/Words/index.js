@@ -1,9 +1,8 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import { getArticleJson,setArticleUrl,showModal,setArticleWord } from '~/actions'
+import { getArticleJson,setArticleUrl,setArticleWord } from '~/actions'
 import splitAt from 'split-at';
-import Modal from 'react-modal';
 import '~/assets/styles/dashboard.css'
 
 
@@ -27,14 +26,8 @@ export class Words extends React.Component {
         // 4. http://live.dbpedia.org/data/Space_X.json
         let lastIndex = event.target.dataset.url.lastIndexOf('/');
         let array = [lastIndex];
-        
         let urlArray = splitAt(event.target.dataset.url,array); 
-        console.log("urlArray: ", urlArray);
-        console.log("process.env.DBPEDIA_ARTICLE_URL+urlArray[1]: ", process.env.DBPEDIA_ARTICLE_URL+urlArray[1]);
-        console.log("event.target.dataset.word: ", event.target.dataset.word);
         //then dispatch actions to show the text to set 
-        
-
         this.props.dispatch(setArticleUrl(process.env.DBPEDIA_ARTICLE_URL+urlArray[1]));
         this.props.dispatch(setArticleWord(event.target.dataset.word));
         this.props.dispatch(getArticleJson(urlArray[1]+".json"));

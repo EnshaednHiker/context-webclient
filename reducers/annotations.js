@@ -21,7 +21,7 @@ const initialState = {
     postingAnnotation: false,
     areAnnotationsLoading:false,
     isAnnoLoading: false,
-    isArticleJsonLoading: false,
+    isArticleJsonLoading: false
 };
 
 function getLinks (json,url) {

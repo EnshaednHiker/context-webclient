@@ -76,3 +76,24 @@ textarea {
     /* color: blue; */
     text-decoration:underline;
 } 
+
+/**********Loading Screen Component Styling***********/
+.loading-screen-div{
+    background: inherit;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: center;
+}
+ .loading-screen-div:before {
+    content:'';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.loading-screen-div i {
+    display:inline-block;
+    vertical-align: middle;
+} 
