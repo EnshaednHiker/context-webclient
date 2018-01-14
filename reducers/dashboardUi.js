@@ -3,8 +3,7 @@ import * as actions from '~/actions';
 const initialState = {
     showModal: false,
     showConvertedText: false,
-    showRecentAnnotationsModal: false,
-    showLoadingScreen: false
+    showRecentAnnotationsModal: false
 };
 
 
@@ -37,16 +36,6 @@ export default function dashboardUi (state = initialState, action) {
     else if (action.type === actions.HIDE_CONVERTED_TEXT){
         return Object.assign({}, state,{
             showConvertedText: false
-        })
-    }
-    else if (action.type === actions.SHOW_LOADING_SCREEN){
-        return Object.assign({}, state,{
-            showLoadingScreen: true
-        })
-    }
-    else if (action.type === actions.HIDE_LOADING_SCREEN){
-        return Object.assign({}, state,{
-            showLoadingScreen: false
         })
     }
     else return state;

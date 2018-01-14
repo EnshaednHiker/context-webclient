@@ -1,7 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {hideLoadingScreen,showLoadingScreen} from '~/actions';
+
 import Modal from 'react-modal';
 import '~/assets/styles/dashboard.css'
 import store from '~/public/store.js'; 
@@ -9,16 +9,7 @@ import store from '~/public/store.js';
 export class LoadingScreen extends React.Component {
     constructor(props){
         super(props)
-        this.handleCloseLoadingScreen = this.handleCloseLoadingScreen.bind(this);
-        this.handleOpenLoadingScreen = this.handleOpenLoadingScreen.bind(this);
-    }
 
-    handleOpenLoadingScreen(){
-        this.props.dispatch(showLoadingScreen());
-    }
-
-    handleCloseLoadingScreen(){
-        this.props.dispatch(hideLoadingScreen());
     }
 
     render(){
@@ -48,12 +39,15 @@ export class LoadingScreen extends React.Component {
           
             }
           }
-        if(this.props.postingAnnotation === true || this.props.areAnnotationsLoading === true || this.props.isAnnoLoading === true || this.props.isArticleJsonLoading === true || this.props.isUserLoading === true){
-            store.dispatch(showLoadingScreen())
-        }
-        else {
-            store.dispatch(hideLoadingScreen())
-        }
+        let boolean = this.props.postingAnnotation === true || this.props.areAnnotationsLoading === true || this.props.isAnnoLoading === true || this.props.isArticleJsonLoading === true || this.props.isUserLoading === true;
+        // if(this.props.postingAnnotation === true || this.props.areAnnotationsLoading === true || this.props.isAnnoLoading === true || this.props.isArticleJsonLoading === true || this.props.isUserLoading === true){
+        //     //store.dispatch(showLoadingScreen())
+        //     this.handleOpenLoadingScreen()
+        // }
+        // else {
+        //     //store.dispatch(hideLoadingScreen())
+        //     this.handleCloseLoadingScreen()
+        // }
 
         return (
             <div id="loading-screen-id">
@@ -61,8 +55,8 @@ export class LoadingScreen extends React.Component {
                     appElement={document.getElementById('loading-screen-id')}
                     style={modalStyle}
                     closeTimeOutMS={10}
-                    onRequestClose={this.handleCloseLoadingScreen}
-                    isOpen={this.props.showLoadingScreen}
+                    
+                    isOpen={boolean}
                     contentLabel={"Loading Screen"}
                 >
                     <div className="loading-screen-div">
@@ -78,7 +72,6 @@ export class LoadingScreen extends React.Component {
 
 const mapStateToProps = state => {
    return ({
-        showLoadingScreen: state.dashboardUi.showLoadingScreen,
         postingAnnotation: state.annotations.postingAnnotation,
         areAnnotationsLoading:state.annotations.areAnnotationsLoading,
         isAnnoLoading: state.annotations.isAnnoLoading,
