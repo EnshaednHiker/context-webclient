@@ -1,9 +1,8 @@
 import React from 'react';
 import Dom from 'react-dom';
 import { connect } from 'react-redux';
-import {markUpText, hideModal} from '~/actions';
+import {hideModal} from '~/actions';
 import Words from '~/components/Words';
-import splitAt from 'split-at';
 import Modal from 'react-modal';
 
 
@@ -17,12 +16,7 @@ export class Frame extends React.Component {
         this.props.dispatch(hideModal());
     }
 
-
     render(){
-        console.log("this.props.annotatedText",this.props.annotatedText);
-        console.log("this.props.dbPediaError",this.props.dbPediaError);
-        console.log("this.props.annotation",this.props.annotation);
-        console.log("this.props.showConvertedText",this.props.showConvertedText)
 
         if(this.props.annotatedText === null && this.props.dbPediaError === null) {
             return (
@@ -53,8 +47,6 @@ export class Frame extends React.Component {
                 return <Words words={word} key={index} noButton={false} />
             });
             
-            //let abstract = this.getAbstract(this.props.articleJson, this.props.articleUrl)
-            //let links = this.getLinks(this.props.articleJson, this.props.articleUrl)
             let modalStyle = {
                 overlay:{
                     zIndex:"100"
@@ -103,7 +95,7 @@ export class Frame extends React.Component {
             
         }
         else {
-            console.log("this.props.showConvertedText",this.props.showConvertedText);
+        
             return (
                 <div className="frame">
                     <h2>Whoops! Some kind of error.</h2>

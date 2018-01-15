@@ -78,7 +78,7 @@ export class Form extends React.Component {
     }
 
     render(){
-        console.log("system.authorization(system.identity())",system.authorization(system.identity()));
+        
         const badColor = {
             backgroundColor: "#ff6666",
             color: "white"
@@ -180,7 +180,7 @@ export class Form extends React.Component {
         }
         else {
             let user = system.identity()
-            console.log("user: ",user);
+            
             return (
                 <div className="form-container">
                     <div className="form">

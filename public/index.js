@@ -41,7 +41,7 @@ function protectRoutes () {
 
 function getRecentAnnotations () {
     let currentStore = store.getState()
-    console.log("This should be true on dashoard, currentStore.user.location.includes('dashboard'): ",currentStore.user.location.includes('dashboard'));
+
     if (currentStore.user.location.includes('dashboard')){
         let user = system.identity();
         store.dispatch(getAnnotations(user.id));

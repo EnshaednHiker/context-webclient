@@ -3,12 +3,8 @@ import Dom from 'react-dom';
 import { connect } from 'react-redux';
 import {  } from '~/actions'
 import {If, Then, Else} from 'react-if';
-
-
 import '~/assets/styles/main.css'
-
 import Scroll from 'react-scroll';
-
 
 const Element = Scroll.Element;
 
@@ -57,15 +53,3 @@ const mapDispatchToProps = dispatch => {
    })
 };
 export default connect(mapDispatchToProps)(Feature);
-
-// <div className="" id={`${this.props.name}`}>
-// <div className={`mx-auto media-${this.props.position}  col-lg-6`} style={styles}>
-//     <a  href="">
-//         <img className="media-object svg-image img-fluid " src={this.props.image} alt={`Image of ${this.props.title}`}></img>
-//     </a>
-// </div>
-// <div className="media-body col-lg-6">
-//     <h4 className="media-heading">{this.props.title}</h4>
-//     <p>{this.props.copy}</p>
-// </div>
-// </div>

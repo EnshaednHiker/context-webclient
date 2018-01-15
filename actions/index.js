@@ -4,28 +4,10 @@ import store from '~/public/store.js';
 
 /***************Main UI ACTIONS******************/
 
-export const HAMBURGER_CLICK = "HAMBURGER_CLICK";
-export const hamburgerClick = boolean => ({
-    type: HAMBURGER_CLICK,
-    boolean
-});
-
 export const SCROLL_AT_TOP = "SCROLL_AT_TOP";
 export const scrollAtTop = boolean => ({
     type: SCROLL_AT_TOP,
     boolean
-});
-
-export const COLLAPSE_MENU = "COLLAPSE_MENU";
-export const collapseMenu = (click) => ({
-    type: COLLAPSE_MENU,
-    click
-});
-
-export const TOGGLE__HAMBURGER_MENU = "TOGGLE__HAMBURGER_MENU";
-export const toggleHamburgerMenu = (click) => ({
-    type: TOGGLE__HAMBURGER_MENU,
-    click
 });
 
 export const TOGGLE_FORM = "TOGGLE_FORM";
@@ -129,23 +111,26 @@ export function login (payload) {
     }
 }
 
-export const GET_USER = 'GET_USER';
-export function getUser (userId) {
-    return {
-        type: GET_USER,
-        promise: system.API.GET(`/user/${userId}`)
-    }
-}
-
 export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
     type: LOGOUT
 });
 
-export const DELETE_USER = 'DELETE_USER';
-export function deleteUser () {
+//Future functionality I would like to add
+// export const DELETE_USER = 'DELETE_USER';
+// export function deleteUser (userId) {
+    
+//     return {
+//         type: DELETE_USER,
+//         promise: system.API.DELETE(`/users/${userId}`),
+//         meta: {
+//             onSuccess: (result, getState) => {
+//                 console.log("user account deleted!",result);
+//             }
+//         }
+//     }
+// }
 
-}
 
 /********************ANNOTATION ACTIONS************************/
 
@@ -164,7 +149,7 @@ export const ANNOTATE = 'ANNOTATE';
 export function annotate(annoString) {
     return {
         type: ANNOTATE,
-        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:0.9}),
+        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:process.env.CONFIDENCE_SCORE}),
         meta: {
             onSuccess: (result, getState) => {
                 let currentStore=getState();
@@ -174,10 +159,6 @@ export function annotate(annoString) {
                 
                 store.dispatch(postAnnotation(payload,user.id))
             }
-            // onSuccess: (result, getState) => {
-            //     const annotation = result;
-            //     postAnnotation(annotation);
-            // }
         }
     }
 }
@@ -189,7 +170,6 @@ export function getArticleJson(url) {
         promise: system.API.GET_OUTSIDE_ARTICLE(url),
         meta: {
             onSuccess: (result, getState) => {
-                console.log("result.body from getting article JSON: ", result.body);
                 store.dispatch(showModal())
             }
 
@@ -210,19 +190,6 @@ export const setArticleWord = (word) => ({
         word
 });
 
-export const DUMP_JSON = "DUMP_JSON";
-export const dumpJson = () => ({
-        type: DUMP_JSON
-});
-
-
-export const MARK_UP_TEXT = "MARK_UP_TEXT";
-export const markUpText = (text, resources) => {
-    type: MARK_UP_TEXT,
-    text,
-    resources
-}
-
 export const POST_ANNOTATION = 'POST_ANNOTATION';
 export function postAnnotation(payload,userId) {
     return {
@@ -230,7 +197,7 @@ export function postAnnotation(payload,userId) {
         promise: system.API.POST(`/user/${userId}/annotations`, payload),
         meta: {
             onSuccess: (result, getState) => {
-                console.log("result.body from posting annotation to server: ", result.body);
+                //console.log("result.body from posting annotation to server: ", result.body);
             }
         }
     }
@@ -243,7 +210,7 @@ export function getAnnotations(userId, modalType) {
         promise: system.API.GET(`/user/${userId}/annotations`),
         meta: {
             onSuccess: (result, getState) => {
-                console.log("result.body from getting annotations from server: ", result.body);
+                //console.log("result.body from getting annotations from server: ", result.body);
             }
         }
     }
@@ -251,14 +218,14 @@ export function getAnnotations(userId, modalType) {
 
 export const SET_ANNOTATED_TEXT = "SET_ANNOTATED_TEXT";
 export const setAnnotatedText = (annotatedText) => {
-    console.log("what does annotatedText look like?", annotatedText);
     return {type: SET_ANNOTATED_TEXT, annotatedText}
 };
 
-export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
-export function deleteAnnotations () {
+//Future functionality that I'd like to add
+// export const DELETE_ANNOTATIONS = 'DELETE_ANNOTATIONS';
+// export function deleteAnnotations () {
 
-}
+// }
 
 /**************ROUTER ACTIONS****************/
 

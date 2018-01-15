@@ -97,9 +97,7 @@ export default function user (state = initialState, action) {
             confirmPassword: action.confirmPassword
         })
     }
-    else if (action.type === actions.GET_USER){
-        
-    }
+
     else if (action.type === actions.LOGOUT){
         window.localStorage.removeItem(process.env.TOKEN);
         window.location.hash='#';

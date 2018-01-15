@@ -2,14 +2,11 @@ import * as actions from '~/actions';
 import { handle } from 'redux-pack';
 import splitAt from 'split-at';
 
-
 const initialState = {
     recentAnnotations:[{annotation:["foo","bar"]}],
     annoString: "",
     dbPediaError: null,
-    
     annotation: null,
-    
     articleJsonError: null,
     articleUrl: "nullUrl",
     articleWord: null,
@@ -24,6 +21,7 @@ const initialState = {
     isArticleJsonLoading: false
 };
 
+//Cleans up the returned JSON to use just the external links, configurable with configs and dotenv 
 function getLinks (json,url) {
     
     let rightObject = json[url];
@@ -41,6 +39,7 @@ function getLinks (json,url) {
     }
 }
 
+//Cleans up the returned JSON to use just the abstract, configurable with configs and dotenv
 function getAbstract(json,url){
     
     let rightObject = json[url];
@@ -59,12 +58,13 @@ function getAbstract(json,url){
     }
 }
 
+//Converts the returned resources from dbpedia and turns them in an array of either text or an object that
+//will later be consumed by the Words component
 function convertText(annotation){
     let separator = "45098quarksdfglijhg34bitcoin5987xvckjhg3madness562867"            
     let newString = annotation['@text'];
-    console.log("annotation: ", annotation);
+    
     //remove duplicate named entities flagged by dbPedia
-   
     let arrayResources = annotation.Resources.filter((resource, index, self)=>{
         return index === self.findIndex((r) => {
             return r['@surfaceForm'] === resource['@surfaceForm']
@@ -88,7 +88,6 @@ function convertText(annotation){
     let splitArray = splitAt(newString,indicesArray);
     
     //use a .map to return an array where elements that exactly match to '@surfaceForm' get changed into the proper object
-    
     let surfaceForm = '@surfaceForm';
     let uri = '@URI';
 
@@ -103,7 +102,7 @@ function convertText(annotation){
             return splitString
         }
     });
-    console.log("convertedSplitArray in reducer: ",convertedSplitArray);
+    
     return convertedSplitArray
 }
 
@@ -151,19 +150,9 @@ export default function annotations (state = initialState, action) {
             articleUrl: action.url
         })
     }
-    // else if (action.type === actions.LOAD_JSON){
-    //     return Object.assign({}, state, {  
-    //         articleJson: action.json
-    //     })
-    // }
     else if (action.type === actions.SET_ARTICLE_WORD){
         return Object.assign({}, state, {
             articleWord: action.word
-        })
-    }
-    else if (action.type === actions.DUMP_JSON){
-        return Object.assign({}, state, {
-            articleJson: null
         })
     }
     else if (action.type === actions.SET_ANNOTATED_TEXT){

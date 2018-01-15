@@ -40,7 +40,7 @@ var config = {
     
     "test_settings" : {
       "default": {
-        "launch_url": "http://localhost:3000",
+        "launch_url": "http://localhost:3000/#",
         "selenium_port": 4444,
         "selenium_host": "127.0.0.1",
         "silent": true,

@@ -79,23 +79,17 @@ export class NavBar extends React.Component {
         else {
             window.location.hash="#/";
         }
-            
     }
     handleRecentAnnotationsClick () {
-        console.log("handleRecentAnnotationsClick function fired")
         this.props.dispatch(showRecentAnnotationsModal());
-        
     }
     afterModalOpen() {
-        console.log("afterModalOpen function fired")
         let user = system.identity()
         this.props.dispatch(getAnnotations(user.id))
     }
 
     handleRecentAnnotationClick(event){
-        console.log("this.props.recentAnnotations",this.props.recentAnnotations);
         let element = parseInt(event.currentTarget.dataset.element);
-        console.log("this.props.recentAnnotations[element]", this.props.recentAnnotations[element]);
         this.props.dispatch(setAnnotatedText(this.props.recentAnnotations[element].annotation));
         this.handleCloseModal();
         this.props.dispatch(showConvertedText());
@@ -122,11 +116,6 @@ export class NavBar extends React.Component {
         else {
             location = "Dashboard"
         }
-
-                                    // <button type="button" onClick={this.handleHamburgerClick} className="button hamburger-link m-2">
-                                    //     <i className="fa fa-bars white-text" aria-hidden="true"></i>
-                                    // </button>
-                                    //<ClickOutHandler onClickOut={this.onClickOut}><span></span></ClickOutHandler>
 
         return (
                  ()=> {

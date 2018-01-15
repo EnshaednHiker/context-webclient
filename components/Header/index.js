@@ -5,7 +5,6 @@ import {  } from '~/actions'
 
 import '~/assets/styles/main.css'
 
-//import { Picture } from 'react-responsive-picture';
 
 export class Header extends React.Component {
     constructor(props){
@@ -47,11 +46,3 @@ const mapDispatchToProps = dispatch => {
    })
 };
 export default connect(mapDispatchToProps)(Header);
-
-/*
-                <Picture style={backgroundStyles}
-                    alt="background of books"
-                    src="assets/images/book_stacks_large.jpeg 1080w, assets/images/book_stacks_medium.jpeg 640w, assets/images/book_stacks_small.jpeg 320w"
-                    sizes="100vw"
-                />
-*/
