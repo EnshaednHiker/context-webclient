@@ -31,7 +31,7 @@ export class Frame extends React.Component {
                 </div>
                 )
         }
-        else if (this.props.annotation.Resources === undefined || this.props.dbPediaError !== null){
+        else if (this.props.annotation.Resources === null || this.props.dbPediaError !== null){
             return (
                 <p className="frame">
                     Whoops something went wrong or that passage of text returned no annotations. 
@@ -71,7 +71,7 @@ export class Frame extends React.Component {
                     {wordComponents}
                     <Modal
                         base="frame"
-                        appElement={document.getElementById('frame-id')}
+                        ariaHideApp={false}
                         style={modalStyle}
                         closeTimeOutMS={10}
                         onRequestClose={this.handleCloseModal}

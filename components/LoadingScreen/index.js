@@ -42,7 +42,7 @@ export class LoadingScreen extends React.Component {
         return (
             <div id="loading-screen-id">
                 <Modal
-                    appElement={document.getElementById('loading-screen-id')}
+                    ariaHideApp={false}
                     style={modalStyle}
                     closeTimeOutMS={10}
                     isOpen={boolean}

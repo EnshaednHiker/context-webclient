@@ -49,6 +49,8 @@ export class NavBar extends React.Component {
     }
 
     handleSubmit(e, annotation){
+        console.log("e.target.userInput.value",e.target.userInput.value);
+        console.log("annotation: ", annotation);
         if(annotation === null){
             e.preventDefault();
             //console.log("event.target.search-box.value: ",e.target.userInput.value)
@@ -80,6 +82,7 @@ export class NavBar extends React.Component {
             window.location.hash="#/";
         }
     }
+    //Recent Annotations, with an 's'
     handleRecentAnnotationsClick () {
         this.props.dispatch(showRecentAnnotationsModal());
     }
@@ -87,7 +90,7 @@ export class NavBar extends React.Component {
         let user = system.identity()
         this.props.dispatch(getAnnotations(user.id))
     }
-
+    //RecentAnnoation, with NO 's'
     handleRecentAnnotationClick(event){
         let element = parseInt(event.currentTarget.dataset.element);
         this.props.dispatch(setAnnotatedText(this.props.recentAnnotations[element].annotation));
@@ -179,7 +182,7 @@ export class NavBar extends React.Component {
                                 </ul>
                                 <Modal
                                     base=""
-                                    appElement={document.getElementById('nav-id')}
+                                    ariaHideApp={false}
                                     style={modalStyle}
                                     closeTimeOutMS={10}
                                     onRequestClose={this.handleCloseModal}

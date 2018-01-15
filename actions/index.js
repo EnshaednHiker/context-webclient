@@ -149,7 +149,7 @@ export const ANNOTATE = 'ANNOTATE';
 export function annotate(annoString) {
     return {
         type: ANNOTATE,
-        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:process.env.CONFIDENCE_SCORE}),
+        promise: system.API.GET_OUTSIDE_RESOURCE('', {text:annoString}, {confidence:0.9}),
         meta: {
             onSuccess: (result, getState) => {
                 let currentStore=getState();
