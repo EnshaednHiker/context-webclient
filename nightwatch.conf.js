@@ -1,5 +1,5 @@
 "use strict";
-
+// "babel": "^6.23.0",
 //run postinstall script in package.json prior to running tests the first time
 
 require ('dotenv').config();
