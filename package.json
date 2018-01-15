@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "director": "^1.2.8",
+    "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "0.0.5-beta.2",
