@@ -22,5 +22,5 @@ deployment:
   staging:
     branch: master
     commands:
-      - npm run build 
+      - npm run production-build 
       - netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist
