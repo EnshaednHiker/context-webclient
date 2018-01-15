@@ -91,7 +91,7 @@ export class Frame extends React.Component {
                             <h2>{this.props.articleWord}</h2>
                             <h3>Abstract:</h3>
                             <p>{this.props.abstract}</p>
-                            <h3>External Links</h3>
+                            <h3>External Links:</h3>
                             <ul>
                                 {externalLinks}
                             </ul>
