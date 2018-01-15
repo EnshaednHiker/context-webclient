@@ -9,6 +9,14 @@ import system from '~/system';
 import store from '~/public/store.js'; 
 import {logout,setLocation} from '~/actions';
 import { getAnnotations } from '../actions/index';
+import imgLarge from '~/assets/images/book_stacks_large.jpeg';
+import imgMedium from '~/assets/images/book_stacks_medium.jpeg';
+import imgSmall from '~/assets/images/book_stacks_small.jpeg';
+import gif1 from '~/assets/images/step1gif.gif';
+import gif2 from '~/assets/images/step2gif.gif';
+import gif3 from '~/assets/images/step3gif.gif';
+import gif4 from '~/assets/images/step4gif.gif';
+
 //to do: create a second page that takes dynamic segment i.e. user/:ID
 const routes = {
     '/': Main ,

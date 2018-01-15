@@ -65,7 +65,7 @@ class Main extends React.Component {
             copy: "The Recent Annotations feature lets you pick up where you left off last time.",
             title: "Step 4",
             name: "step4",
-            key:3 
+            key:4 
         }
     
         return (
