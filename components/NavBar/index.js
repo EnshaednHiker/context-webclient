@@ -49,11 +49,10 @@ export class NavBar extends React.Component {
     }
 
     handleSubmit(e, annotation){
-        console.log("e.target.userInput.value",e.target.userInput.value);
-        console.log("annotation: ", annotation);
+        console.warn("Warning: This site only works if accessed from http, not https. If you access it from https, it will not work.")
         if(annotation === null){
             e.preventDefault();
-            //console.log("event.target.search-box.value: ",e.target.userInput.value)
+  
             let annoString = "" + `${e.target.userInput.value}`;
             this.props.dispatch(setAnnotationString(annoString));
             this.props.dispatch(annotate(annoString));
