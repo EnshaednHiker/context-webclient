@@ -61,49 +61,57 @@ function getAbstract(json,url){
 //Converts the returned resources from dbpedia and turns them in an array of either text or an object that
 //will later be consumed by the Words component
 function convertText(annotation){
-    let separator = "45098quarksdfglijhg34bitcoin5987xvckjhg3madness562867"            
-    let newString = annotation['@text'];
+    let annotationKeys = Object.keys(annotation);
+    if (annotationKeys.includes("Resources")){
+        let separator = "45098quarksdfglijhg34bitcoin5987xvckjhg3madness562867"            
+        let newString = annotation['@text'];
+        
+        //remove duplicate named entities flagged by dbPedia
+        let arrayResources = annotation.Resources.filter((resource, index, self)=>{
+            return index === self.findIndex((r) => {
+                return r['@surfaceForm'] === resource['@surfaceForm']
+            })
+        });
+        
+        
+        //build indices for splitAt function
+        let indicesSplitsEndArray = arrayResources.map((resource)=>{
+            return resource['@surfaceForm'].length+parseInt(resource['@offset']) - 1
+        });
+        let indicesSplitsStartArray = arrayResources.map((resource)=>{
+            return parseInt(resource['@offset']) - 1
+        });
+        let indicesArray = indicesSplitsStartArray.concat(indicesSplitsEndArray);
+        indicesArray.sort((a, b) => {
+            return a - b;
+          });
+        
+        //cut up string with the multiple splits
+        let splitArray = splitAt(newString,indicesArray);
+        
+        //use a .map to return an array where elements that exactly match to '@surfaceForm' get changed into the proper object
+        let surfaceForm = '@surfaceForm';
+        let uri = '@URI';
     
-    //remove duplicate named entities flagged by dbPedia
-    let arrayResources = annotation.Resources.filter((resource, index, self)=>{
-        return index === self.findIndex((r) => {
-            return r['@surfaceForm'] === resource['@surfaceForm']
-        })
-    });
-    
-    
-    //build indices for splitAt function
-    let indicesSplitsEndArray = arrayResources.map((resource)=>{
-        return resource['@surfaceForm'].length+parseInt(resource['@offset']) - 1
-    });
-    let indicesSplitsStartArray = arrayResources.map((resource)=>{
-        return parseInt(resource['@offset']) - 1
-    });
-    let indicesArray = indicesSplitsStartArray.concat(indicesSplitsEndArray);
-    indicesArray.sort((a, b) => {
-        return a - b;
-      });
-    
-    //cut up string with the multiple splits
-    let splitArray = splitAt(newString,indicesArray);
-    
-    //use a .map to return an array where elements that exactly match to '@surfaceForm' get changed into the proper object
-    let surfaceForm = '@surfaceForm';
-    let uri = '@URI';
+        let convertedSplitArray = splitArray.map((splitString)=>{
+            let matchedResource = arrayResources.find((element)=>{
+                return element[surfaceForm]===splitString 
+            })
+            if (matchedResource){
+                return JSON.stringify({uri:matchedResource[uri],word:matchedResource[surfaceForm]})
+            }
+            else {
+                return splitString
+            }
+        });
+        
+        return convertedSplitArray
+    }
+    else {
+        annotation["Resources"] = undefined;
+        return annotation
+    }
 
-    let convertedSplitArray = splitArray.map((splitString)=>{
-        let matchedResource = arrayResources.find((element)=>{
-            return element[surfaceForm]===splitString 
-        })
-        if (matchedResource){
-            return JSON.stringify({uri:matchedResource[uri],word:matchedResource[surfaceForm]})
-        }
-        else {
-            return splitString
-        }
-    });
-    
-    return convertedSplitArray
 }
 
 

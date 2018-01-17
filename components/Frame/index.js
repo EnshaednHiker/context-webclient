@@ -18,7 +18,7 @@ export class Frame extends React.Component {
 
     render(){
 
-        if(this.props.annotatedText === null && this.props.dbPediaError === null) {
+        if(this.props.annotation === null && this.props.dbPediaError === null) {
             return (
                 <div className="frame">
                     <textarea 
@@ -31,7 +31,7 @@ export class Frame extends React.Component {
                 </div>
                 )
         }
-        else if (this.props.annotation.Resources === null || this.props.dbPediaError !== null){
+        else if (this.props.annotation.Resources === undefined || this.props.dbPediaError !== null){
             return (
                 <p className="frame">
                     Whoops something went wrong or that passage of text returned no annotations. 
