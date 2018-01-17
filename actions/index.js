@@ -154,8 +154,8 @@ export function annotate(annoString) {
             onSuccess: (result, getState) => {
                 let currentStore=getState();
                 let user = system.identity();
-                
-                if(currentStore.annotations.annotatedText.Resources !== undefined){
+                console.log("currentStore.annotations.annotatedText",currentStore.annotations.annotatedText);
+                if(currentStore.annotations.annotatedText.Resources !== undefined || Array.isArray(currentStore.annotations.annotatedText)){
                     let payload = {annotation: currentStore.annotations.annotatedText}
                     store.dispatch(showConvertedText());
                     store.dispatch(postAnnotation(payload,user.id))
