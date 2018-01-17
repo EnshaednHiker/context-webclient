@@ -12,6 +12,15 @@ Context was built around the idea that a user's reading experience on the web co
 
 Context is comprised of two main components: [server](https://github.com/EnshaednHiker/context-server) and [webclient](https://github.com/EnshaednHiker/context-webclient).
 
+## Screenshots
+
+![Screenshot of First Main View](docs/screenshot1.png "Screenshot of First Main View")
+![Screenshot of Login on Main View](docs/screenshot2.png "Screenshot of Login on Main View")
+![Screenshot of empty Dashboard in Dashboard View](docs/screenshot3.png "Screenshot of empty Dashboard in Dashboard View")
+![Screenshot of annotated text in Dashboard View](docs/screenshot4.png "Screenshot of annotated text in Dashboard View")
+![Screenshot of abstract and external links in Dashboard View](docs/screenshot5.png "Screenshot of abstract and external links in Dashboard View")
+![Screenshot of Recent Annotations in Dashboard View](docs/screenshot6.png "Screenshot of Recent Annotations in Dashboard View")
+
 # Webclient
 
 ## Getting Started
