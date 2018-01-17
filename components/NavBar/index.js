@@ -3,7 +3,7 @@ import Dom from 'react-dom';
 import { connect } from 'react-redux';
 import {hideConvertedText, scrollAtTop, logout, setAnnotationString, annotate, clearAnnotation, 
         getAnnotations,showRecentAnnotationsModal,hideRecentAnnotationsModal,setAnnotatedText, 
-        showConvertedText} from '~/actions';
+        showConvertedText, login} from '~/actions';
 import Modal from 'react-modal';
 import '~/assets/styles/main.css'
 import Words from '~/components/Words'
@@ -26,6 +26,7 @@ export class NavBar extends React.Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.afterModalOpen = this.afterModalOpen.bind(this);
         this.handleRecentAnnotationClick = this.handleRecentAnnotationClick.bind(this)
+        this.handleDemoAccount = this.handleDemoAccount.bind(this);
     }
 
     handleCloseModal () {
@@ -33,6 +34,19 @@ export class NavBar extends React.Component {
     }
     handleOpenModal () {
         this.props.dispatch(showRecentAnnotationsModal());
+    }
+
+    handleDemoAccount(){
+
+        let payload = system.security.encrypt(
+            {
+              "user": {
+                "username": "demoAccount",
+                "password": "demo"
+              }
+            }
+        );
+        this.props.dispatch(login(payload));
     }
 
     componentDidMount() {
@@ -49,16 +63,16 @@ export class NavBar extends React.Component {
     }
 
     handleSubmit(e, annotation){
+        e.preventDefault();
         console.warn("Warning: This site only works if accessed from http, not https. If you access it from https, it will not work.")
         if(annotation === null){
-            e.preventDefault();
+            
   
             let annoString = "" + `${e.target.userInput.value}`;
             this.props.dispatch(setAnnotationString(annoString));
             this.props.dispatch(annotate(annoString));
         }
         else {
-            e.preventDefault()
             this.props.dispatch(hideConvertedText());
             this.props.dispatch(clearAnnotation());
             
@@ -89,7 +103,7 @@ export class NavBar extends React.Component {
         let user = system.identity()
         this.props.dispatch(getAnnotations(user.id))
     }
-    //RecentAnnoation, with NO 's'
+    //RecentAnnotation, with NO 's'
     handleRecentAnnotationClick(event){
         let element = parseInt(event.currentTarget.dataset.element);
         this.props.dispatch(setAnnotatedText(this.props.recentAnnotations[element].annotation));
@@ -132,6 +146,7 @@ export class NavBar extends React.Component {
                                     <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
                                     <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
                                     <li className="thistle-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
+                                    <li className="thistle-text-color link m-2" hidden={this.props.userAuth} onClick={this.handleDemoAccount}>Demo</li>
                                     <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 white-text float-flex-item-right" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
                                 </ul>
                             </nav>
@@ -149,6 +164,7 @@ export class NavBar extends React.Component {
                                     <li><Link hidden={this.props.userAuth} className="dark-slate-gray-text-color link m-2" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
                                     <li><Link hidden={this.props.userAuth} className="dark-slate-gray-text-color link m-2" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
                                     <li className="dark-slate-gray-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
+                                    <li className="dark-slate-gray-text-color link m-2" hidden={this.props.userAuth} onClick={this.handleDemoAccount}>Demo</li>
                                     <button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2 float-flex-item-right">Logout ({this.props.user.username})</button>  
                                 </ul>
                             </nav>
@@ -175,7 +191,6 @@ export class NavBar extends React.Component {
                                     <li><button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button></li>
                                     <li><button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button></li>  
                                     <form className="float-flex-item-right" id={this.props.formId} onSubmit={(e) => this.handleSubmit(e,this.props.annotation)}>
-                                        
                                         <button type="submit" className="button button-primary" name="search-button">{this.props.annotation===null ? "Annotate" : "Clear"}</button>
                                     </form>
                                 </ul>
