@@ -35,7 +35,7 @@ export class Words extends React.Component {
 
 
     render(){
-    
+        
         if(this.props.words.startsWith('{"uri":') && this.props.words.endsWith('}')){
             
             let wordObject;

@@ -154,10 +154,15 @@ export function annotate(annoString) {
             onSuccess: (result, getState) => {
                 let currentStore=getState();
                 let user = system.identity();
-                let payload = {annotation: currentStore.annotations.annotatedText}
-                store.dispatch(showConvertedText());
                 
-                store.dispatch(postAnnotation(payload,user.id))
+                if(currentStore.annotations.annotatedText.Resources !== undefined){
+                    let payload = {annotation: currentStore.annotations.annotatedText}
+                    store.dispatch(showConvertedText());
+                    store.dispatch(postAnnotation(payload,user.id))
+                }
+                else{
+                    console.warn("annotated text returned no resources, try again: ",currentStore.annotations.annotatedText);
+                }
             }
         }
     }
@@ -204,7 +209,7 @@ export function postAnnotation(payload,userId) {
 }
 
 export const GET_ANNOTATIONS = 'GET_ANNOTATIONS';
-export function getAnnotations(userId, modalType) {
+export function getAnnotations(userId) {
     return {
         type: GET_ANNOTATIONS,
         promise: system.API.GET(`/user/${userId}/annotations`),

@@ -36,8 +36,8 @@ export class NavBar extends React.Component {
         this.props.dispatch(showRecentAnnotationsModal());
     }
 
-    handleDemoAccount(){
-
+    handleDemoAccount(e){
+        e.preventDefault();
         let payload = system.security.encrypt(
             {
               "user": {
@@ -46,6 +46,7 @@ export class NavBar extends React.Component {
               }
             }
         );
+        this.props.dispatch(clearAnnotation())
         this.props.dispatch(login(payload));
     }
 
@@ -65,6 +66,7 @@ export class NavBar extends React.Component {
     handleSubmit(e, annotation){
         e.preventDefault();
         console.warn("Warning: This site only works if accessed from http, not https. If you access it from https, it will not work.")
+        
         if(annotation === null){
             
   

@@ -36,7 +36,8 @@ export class Frame extends React.Component {
                 <p className="frame">
                     Whoops something went wrong or that passage of text returned no annotations. 
                     <br></br>Clear this and try again.
-                    <br></br>Error: {this.props.dbPediaError || this.props.annoString}
+                    <br></br>The following section was too weird, too short, too boring: {this.props.annoString}
+                    <br></br>We encountered the following error: {this.props.dbPediaError || "no error found." }
                 </p>
             )
         }
@@ -56,7 +57,7 @@ export class Frame extends React.Component {
             
             let externalLinks = this.props.externalLinks.map((link, index)=>{
                 urlRegex = new RegExp(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/)
-                console.log(`${link}: `, urlRegex.test(link));
+                
                 if (urlRegex.test(link)){
                     return <li key={index}><a className="text-wrap" target="_blank" href={link}>{link}</a></li>
                 }
