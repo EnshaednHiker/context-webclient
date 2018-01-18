@@ -91,6 +91,7 @@ export function register(payload){
                 },
                 onFailure: (err, getState) => {
                     console.warn(err);
+                    store.dispatch(clearCredentials());
                 }
             }
         }
@@ -105,7 +106,12 @@ export function login (payload) {
         promise: system.API.POST('/users/login',{payload:payload}),
         meta: {
             onSuccess: (result, getState) => {
-                console.log("login dispatched!",result);
+                console.log("login dispatched!");
+                store.dispatch(clearCredentials());
+            },
+            onFailure: (result, getState) => {
+                console.log("login failed!");
+                store.dispatch(clearCredentials());
             }
         }
     }
@@ -115,6 +121,11 @@ export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
     type: LOGOUT
 });
+
+export const CLEAR_CREDENTIALS = "CLEAR_CREDENTIALS";
+export const clearCredentials = () => ({
+    type: CLEAR_CREDENTIALS
+})
 
 //Future functionality I would like to add
 // export const DELETE_USER = 'DELETE_USER';
@@ -154,7 +165,6 @@ export function annotate(annoString) {
             onSuccess: (result, getState) => {
                 let currentStore=getState();
                 let user = system.identity();
-                console.log("currentStore.annotations.annotatedText",currentStore.annotations.annotatedText);
                 if(currentStore.annotations.annotatedText.Resources !== undefined || Array.isArray(currentStore.annotations.annotatedText)){
                     let payload = {annotation: currentStore.annotations.annotatedText}
                     store.dispatch(showConvertedText());

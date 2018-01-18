@@ -24,7 +24,7 @@ function validationError (error, errorType) {
     let valError = JSON.parse(error.response.text);
     if (error.response.status===500){
         let errorKeys = Object.keys(valError.errors);
-        console.log("errorKeys: ", errorKeys);
+    
         function hasError (element){
             //errorType currently set to be either a string of "email" or "username"
             return element === errorType;
@@ -74,25 +74,25 @@ export default function user (state = initialState, action) {
         });
     }
     else if (action.type === actions.SET_EMAIL) {
-        console.log("set email: ",action.email)
+        
         return Object.assign({}, state, {
             email: action.email
         })
     }
     else if (action.type === actions.SET_CONFIRM_EMAIL) {
-        console.log("set confirmEmail: ",action.confirmEmail)
+        
         return Object.assign({}, state, {
             confirmEmail: action.confirmEmail
         })
     }
     else if (action.type === actions.SET_PASSWORD) {
-        console.log("set password: ",action.password)
+        
         return Object.assign({}, state, {
             password: action.password
         })
     }
     else if (action.type === actions.SET_CONFIRM_PASSWORD) {
-        console.log("set confirm password: ",action.confirmPassword)
+        
         return Object.assign({}, state, {
             confirmPassword: action.confirmPassword
         })
@@ -108,6 +108,15 @@ export default function user (state = initialState, action) {
             usernameValidationError: false,
             emailValidationError: false 
         });
+    }
+    else if(action.type ===actions.CLEAR_CREDENTIALS){
+        return Object.assign({},state,{
+            username: null,
+            email: null,
+            confirmEmail: null,
+            password: null,
+            confirmPassword: null
+        })
     }
     else if(action.type === actions.SET_LOCATION){
         return Object.assign({},state,{
