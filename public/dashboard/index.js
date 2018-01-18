@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
         return (
                 <Provider store={store}>
                     <div className="" id="dashboard-view">
-                        <NavBar formId="annotate-form" link1='foo1' link2='foo2' link3="foo3"/>
+                        <NavBar textareaId="user-input-id" formId="annotate-form" link1='foo1' link2='foo2' link3="foo3"/>
                         <Frame formId="annotate-form" />
                         <LoadingScreen />
                     </div>

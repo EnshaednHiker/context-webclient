@@ -23,6 +23,7 @@ export class Frame extends React.Component {
                 <div className="frame">
                     <textarea 
                         name="userInput"
+                        id="user-input-id"
                         form={this.props.formId}  
                         required
                         placeholder="paste in text to annotate here"

@@ -19,6 +19,7 @@
   "author": "EnshaednHiker",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "director": "^1.2.8",
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",

@@ -65,19 +65,19 @@ export class NavBar extends React.Component {
 
     handleSubmit(e, annotation){
         e.preventDefault();
-        console.warn("Warning: This site only works if accessed from http, not https. If you access it from https, it will not work.")
         
+        //console.log("document.getElementById(user-input-id).value",document.getElementById(this.props.textareaId).value);
+        console.warn("Warning: This site only works if accessed from http, not https. If you access it from https, it will not work.")
+        console.log("annotation",annotation);
         if(annotation === null){
-            
-  
-            let annoString = "" + `${e.target.userInput.value}`;
+            //let annoString = "" + `${e.target.userInput.value}`;
+            let annoString = "" + `${document.getElementById(this.props.textareaId).value}`;
             this.props.dispatch(setAnnotationString(annoString));
             this.props.dispatch(annotate(annoString));
         }
         else {
             this.props.dispatch(hideConvertedText());
-            this.props.dispatch(clearAnnotation());
-            
+            this.props.dispatch(clearAnnotation()); 
         }
     }
 
