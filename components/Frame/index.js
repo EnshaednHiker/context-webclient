@@ -35,8 +35,8 @@ export class Frame extends React.Component {
         else if (this.props.annotation.Resources === undefined || this.props.dbPediaError !== null){
             return (
                 <p className="frame">
-                    Whoops something went wrong or that passage of text returned no annotations. 
-                    <br></br>Clear this and try again.
+                    Whoops something went wrong or that passage of text returned no annotations. What you entered has not been added to your Recent Annotations list. 
+                    <br></br>Click the Clear button and try again.
                     <br></br>The following section was too weird, too short, too boring: {this.props.annoString}
                     <br></br>We encountered the following error: {this.props.dbPediaError || "no error found." }
                 </p>
