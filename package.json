@@ -39,7 +39,8 @@
     "redux-pack": "^0.1.5",
     "redux-thunk": "^2.2.0",
     "split-at": "^1.2.0",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "typed.js": "^2.0.6"
   },
   "devDependencies": {
     "babel": "^6.23.0",
