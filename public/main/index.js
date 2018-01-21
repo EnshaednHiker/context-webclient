@@ -29,7 +29,7 @@ class Main extends React.Component {
         const contentOptions = {
             position:"center",
             image: null,
-            copy: "Context puts the world at the fingertips of the voracious reader. Take any article and Context will annotate its named entities with a definition and external links to learn more. Powered by DBpedia Spotlight, a tool to recognize named entities and to pair them with resources from Wikipedia, Context will supercharge your consumption of the web.",
+            copy: "Context puts the world at the fingertips of the voracious reader. Take any article and Context will first find named entities (things like nouns and proper nouns) in a given passage. Context annotates those found named entities with a definition and external links to learn more. Powered by DBpedia Spotlight, a tool to recognize named entities and to pair them with resources from Wikipedia, Context will supercharge your consumption of the web.",
             title: "The Pitch",
             name: "about",
             key:0 

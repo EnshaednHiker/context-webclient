@@ -185,13 +185,13 @@ nav ul {
         justify-content: center;
     }
     .feature-image {
-        max-width: 60vw;
+        max-width: 90vw;
         height: inherit;
         fill: #D2AF98 !important;
     }
     
     .feature-content {
-        max-width: 60vw;
+        max-width: 80vw;
     }
 }
 
