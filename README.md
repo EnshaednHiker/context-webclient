@@ -72,6 +72,14 @@ User credentials are encrypted with [jsonwebtokens](https://github.com/auth0/nod
 * [NORMALIZE.CSS](https://necolas.github.io/normalize.css/) - Browsers need centralized wrangling
 * [DBPEDIA SPOTLIGHT](http://www.dbpedia-spotlight.org/) - handles named entity recognition and finding abstracts and external links
 
+## Development Roadmap
+
+* Retain paragraph separation in returned annotated strings
+* Collapsible hamburger menu for mobile view
+* Build proxy server of DBPedia Spotlight for avoid running the site in http issue. Currently, I have to host the site in http, not https, in order to access the DBPedia Spotlight API
+* Social media elements with blog roll that shows user annotations
+* Sharing social media site elements where study meets social media
+
 ## Author
 
 * **Nick Bingham** - [EnshaednHiker](https://github.com/EnshaednHiker)
