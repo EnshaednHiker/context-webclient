@@ -10,7 +10,7 @@ import Content from '~/components/Content';
 import Feature from '~/components/Feature';
 import Form from '~/components/Form';
 import Footer from '~/components/Footer';
-import LoadingScreen from '~/components/LoadingScreen';   
+import LoadingScreen from '~/components/LoadingScreen'; 
 
 class Main extends React.Component {
     constructor(){
