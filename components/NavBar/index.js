@@ -188,7 +188,7 @@ export class NavBar extends React.Component {
                                     </div>
                                     <li className="dark-slate-gray-text-color link m-2" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
                                     <li><button type="button" onClick={this.handleLogoutClick} hidden={!this.props.userAuth} className="link button-link gray-text-color m-2">Logout ({this.props.user.username})</button></li>
-                                    <li><button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button></li>  
+                                    <li><button type="button" onClick={this.handleRecentAnnotationsClick} className="link button-link gray-text-color m-2">Recent Annotations</button></li>
                                     <form className="float-flex-item-right" id={this.props.formId} onSubmit={(e) => this.handleSubmit(e,this.props.annotation)}>
                                         <button type="submit" className="button button-primary" name="search-button">{this.props.annotation===null ? "Annotate" : "Clear"}</button>
                                     </form>

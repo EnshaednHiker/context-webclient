@@ -75,6 +75,11 @@ export const hideConvertedText = () => ({
     type: HIDE_CONVERTED_TEXT
 });
 
+export const SHOW_TIPS = "SHOW_TIPS";
+export const showTips = (boolean) => ({
+    type: SHOW_TIPS,
+    boolean
+});
 
 /*********************USER ACTIONS****************************/
 
