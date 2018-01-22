@@ -39,8 +39,13 @@ export class Frame extends React.Component {
     }
   
     componentWillUnmount() {
-        // Make sure to destroy Typed instance on unmounting to prevent memory leaks
-        this.typed2.destroy();
+        if (this.props.showTips===true){
+            // Make sure to destroy Typed instance on unmounting to prevent memory leaks
+            this.typed2.destroy();
+        }
+        else {
+            console.log("don't need this unmounting logic");
+        }
     }
 
     handleCloseModal () {
