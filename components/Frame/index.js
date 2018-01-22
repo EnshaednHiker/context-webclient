@@ -16,10 +16,10 @@ export class Frame extends React.Component {
             let strings = [
                 "Time for some tips and tricks.",
                 "Paste in text to annotate here, you won't hurt my feelings.",
-                "More text is better than less text. Paragraphs and articles, not tweets or titles",
+                "More text is better than less text. Paragraphs and articles, not tweets or titles.",
                 "Once you paste in text, click the 'Annotate' button. Click the 'Clear' button afterwards to get rid of your annotation.",
                 "Clicking 'Recent Annotations' will bring up a list of what you've previously annotated. You have a max of 10 recent annotations.",
-                "Upon annotating your 11th annotation, the oldest annotation disapears from the list.",
+                "Upon annotating your 11th annotation, the oldest annotation disappears from the list.",
                 "paste in text to annotate here",
             ]
             const options = {
