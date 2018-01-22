@@ -141,12 +141,12 @@ export class NavBar extends React.Component {
                                     <a onClick={this.scrollToTop} className="m-2 white-text navbar-brand link"><strong>CONTEXT</strong></a>
                                 </div>
                                 <ul className="white-text links">
-                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 dark-slate-gray-text-shadow" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
-                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 dark-slate-gray-text-shadow" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
-                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 dark-slate-gray-text-shadow" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
-                                    <li className="thistle-text-color link m-2 dark-slate-gray-text-shadow" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
-                                    <li className="thistle-text-color link m-2 dark-slate-gray-text-shadow" hidden={this.props.userAuth} onClick={this.handleDemoAccount}>Demo</li>
-                                    <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 white-text float-flex-item-right dark-slate-gray-text-shadow" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 black-text-shadow" to={this.props.link1} spy={true} smooth={true} duration={750}>About</Link></li>
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 black-text-shadow" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
+                                    <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 black-text-shadow" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
+                                    <li className="thistle-text-color link m-2 black-text-shadow" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
+                                    <li className="thistle-text-color link m-2 black-text-shadow" hidden={this.props.userAuth} onClick={this.handleDemoAccount}>Demo</li>
+                                    <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 black-text-shadow white-text float-flex-item-right dark-slate-gray-text-shadow" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
                                 </ul>
                             </nav>
                         )

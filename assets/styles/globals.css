@@ -64,7 +64,9 @@ body {
     color: #B0A0AC !important;
 }
 
-
+.black-text-shadow{
+    text-shadow:  1.5px 1.5px 2px black;
+}
 
 
 .small {
@@ -165,9 +167,7 @@ body {
     border-color: #243145;
 }
 
-.dark-slate-gray-text-shadow{
-    text-shadow:  1.5px 1.5px 2px #243145;
-}
+
 
 .thistle-text-color {
     color: #E3DACE;
