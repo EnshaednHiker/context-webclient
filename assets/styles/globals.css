@@ -64,6 +64,9 @@ body {
     color: #B0A0AC !important;
 }
 
+
+
+
 .small {
     font-size: 80%;
 }
@@ -83,6 +86,10 @@ body {
 
 .text-wrap {
     word-wrap: break-word;
+}
+
+.no-text-wrap {
+    word-wrap: keep-all !important;
 }
 
 .button {
@@ -158,6 +165,10 @@ body {
     border-color: #243145;
 }
 
+.dark-slate-gray-text-shadow{
+    text-shadow:  1.5px 1.5px 2px #243145;
+}
+
 .thistle-text-color {
     color: #E3DACE;
 }
@@ -195,7 +206,6 @@ body {
 /*************Flex Directions*******************/
 .flex-direction-row-reverse {
     justify-content: flex-end;
-    
 }
 
 /*******************Padding Globals***************/

@@ -126,25 +126,34 @@ nav ul {
     padding-left: 3px;
 }
 
-#header-text{
+.header-text{
     z-index: 8 !important;
 }
 
 @media (max-width: 700px) {
-    #header-text {
+    .header-text {
       margin-left:20vw !important;
     }
 }
 @media (min-width: 900px) {
-    #header-text {
+    .header-text {
       font-size: 3rem !important;
     }
 }
 @media (max-width: 400px) {
-    #header-text {
+    .header-text {
       font-size: 1.5rem !important;
     }
 }
+@media (max-width: 650px) {
+    .header-text {
+      position: absolute;
+      top: 20vw;
+      margin-left:18vw !important;
+      line-break: loose !important;
+    }
+}
+
 
 /*************Content Component Stlying***********/
 .content {
@@ -156,11 +165,18 @@ nav ul {
     margin-left: auto;
 }
 
-@media (min-width: 500px) {
+@media (max-width: 650px) {
     .content {
-        max-width: 50vw;    
+        margin-top: 20vw;   
     }
 }
+
+@media (min-width: 500px) {
+    .content {
+        max-width: 60vw;    
+    }
+}
+
 /*************Feature Component Styling***************/
 
 .feature-image {

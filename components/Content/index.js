@@ -28,9 +28,9 @@ export class Content extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
    return ({
 
    })
 };
-export default connect(mapDispatchToProps)(Content);
+export default connect(mapStateToProps)(Content);

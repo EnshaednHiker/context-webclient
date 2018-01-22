@@ -40,21 +40,21 @@ export class Header extends React.Component {
         }
 
         const textStyles = {
-            zIndex: 1000,
             position: "absolute",
             marginTop: "30vw",
             marginLeft: "60vw",
             color: "white",
-            backgroundColor: "none"
+            backgroundColor: "none",
+            whiteSpace: "nowrap",
         }
 
         return (
             <header className="header">
-                <div className="transparent" style={textStyles} id="header-text">
-                    <h1 id="header-text" className=""><strong>CONTEXT</strong> <br />
-                        <div className="type-wrap">
+                <div className="transparent header-text" style={textStyles} id="">
+                    <h1 id="" className="header-text no-text-wrap"><strong>CONTEXT</strong> <br />
+                        <div className="">
                             <span className="white-text small">consult </span>
-                            <span className="type-wrap thistle-background-color highlighted-text" ref={(el) => { this.el = el; }}></span>
+                            <span className=" thistle-background-color highlighted-text" ref={(el) => { this.el = el; }}></span>
                             <span className="typed-cursor "></span>
                         </div>
                     </h1>
