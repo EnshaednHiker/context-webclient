@@ -19,7 +19,8 @@ export class Header extends React.Component {
             strings: this.props.strings,
             typeSpeed: 50,
             backSpeed: 50,
-            showCursor: false
+            showCursor: false,
+            startDelay: 700
         };
         // this.el refers to the <span> in the render() method
         this.typed = new Typed(this.el, options);
