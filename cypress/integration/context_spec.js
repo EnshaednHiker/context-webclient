@@ -36,7 +36,6 @@ describe('Logging in to an account', function (){
         cy.get('textarea').type(textToAnnotate);
         cy.get('button[type="submit"]').click();
         cy.wait(2000);
-        cy.scrollTo('top');
         cy.get('button[type="button"]').contains('carbanions').click();
         cy.wait(2000);
         cy.get('h2').should('contain','carbanions');
