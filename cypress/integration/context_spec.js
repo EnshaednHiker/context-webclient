@@ -43,6 +43,7 @@ describe('Logging in to an account', function (){
         cy.get('h3').should('contain','Abstract');
         cy.get('h3').should('contain','External Links');
         cy.get('button.modalCloseButton').click();
+        cy.wait(2000);
     });
     it('The user can navigate to the main page', function(){
         cy.contains('Main').click();
