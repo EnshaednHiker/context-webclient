@@ -36,6 +36,7 @@ describe('Logging in to an account', function (){
         cy.get('textarea').type(textToAnnotate);
         cy.get('button[type="submit"]').click();
         cy.wait(7000);
+        cy.scrollTo('top');
         cy.get('button[type="button"]').contains('tetravalent').click();
         cy.wait(7000);
         cy.get('h2').should('contain','tetravalent');
