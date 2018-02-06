@@ -107,7 +107,7 @@ export class Form extends React.Component {
                         <div className="form-fields">
                             <div className="form-field">
                                 <label htmlFor='username' className="thistle-text-color m-1">Username: </label>
-                                <input name='username' autoComplete="true" required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
+                                <input name='username' autoComplete="true" required type='text' className='m-1' id='loginUsername' placeholder='Username'></input>
                             </div>
                             <div className="form-field">
                                 <label htmlFor="password" className="thistle-text-color m-1">Password: </label>
@@ -135,7 +135,7 @@ export class Form extends React.Component {
                         <div className="form-fields">
                             <div className="form-field">
                                 <label htmlFor='username' className="thistle-text-color m-1">Username: </label>
-                                <input name='username' autoComplete="true" required type='verbatim' className='m-1' id='loginUsername' placeholder='Username'></input>
+                                <input name='username' autoComplete="true" required type='text' className='m-1' id='loginUsername' placeholder='Username'></input>
                                 <span className="m-1"></span>
                             </div>
                             <div className="form-field">

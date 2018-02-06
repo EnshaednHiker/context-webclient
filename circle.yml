@@ -12,12 +12,13 @@ dependencies:
 
 test:
   override:
-    - npm start:
+    # local host will access production server
+    - npm run ci-start:
         background: true
-    # Wait for app to be ready
-    - sleep 20
-    # Run selenium tests
-    - npm test
+    # Wait on app to be ready
+      - wait-on http://localhost:3000
+    # Run Cypress tests
+      - npm test
 deployment:
   staging:
     branch: master

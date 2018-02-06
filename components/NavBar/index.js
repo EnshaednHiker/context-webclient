@@ -145,7 +145,7 @@ export class NavBar extends React.Component {
                                     <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 black-text-shadow" to={this.props.link2} spy={true} smooth={true} duration={750}>Features</Link></li>
                                     <li><Link hidden={this.props.userAuth} className="thistle-text-color link m-2 black-text-shadow" to={this.props.link3} spy={true} smooth={true} duration={750}>{session}</Link></li>
                                     <li className="thistle-text-color link m-2 black-text-shadow" hidden={!this.props.userAuth} onClick={this.handleGoToOtherPage}>{location}</li>
-                                    <li className="thistle-text-color link m-2 black-text-shadow" hidden={this.props.userAuth} onClick={this.handleDemoAccount}>Demo</li>
+                                    <li className="thistle-text-color link m-2 black-text-shadow" hidden={this.props.userAuth} id="demo-button" onClick={this.handleDemoAccount}>Demo</li>
                                     <button type="button" hidden={!this.props.userAuth} className="link button-link m-2 black-text-shadow white-text float-flex-item-right dark-slate-gray-text-shadow" onClick={this.handleLogoutClick}>Logout ({this.props.user.username})</button>
                                 </ul>
                             </nav>
