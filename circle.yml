@@ -16,9 +16,9 @@ test:
     - npm run ci-start:
         background: true
     # Wait on app to be ready
-      - wait-on http://localhost:3000
+    - wait-on http://localhost:3000
     # Run Cypress tests
-      - npm test
+    - npm test
 deployment:
   staging:
     branch: master
