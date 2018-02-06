@@ -35,15 +35,15 @@ describe('Logging in to an account', function (){
             "what we term an ‘assembly point’ disconnection approach for the construction of chiral centres. Here we describe a catalytic strategy that generates diazomethyl radicals as direct equivalents of carbyne species using visible-light photoredox catalysis.";
         cy.get('textarea').type(textToAnnotate);
         cy.get('button[type="submit"]').click();
-        cy.wait(7000);
+        cy.wait(2000);
         cy.scrollTo('top');
-        cy.get('button[type="button"]').contains('tetravalent').click();
-        cy.wait(7000);
-        cy.get('h2').should('contain','tetravalent');
+        cy.get('button[type="button"]').contains('carbanions').click();
+        cy.wait(2000);
+        cy.get('h2').should('contain','carbanions');
         cy.get('h3').should('contain','Abstract');
         cy.get('h3').should('contain','External Links');
         cy.get('button.modalCloseButton').click();
-        cy.wait(7000);
+        cy.wait(2000);
     });
     it('The user can navigate to the main page', function(){
         cy.contains('Main').click();
