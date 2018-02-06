@@ -2,7 +2,6 @@ dependencies:
   node: 
     version: 6.10.2
   cache_directories:
-    - ~/.npm
     - node_modules
   pre:
     - npm install
