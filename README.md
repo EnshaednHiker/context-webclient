@@ -33,27 +33,29 @@ Context is comprised of two main components: [server](https://github.com/Enshaed
 >   git clone https://github.com/EnshaednHiker/context-webclient.git
 >   cd context-webclient
 >   npm install
->   npm run postinstall
 ```
 
 ### Launching
 
 ```
+> npm start //or
+> npm run ci-start //for testing the local client against the production server
+```
+
+Then open `localhost:3000` in browser. If you used `npm start`, you'll also need to run the [Context-Server](https://github.com/EnshaednHiker/context-server) with:
+
+```
 > npm start
 ```
 
-Then open `localhost:3000` in browser. You'll also need to run the [Context-Server](https://github.com/EnshaednHiker/context-server) with:
-
-```
-> npm start
-```
+If you used `npm run ci-start`, then you're using the local host of the client that's trying to interact with the production, live version of the server.
 
 ### Testing
 
 ```
 > npm test
 ```
-Tests use Selenium and [nightwatch.js](http://nightwatchjs.org/) to test the site with end to end testing.
+Tests use [Cypress](https://www.cypress.io/) to test the site with end to end testing. No more Selenium! All hail Cypress!
 
 ## Continuous Integration 
 

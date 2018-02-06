@@ -18,6 +18,7 @@ describe('Logging in to an account', function (){
         cy.fixture('users.json').then((users)=>{
             console.log("users:",users)
             cy.wrap(users).as('users');
+            cy.route
             console.log("loginUser: ",users.loginUser);
             cy.get('input[name=username]').type(users.loginUser.username);
             cy.get('input[name=password]').type(`${users.loginUser.password}{enter}`);
