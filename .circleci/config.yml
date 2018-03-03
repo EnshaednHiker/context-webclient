@@ -10,17 +10,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: clean the cache
-          command: npm cache clean
+          name: check npm version
+          command: npm version
       - run:
-          name: install npm dependencies
-          command: npm install
+          name: check cache clean verify
+          command: npm cache verify
       - run:
           name: install netlify globally
           command:  npm install netlify-cli -g
       - run:
           name: install wait-on globally
           command: npm install wait-on -g
+      - run:
+          name: install npm dependencies
+          command: npm install
       # local host will access production server
       - run:
           name: ready test environment
