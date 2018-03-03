@@ -1,0 +1,55 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/context-webclient
+    docker: 
+      - image: circleci/node:6.10.2
+    steps:
+      - checkout
+      - run:
+        name: install-npm
+        command: npm install
+      - run:
+        name: install-netlify
+        command:  npm install netlify-cli -g
+      - run:
+        name: install-wait-on
+        command: npm install wait-on -g
+      # local host will access production server
+      - run:
+        name: ready-test-environment
+        command: npm run ci-start
+      # Wait on app to be ready
+      - run:
+        name: wait-on
+        command: wait-on http://localhost:3000
+      # Run Cypress tests
+      - run:
+        name: test
+        command: npm test
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/context-webclient
+    steps:
+      - checkout
+      - run:
+        name: production-build
+        command: npm run production-build
+      - run:
+        name: deploy-to-netlify
+        command: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist        
+  workflows:
+    version: 2
+    build-and-deploy:
+      jobs:
+        - build
+        - deploy:
+          requires: 
+            - build
+          filters:
+            branches:
+              only: master
+
+ 

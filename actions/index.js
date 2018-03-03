@@ -85,22 +85,22 @@ export const showTips = (boolean) => ({
 
 export const REGISTER = 'REGISTER';
 export function register(payload){
-        return {
-            type: REGISTER,
-            promise: system.API.POST('/users',{"payload":payload}),
-            meta: {
-                onSuccess: (result, getState) => {
-                    if (result.status===201){
-                        store.dispatch(login(payload));
-                    }
-                },
-                onFailure: (err, getState) => {
-                    console.warn(err);
-                    store.dispatch(clearCredentials());
+    return {
+        type: REGISTER,
+        promise: system.API.POST('/users',{"payload":payload}),
+        meta: {
+            onSuccess: (result, getState) => {
+                if (result.status===201){
+                    store.dispatch(login(payload));
                 }
+            },
+            onFailure: (err, getState) => {
+                console.warn(err);
+                store.dispatch(clearCredentials());
             }
         }
     }
+}
     
 
 export const LOGIN = 'LOGIN';
