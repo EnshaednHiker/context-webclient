@@ -2,9 +2,12 @@ version: 2
 
 jobs:
   build:
-    # working_directory: ~/context-webclient
+    working_directory: ~/context-webclient
     docker: 
       - image: circleci/node:6.10.2
+    filters:
+      branches:
+        only: master
     steps:
       - checkout
       - run:
@@ -28,27 +31,14 @@ jobs:
       - run:
           name: run e2e tests
           command: npm test
-  deploy:
-    docker: 
-      - image: circleci/node:6.10.2
-    steps:
-      - checkout
-      - run:
-          name: production-build
-          command: npm run production-build
-      - run:
-          name: deploy-to-netlify
-          command: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist        
-  workflows:
-    version: 2
-    build-and-deploy:
-      jobs:
-        - build
-        - deploy:
-            requires: 
-              - build
-          filters:
-            branches:
-              only: master
+      - deploy:
+        # Build production site
+        - run:
+            name: production-build
+            command: npm run production-build
+        # Deploy to netlify
+        - run:
+            name: deploy-to-netlify
+            command: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist      
 
  
