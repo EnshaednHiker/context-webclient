@@ -38,6 +38,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+          key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       # local host will access production server
       - run:
           name: ready test environment
