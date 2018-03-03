@@ -2,7 +2,6 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/context-webclient
     docker: 
       - image: circleci/node:6.10.2
     filters:
