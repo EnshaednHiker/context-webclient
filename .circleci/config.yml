@@ -16,14 +16,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-          name: check npm version
-          command: npm version
-      - run:
           name: install netlify globally
-          command:  npm install netlify-cli -g
+          command: sudo npm install netlify-cli -g
       - run:
           name: install wait-on globally
-          command: npm install wait-on -g
+          command: sudo npm install wait-on -g
       - run:
           name: install npm dependencies
           command: npm install
