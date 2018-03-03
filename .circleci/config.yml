@@ -31,14 +31,13 @@ jobs:
       - run:
           name: run e2e tests
           command: npm test
-      - deploy:
-        # Build production site
-        - run:
-            name: production-build
-            command: npm run production-build
-        # Deploy to netlify
-        - run:
-            name: deploy-to-netlify
-            command: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist      
+      # Build production site
+      - run:
+          name: production-build
+          command: npm run production-build
+      # Deploy to netlify
+      - run:
+          name: deploy-to-netlify
+          command: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./dist      
 
  
