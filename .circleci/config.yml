@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/context-webclient
-    machine: 
+    docker: 
       - image: circleci/node:6.10.2
     steps:
       - checkout
