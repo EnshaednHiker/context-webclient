@@ -4,12 +4,16 @@ jobs:
   build:
     docker: 
       - image: circleci/node:6.10.2
-      - image: circleci/npm:5.7.1
     filters:
       branches:
         only: master
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
       - run:
           name: check npm version
           command: npm version
@@ -31,6 +35,9 @@ jobs:
       - run:
           name: install npm dependencies
           command: npm install
+      - save_cache:
+          paths:
+            - node_modules
       # local host will access production server
       - run:
           name: ready test environment
