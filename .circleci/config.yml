@@ -29,11 +29,10 @@ jobs:
           name: run e2e tests
           command: npm test
   deploy:
-    machine:
-      enabled: true
-    working_directory: ~/context-webclient
+    docker: 
+      - image: circleci/node:6.10.2
     steps:
-      #- checkout
+      - checkout
       - run:
           name: production-build
           command: npm run production-build
@@ -46,8 +45,8 @@ jobs:
       jobs:
         - build
         - deploy:
-          requires: 
-            - build
+            requires: 
+              - build
           filters:
             branches:
               only: master
