@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: clean the cache
+          command: npm cache clean
+      - run:
           name: install npm dependencies
           command: npm install
       - run:
