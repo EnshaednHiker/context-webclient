@@ -4,28 +4,25 @@ jobs:
   build:
     docker: 
       - image: circleci/node:6.10.2
-      - image: cypress/browsers
     working_directory: ~/repo
     filters:
       branches:
         only: master
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - dependencies
-      - run:
-          name: verify that the cache is good
-          command: npm cache verify
+
+      #- restore_cache:
+      #    keys:
+      #    - dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
+      #    # fallback to using the latest cache if no exact match is found
+      #    - dependencies
       - run:
           name: install npm dependencies
           command: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
+      #- save_cache:
+      #    paths:
+      #      - node_modules
+      #    key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       - run:
           name: install netlify globally
           command: sudo npm install netlify-cli -g
