@@ -3,8 +3,8 @@ version: 2
 jobs:
   build:
     docker: 
-      - image: circleci/node:latest
-      - image: cypress/browsers:latest
+      - image: circleci/node:8.9.4
+      - image: cypress/browsers
     working_directory: ~/repo
     filters:
       branches:
@@ -37,9 +37,10 @@ jobs:
           key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       - run:
           name: ready test environment
-          command: npm run ci-start
-          background: true
-          no_output_timeout: 1h 
+          command: |
+            npm run ci-start
+            npm run sleep
+          background: true 
       # Wait on app to be ready
       - run:
           name: wait-on test environment to be ready

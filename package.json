@@ -12,7 +12,8 @@
     "production-build": "npm run build -- --env=production",
     "local-build": "npm run build -- --env=local",
     "deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
-    "ci": "git add . && git commit -m \"CI config change\" && git push"
+    "ci": "git add . && git commit -m \"CI config change\" && git push",
+    "sleep": "sleep 2m"
   },
   "engines": {
     "node": "6.10.2"
