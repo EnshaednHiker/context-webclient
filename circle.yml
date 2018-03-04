@@ -11,7 +11,7 @@ test:
     # local host will access production server
     - npm run ci-start:
         background: true
-    # Wait on app to be ready
+    # Wait on app to be ready.
     - wait-on http://localhost:3000
     # Run Cypress tests
     - npm test
