@@ -17,6 +17,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - dependencies
       - run:
+          name: verify that the cache is good
+          run : npm cache verify
+      - run:
           name: install npm dependencies
           command: npm install
       - save_cache:
