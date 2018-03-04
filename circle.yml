@@ -1,8 +1,7 @@
 dependencies:
   node: 
-    version: 8.9.4
+    version: 6.10.2
   pre:
-    - npm install npm -g 
     - npm install
     - npm install netlify-cli -g
     - npm install wait-on -g

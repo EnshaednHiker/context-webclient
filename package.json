@@ -4,9 +4,9 @@
   "description": "web client for the context content annotation service",
   "main": "index.js",
   "scripts": {
-    "open-cypress": "npx cypress open",
+    "open-cypress": "./node_modules/.bin/cypress open",
     "start": "webpack-dev-server",
-    "test" : "npx cypress run",
+    "test" : "./node_modules/.bin/cypress run",
     "ci-start":"webpack-dev-server --env=production",
     "build": "webpack -p",
     "production-build": "npm run build -- --env=production",
