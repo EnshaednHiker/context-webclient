@@ -31,18 +31,15 @@ jobs:
       - run:
           name: install npm dependencies
           command: npm install
-      #- save_cache:
-      #    paths:
-      #      - node_modules
-      #    key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
-      # local host will access production server
-      #- run:
-      #    name: install cypress globally
-      #    command: sudo npm install cypress -g
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       - run:
           name: ready test environment
           command: npm run ci-start
           background: true
+          no_output_timeout: 1h 
       # Wait on app to be ready
       - run:
           name: wait-on test environment to be ready
