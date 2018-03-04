@@ -38,7 +38,7 @@ jobs:
       - run:
           name: ready test environment
           command: npm run ci-start
-          no_output_timeout: 20s
+          background: true
       # Wait on app to be ready
       - run:
           name: wait-on test environment to be ready
