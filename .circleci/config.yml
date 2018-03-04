@@ -24,6 +24,9 @@ jobs:
       #      - node_modules
       #    key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       - run:
+          name: install npm globally for newest version
+          command: sudo npm install npm -g
+      - run:
           name: install netlify globally
           command: sudo npm install netlify-cli -g
       - run:
