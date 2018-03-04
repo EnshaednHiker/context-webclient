@@ -4,7 +4,6 @@ jobs:
   build:
     docker: 
       - image: circleci/node
-      - image: cypress/base
     working_directory: ~/repo
     filters:
       branches:
@@ -33,6 +32,9 @@ jobs:
       #      - node_modules
       #    key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
       # local host will access production server
+      #- run:
+      #    name: install cypress globally
+      #    command: sudo npm install cypress -g
       - run:
           name: ready test environment
           command: npm run ci-start
