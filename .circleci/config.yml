@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: install cypress dependencies
+          command: sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+      - run:
           name: install npm globally for newest version
           command: sudo npm install npm -g
       - run:
