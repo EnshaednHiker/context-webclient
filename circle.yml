@@ -3,6 +3,7 @@ machine:
     version: 6.10.2
 dependencies:
   pre:
+    - apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
     - npm install
     - npm install netlify-cli -g
     - npm install wait-on -g
