@@ -4,6 +4,7 @@ jobs:
   build:
     docker: 
       - image: circleci/node:6.10.2
+      - image: cypress/browsers
     working_directory: ~/repo
     filters:
       branches:
@@ -16,18 +17,18 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-          name: install netlify globally
-          command: sudo npm install netlify-cli -g
-      - run:
-          name: install wait-on globally
-          command: sudo npm install wait-on -g
-      - run:
           name: install npm dependencies
           command: npm install
       - save_cache:
           paths:
             - node_modules
           key: dependencies-{{ .Branch }}-js-{{ checksum "package.json" }}
+      - run:
+          name: install netlify globally
+          command: sudo npm install netlify-cli -g
+      - run:
+          name: install wait-on globally
+          command: sudo npm install wait-on -g
       # local host will access production server
       - run:
           name: ready test environment
