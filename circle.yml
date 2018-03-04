@@ -1,7 +1,7 @@
 dependencies:
   machine:
     node: 
-        version: 6.10.2
+      version: 6.10.2
   pre:
     - npm install
     - npm install netlify-cli -g
