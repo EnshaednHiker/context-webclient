@@ -1,9 +1,7 @@
 import React from 'react';
 import Dom from 'react-dom';
-import { connect } from 'react-redux';
-import {  } from '~/actions'
 
-export class Footer extends React.Component {
+export default class Footer extends React.Component {
     constructor(props){
         super(props)
 
@@ -22,9 +20,3 @@ export class Footer extends React.Component {
             )
     }
 }
-const mapDispatchToProps = dispatch => {
-    return ({
- 
-    })
- };
- export default connect(mapDispatchToProps)(Footer);

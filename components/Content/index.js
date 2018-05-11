@@ -1,7 +1,5 @@
 import React from 'react';
 import Dom from 'react-dom';
-import { connect } from 'react-redux';
-import {  } from '~/actions'
 
 import '~/assets/styles/main.css'
 
@@ -10,7 +8,7 @@ import Scroll from 'react-scroll';
 
 const Element = Scroll.Element;
 
-export class Content extends React.Component {
+export default class Content extends React.Component {
     constructor(props){
         super(props)
 
@@ -27,10 +25,3 @@ export class Content extends React.Component {
         )
     }
 }
-
-const mapStateToProps = state => {
-   return ({
-
-   })
-};
-export default connect(mapStateToProps)(Content);
